@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/10 19:05:46 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/14 18:36:26 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,58 @@ int	ft_handle_key_press(int keycode, void *param)
 	return (1);
 }
 
-void init_window(t_minilibx *window)
+void 	init_window(t_minilibx *window)
 {
-	window->mlx = mlx_init();
-	if (!window->mlx)
+	window->mlx_ptr = mlx_init();
+	if (!window->mlx_ptr)
 	{
 		printf("Error: environement not set\n");
 		return (exit(0), (void)0);
 	}
-	window->win = mlx_new_window(window->mlx, 1920, 1080, "cub3d");
+	window->win = mlx_new_window(window->mlx_ptr, 1920, 1080, "cub3d");
 }
 
-int	main(void)
+void init_struct_cub(t_cub *cub)
 {
-	t_minilibx minilib;
+	cub->mlx = malloc(sizeof(t_minilibx));
+	if (!cub->mlx)
+	{
+		printf("Error: malloc failed\n");
+		exit(0);
+	}
+	cub->map = malloc(sizeof(t_map));
+	if (!cub->map)
+	{
+		printf("Error: malloc failed\n");
+		exit(0);
+	}
+	cub->map->map = NULL;
+	cub->map->width = 0;
+	// cub->map->height = 0;
+	cub->texture = malloc(sizeof(t_texture));
+	if (!cub->texture)
+	{
+		printf("Error: malloc failed\n");
+		exit(0);
+	}
+	
+}
 
-	init_window(&minilib);
-	mlx_hook(minilib.win, 17, 0, close_game, (void *)&minilib);
-	mlx_hook(minilib.win, KeyPress, KeyPressMask, ft_handle_key_press,
-		(void *)&minilib);
-	mlx_loop(minilib.mlx);
+int	main(int ac, char **av)
+{
+	t_cub cub;
+
+	if (ac < 2)
+	{
+		printf("Error: map file not found\n");
+		return (0);
+	}
+	init_struct_cub(&cub);
+	parsing_map(av[1], &cub);
+	init_window(cub.mlx);
+	mlx_hook(cub.mlx->win, KeyPress, KeyPressMask, ft_handle_key_press, &cub);
+	mlx_hook(cub.mlx->win, 17, 0, close_game, &cub);
+	mlx_loop(cub.mlx->mlx_ptr);
+	return (0);
 }
 

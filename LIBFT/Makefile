@@ -6,7 +6,7 @@
 #    By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/29 20:32:47 by ilbendib          #+#    #+#              #
-#    Updated: 2023/12/27 12:03:25 by ilbendib         ###   ########.fr        #
+#    Updated: 2024/05/14 15:01:19 by ilbendib         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ _SRCS = ft_atoi.c\
 	ft_strlen.c\
 	ft_strmapi.c\
 	ft_strncmp.c\
+	ft_strcmp.c\
 	ft_strnstr.c\
 	ft_strrchr.c\
 	ft_strtrim.c\

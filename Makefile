@@ -3,7 +3,9 @@ CC = gcc -g3
 CFLAGS = -Wall -Wextra -Werror
 _HEADERS = cub3d.h
 
-_SRCS = 		srcs/main.c
+_SRCS = 		srcs/main.c \
+				srcs/parser/parser_texture.c \
+				srcs/parser/parse_map.c \
 
 SRC_DIR = .
 

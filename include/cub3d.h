@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/10 18:53:07 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:03:35 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
+# include "../LIBFT/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -39,9 +40,41 @@
 
 typedef struct s_minilibx
 {
-	void	*mlx;
+	void	*mlx_ptr;
 	void	*win;
 }			t_minilibx;
 
+typedef struct s_map
+{
+	char	**map;
+	int		width;
+	int		height;
+}			t_map;
+
+typedef struct s_texture
+{
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	char	*sprite;
+	int 	height;
+}			t_texture;
+
+typedef struct s_cub
+{
+	t_minilibx	*mlx;
+	t_map		*map;
+	t_texture	*texture;
+	char		*line;
+}			t_cub;
+
+int	check_texture(t_texture *texture);
+void parse_texture_file(t_cub *cub, int fd);
+void count_map_height(t_cub *cub, int fd);
+void allocate_and_fill_map(t_map *map, int fd);
+void is_cub_file(char *map);
+void	parsing_map(char *file, t_cub *cub);
+void count_texture_height(t_texture *texture, int fd);
 
 #endif
