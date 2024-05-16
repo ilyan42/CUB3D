@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/14 20:03:35 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:04:27 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_texture
 	char	*east;
 	char	*sprite;
 	int 	height;
+	char **texture;
 }			t_texture;
 
 typedef struct s_cub
@@ -70,11 +71,11 @@ typedef struct s_cub
 }			t_cub;
 
 int	check_texture(t_texture *texture);
-void parse_texture_file(t_cub *cub, int fd);
+char **parse_texture_file(t_cub *cub, int fd);
 void count_map_height(t_cub *cub, int fd);
-void allocate_and_fill_map(t_map *map, int fd);
+char **allocate_and_fill_map(t_cub *cub, int fd);
 void is_cub_file(char *map);
 void	parsing_map(char *file, t_cub *cub);
-void count_texture_height(t_texture *texture, int fd);
+void count_texture_height(t_cub *cub, int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:57:05 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/14 20:03:25 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:15:09 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,33 @@
 
 void count_map_height(t_cub *cub, int fd)
 {
-	char	*line;
-
-	line = get_next_line_map(fd);
-	cub->map->height = 0;
-	while (line)
+	cub->line = get_next_line_map(fd);
+	cub->map->height = 1;
+	while (cub->line)
 	{
 		cub->map->height++;
-		free(line);
-		line = get_next_line_map(fd);
+		free(cub->line);
+		cub->line = get_next_line_map(fd);
 	}
 }
 
-void allocate_and_fill_map(t_map *map, int fd)
+char **allocate_and_fill_map(t_cub *cub, int fd)
 {
-	char *line;
 	int i;
 
-	i = 0;
-	line = get_next_line_map(fd);
-	// printf ("line = %s\n", line);
-	map->map = malloc(sizeof(char *) * (map->height + 1));
-	while (line && i < map->height)
+	i = 1;
+	cub->map->map = malloc(sizeof(char *) * (cub->map->height + 1));
+	cub->map->map[0] = cub->line;
+	cub->line = get_next_line_map(fd);
+	while (cub->line && i <= cub->map->height)
 	{
-		map->map[i] = ft_strdup(line);
-		free(line);
-		line = get_next_line_map(fd);
-		// printf ("line = %s\n", line);
+		cub->map->map[i] = ft_strdup(cub->line);
+		free(cub->line);
+		cub->line = get_next_line_map(fd);
 		i++;
 	}
-	map->map[i] = NULL;
+	cub->map->map[i] = NULL;
+	return (cub->map->map);
 }
 
 void is_cub_file(char *map)
@@ -61,20 +58,23 @@ void is_cub_file(char *map)
 void	parsing_map(char *file, t_cub *cub)
 {
 	int fd;
-	int i = -1;
 
+	cub->line = NULL;
 	is_cub_file(file);
 	fd = open(file, O_RDONLY);
-	count_texture_height(cub->texture, fd);
+	count_texture_height(cub, fd);
 	printf ("height = %d\n", cub->texture->height);
 	count_map_height(cub, fd);
 	printf ("height = %d\n", cub->map->height);
 	close(fd);
 	fd = open(file, O_RDONLY);
-	parse_texture_file(cub, fd);
-	allocate_and_fill_map(cub->map, fd);
-	printf ("ici\n");
-	while (cub->map->map[++i])
-		printf ("map = %s\n", cub->map->map[i]);
+	cub->texture->texture = parse_texture_file(cub, fd);
+	int i = -1;
+	while (cub->texture->texture[++i])
+		printf ("texture = %s\n", cub->texture->texture[i]);
+	cub->map->map = allocate_and_fill_map(cub, fd);
+	int j = -1;
+	while (cub->map->map[++j])
+		printf ("map = %s\n", cub->map->map[j]);
 	close(fd);
 }
