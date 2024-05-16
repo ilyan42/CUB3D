@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/16 16:30:38 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:54:35 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,19 @@ void		get_map_and_tex(char *file, t_cub *cub);
 void		count_texture_height(t_cub *cub, int fd);
 void		parsing_texture(t_cub *cub);
 void		texture_processing(t_cub *cub);
+
+/************************************************/
+/*					PARSING						*/
+/************************************************/
+
+void		parse_ceiling_texture(t_cub *cub, char *line, int x);
+void		parsing_texture(t_cub *cub);
+int			open_texture(t_cub *cub);
+void		texture_processing(t_cub *cub);
+void		parse_north_texture(t_cub *cub, char *line, int x);
+void		parse_south_texture(t_cub *cub, char *line, int x);
+void		parse_west_texture(t_cub *cub, char *line, int x);
+void		parse_east_texture(t_cub *cub, char *line, int x);
+void		parse_floor_texture(t_cub *cub, char *line, int x);
 
 #endif

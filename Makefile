@@ -6,6 +6,8 @@ _HEADERS = cub3d.h
 _SRCS = 		srcs/main.c \
 				srcs/parser/parser_texture.c \
 				srcs/parser/parse_map.c \
+				srcs/parser/parse_texture/get_texture.c \
+				srcs/parser/parse_texture/parse_and_open_texture.c \
 
 SRC_DIR = .
 
