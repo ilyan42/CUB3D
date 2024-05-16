@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:23:09 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/16 13:16:39 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:05:00 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_texture(t_texture *texture)
 {
 	if (!texture->north || !texture->south || !texture->west || !texture->east
-		|| !texture->sprite)
+		|| !texture->floor || !texture->ceiling)
 	{
 		printf("Error: texture not found\n");
 		return (0);
@@ -23,15 +23,32 @@ int	check_texture(t_texture *texture)
 	return (1);
 }
 
+
 void count_texture_height(t_cub *cub, int fd)
 {
 	cub->line = get_next_line_map(fd);
 	cub->texture->height = 0;
-	while (cub->line[0] == 'N' || cub->line[0] == 'S' || cub->line[0] == 'W' || cub->line[0] == 'E' || cub->line[0] == 'F' || cub->line[0] == 'C')
+	int y = 0;
+	int check_nb_tex = 1;
+	while (cub->line)
 	{
+		while (cub->line[y] != '\n')
+		{
+			while ((cub->line[y] >= 9 && cub->line[y] <= 13) || cub->line[y] == ' ')
+				y++;
+			if (cub->line[y] == 'N' || cub->line[y] == 'S' || cub->line[y] == 'W' || cub->line[y] == 'E' || cub->line[y] == 'F' || cub->line[y] == 'C')
+			{
+				check_nb_tex++;
+				break ;
+			}
+			if (cub->line[y] == '1')
+				return ;
+			y++;
+		}
 		cub->texture->height++;
 		free(cub->line);
 		cub->line = get_next_line_map(fd);
+		y = 0;
 	}
 }
 

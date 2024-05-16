@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/16 13:04:27 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:30:38 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ typedef struct s_texture
 	char	*south;
 	char	*west;
 	char	*east;
-	char	*sprite;
+	char	*floor;
+	char	*ceiling;
 	int 	height;
 	char **texture;
 }			t_texture;
@@ -70,12 +71,14 @@ typedef struct s_cub
 	char		*line;
 }			t_cub;
 
-int	check_texture(t_texture *texture);
-char **parse_texture_file(t_cub *cub, int fd);
-void count_map_height(t_cub *cub, int fd);
-char **allocate_and_fill_map(t_cub *cub, int fd);
-void is_cub_file(char *map);
-void	parsing_map(char *file, t_cub *cub);
-void count_texture_height(t_cub *cub, int fd);
+int			check_texture(t_texture *texture);
+char		**parse_texture_file(t_cub *cub, int fd);
+void		count_map_height(t_cub *cub, int fd);
+char		**allocate_and_fill_map(t_cub *cub, int fd);
+void		is_cub_file(char *map);
+void		get_map_and_tex(char *file, t_cub *cub);
+void		count_texture_height(t_cub *cub, int fd);
+void		parsing_texture(t_cub *cub);
+void		texture_processing(t_cub *cub);
 
 #endif
