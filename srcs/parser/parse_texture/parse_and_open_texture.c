@@ -6,39 +6,16 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:50:55 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/16 18:57:35 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:03:39 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-void parse_ceiling_texture(t_cub *cub, char *line, int x)
-{
-	char *path_start = strchr(&line[x], '.');
-	char *path_end = strchr(&line[x], '\n');
-	size_t path_len;
-
-	if (path_start && path_end)
-	{
-		path_len = path_end - path_start;
-		cub->texture->ceiling = malloc(path_len + 1);
-		if (cub->texture->ceiling)
-		{
-			strncpy(cub->texture->ceiling, path_start, path_len);
-			cub->texture->ceiling[path_len] = '\0';
-		}
-		else
-		{
-			printf("Error: Memory allocation failed for the ceiling texture\n");
-			exit(EXIT_FAILURE);
-		}
-	}
-	else
-	{
-		printf("Error: Invalid ceiling texture format\n");
-		exit(EXIT_FAILURE);
-	}
-}
+// void handle_get_ceilling_color(t_cub *cub, char *line, int x)
+// {
+	
+// }
 
 
 void parsing_texture(t_cub *cub)
@@ -73,32 +50,33 @@ void parsing_texture(t_cub *cub)
 				parse_east_texture(cub, line, x);
 				check++;
 			}
-			else if (line[x] == 'F')
+			else if (line[x] == 'F' && line[x + 1] == ' ')
 			{
-				parse_floor_texture(cub, line, x);
+				parse_floor_color(cub, line);
 				check++;
 			}
-			else if (line[x] == 'C')
+			else if (line[x] == 'C' && line[x + 1] == ' ')
 			{
-				parse_ceiling_texture(cub, line, x);
+				parse_ceiling_color(cub, line);
 				check++;
 			}
 			x++;
 		}
 		y++;
 	}
+	if (check != 6)
+		print_and_exit(WRONG_NUMBER_OK_TEXTURES);
 	printf ("\n%s\n", cub->texture->north);
 	printf ("%s\n", cub->texture->south);
 	printf ("%s\n", cub->texture->west);
 	printf ("%s\n", cub->texture->east);
-	printf ("%s\n", cub->texture->floor);
-	printf ("%s\n", cub->texture->ceiling);
-	if (check != 6) {
-		printf("Error: Wrong number of textures\n");
-		exit(EXIT_FAILURE);
-	}
+	printf ("%d\n", cub->color->F_r);
+	printf ("%d\n", cub->color->F_g);
+	printf ("%d\n", cub->color->F_b);
+	printf ("%d\n", cub->color->C_r);
+	printf ("%d\n", cub->color->C_g);
+	printf ("%d\n", cub->color->C_b);
 }
-
 
 int open_texture(t_cub *cub)
 {
@@ -106,31 +84,19 @@ int open_texture(t_cub *cub)
 	
 	fd = open(cub->texture->north, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("Error\n -> open north texture\n");
-		return (0);
-	}
+		print_and_exit(OPEN_NORTH_TEXTURE);
 	close(fd);
 	fd = open(cub->texture->south, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("Error\n -> open south texture\n");
-		return (0);
-	}
+		print_and_exit(OPEN_SOUTH_TEXTURE);
 	close(fd);
 	fd = open(cub->texture->west, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("Error\n -> open west texture\n");
-		return (0);
-	}
+		print_and_exit(OPEN_WEST_TEXTURE);
 	close(fd);
 	fd = open(cub->texture->east, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("Error\n -> open east texture\n");
-		return (0);
-	}
+		print_and_exit(OPEN_EAST_TEXTURE);
 	close(fd);
 	return (1);
 }
@@ -142,3 +108,10 @@ void texture_processing(t_cub *cub)
 	if (open_texture(cub) == 0)
 		exit(EXIT_FAILURE);
 }
+
+// void	load_texture_detatils()
+// {
+// 	mlx_xpm_file_to_image(mlx_ptr, cub->texture->south, &width, &height);
+// }
+
+// mlx_xpm_file_to_image(mlx_ptr, "path.xpm", &width, &height);

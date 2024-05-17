@@ -9,6 +9,7 @@ _SRCS = 		srcs/main.c \
 				srcs/parser/parse_texture/get_texture.c \
 				srcs/parser/parse_texture/parse_and_open_texture.c \
 				srcs/parser/parse_map/parse_map.c \
+				srcs/error/print_error.c \
 
 SRC_DIR = .
 

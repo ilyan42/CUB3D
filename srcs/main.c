@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/17 13:44:21 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:33:46 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ void init_struct_cub(t_cub *cub)
 		printf("Error: malloc failed\n");
 		exit(0);
 	}
+	cub->color->C_b = 0;
+	cub->color->C_g = 0;
+	cub->color->C_r = 0;
+	cub->color->F_b = 0;
+	cub->color->F_g = 0;
+	cub->color->F_r = 0;
 	
 }
 
@@ -81,7 +87,6 @@ int	main(int ac, char **av)
 	init_struct_cub(&cub);
 	get_map_and_tex(av[1], &cub);
 	texture_processing(&cub);
-	get_size_map(&cub);
 	map_is_valid(&cub);
 	init_window(cub.mlx);
 	mlx_hook(cub.mlx->win, KeyPress, KeyPressMask, ft_handle_key_press, &cub);

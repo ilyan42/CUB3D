@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:49:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/16 18:51:38 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:01:31 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,30 +124,52 @@ void parse_east_texture(t_cub *cub, char *line, int x)
 	}
 }
 
-void parse_floor_texture(t_cub *cub, char *line, int x)
+void parse_floor_color(t_cub *cub, char *line)
 {
-	char *path_start = strchr(&line[x], '.');
-	char *path_end = strchr(&line[x], '\n');
-	size_t path_len;
+	char **tmp_line;
+	char *color_values;
+	int nb;
 
-	if (path_start && path_end)
+	nb = 0;
+	color_values = strchr(line, ' ');
+	if (color_values) color_values++;
+	tmp_line = ft_split(color_values, ',');
+	if (tmp_line)
 	{
-		path_len = path_end - path_start;
-		cub->texture->floor = malloc(path_len + 1);
-		if (cub->texture->floor)
-		{
-			strncpy(cub->texture->floor, path_start, path_len);
-			cub->texture->floor[path_len] = '\0';
-		}
-		else 
-		{
-			printf("Error: Memory allocation failed for the floor texture\n");
-			exit(EXIT_FAILURE);
-		}
+		while (tmp_line[nb])
+			nb++;
 	}
-	else
+	if (nb != 3)
+		print_and_exit(INVALIDE_FLOOR_COLOR);
+	if (tmp_line[0] && tmp_line[1] && tmp_line[2])
 	{
-		printf("Error: Invalid floor texture format\n");
-		exit(EXIT_FAILURE);
+		cub->color->F_r = ft_atoi(tmp_line[0]);
+		cub->color->F_g = ft_atoi(tmp_line[1]);
+		cub->color->F_b = ft_atoi(tmp_line[2]);
+	}
+}
+
+void parse_ceiling_color(t_cub *cub, char *line)
+{
+	char **tmp_line;
+	char *color_values;
+	int nb;
+
+	nb = 0;
+	color_values = strchr(line, ' ');
+	if (color_values) color_values++;
+	tmp_line = ft_split(color_values, ',');
+	if (tmp_line)
+	{
+		while (tmp_line[nb])
+			nb++;
+	}
+	if (nb != 3)
+		print_and_exit(INVALIDE_CEILING_COLOR);
+	if (tmp_line[0] && tmp_line[1] && tmp_line[2])
+	{
+		cub->color->C_r = ft_atoi(tmp_line[0]);
+		cub->color->C_g = ft_atoi(tmp_line[1]);
+		cub->color->C_b = ft_atoi(tmp_line[2]);
 	}
 }
