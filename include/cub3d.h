@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/16 18:54:35 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/17 13:44:08 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include <stdbool.h>
 
 # define ESCAPE_KEY 65307
 # define SIZE 50
@@ -49,6 +51,8 @@ typedef struct s_map
 	char	**map;
 	int		width;
 	int		height;
+	int size_x;
+	int size_y;
 }			t_map;
 
 typedef struct s_texture
@@ -94,5 +98,9 @@ void		parse_south_texture(t_cub *cub, char *line, int x);
 void		parse_west_texture(t_cub *cub, char *line, int x);
 void		parse_east_texture(t_cub *cub, char *line, int x);
 void		parse_floor_texture(t_cub *cub, char *line, int x);
+
+
+void map_is_valid(t_cub *cub);
+void get_size_map(t_cub *cub);
 
 #endif

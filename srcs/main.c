@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/16 16:23:08 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/17 13:44:21 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	main(int ac, char **av)
 	init_struct_cub(&cub);
 	get_map_and_tex(av[1], &cub);
 	texture_processing(&cub);
+	get_size_map(&cub);
+	map_is_valid(&cub);
 	init_window(cub.mlx);
 	mlx_hook(cub.mlx->win, KeyPress, KeyPressMask, ft_handle_key_press, &cub);
 	mlx_hook(cub.mlx->win, 17, 0, close_game, &cub);
