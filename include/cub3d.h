@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/21 14:32:17 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:16:32 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 # define WRONG_NUMBER_OK_TEXTURES "Error\n -> Wrong number of textures\n"
 # define INVALIDE_FLOOR_COLOR "Error\n -> Invalid floor color\n"
 # define INVALIDE_CEILING_COLOR "Error\n -> Invalid ceiling color\n"
-
+# define WRONG_TEXTURE_EXTENTION "Error\n -> Wrong texture extention\n"
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
@@ -75,7 +75,10 @@ typedef struct s_map
 
 typedef struct s_image
 {
-	void	*img;
+	void	*NO_img;
+	void	*SO_img;
+	void	*WE_img;
+	void	*EA_img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -85,12 +88,13 @@ typedef struct s_image
 	char 	*path;
 }			t_image;
 
+
 typedef struct s_texture
 {
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
+	char	*north_path;
+	char	*south_path;
+	char	*west_path;
+	char	*east_path;
 	char	*floor;
 	char	*ceiling;
 	int 	height;
@@ -191,5 +195,6 @@ void map_is_valid(t_cub *cub);
 void get_size_map(t_cub *cub);
 void print_and_exit(char *msg);
 void raycasting(t_cub *cub);
+void load_image(t_cub *cub);
 
 #endif

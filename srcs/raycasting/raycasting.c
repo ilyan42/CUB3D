@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:25:51 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/21 14:41:34 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:27:26 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void raycasting(t_cub *cub)
         x++;
     }
 }
+
 
 
 // /*partis renderer du raycast maintenant qu'on a la disance avec les murs*/

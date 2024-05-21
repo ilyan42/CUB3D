@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/21 13:16:11 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/21 19:14:49 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,33 @@ void init_struct_cub(t_cub *cub)
 		printf("Error: malloc failed\n");
 		exit(0);
 	}
-	
+	cub->player->pos_x = 0;
+	cub->player->pos_y = 0;
+	cub->player->dir_x = 0;
+	cub->player->dir_y = 0;
+	cub->player->plane_x = 0;
+
+	cub->player->plane_y = 0;
+	cub->player->angle = 0;
+	cub->image = malloc(sizeof(t_image));
+	if (!cub->image)
+	{
+		printf("Error: malloc failed\n");
+		exit(0);
+	}
+	cub->image->NO_img = NULL;
+	cub->image->SO_img = NULL;
+	cub->image->WE_img = NULL;
+	cub->image->EA_img = NULL;
+	cub->image->addr = NULL;
+	cub->image->bits_per_pixel = 0;
+	cub->image->line_length = 0;
+	cub->image->endian = 0;
+	cub->image->width = 0;
+	cub->image->height = 0;
+	cub->image->path = NULL;
 }
+
 
 int	main(int ac, char **av)
 {
@@ -96,8 +121,8 @@ int	main(int ac, char **av)
 	get_map_and_tex(av[1], &cub);
 	texture_processing(&cub);
 	map_is_valid(&cub);
-	printf ("map is valid\n");
 	init_window(cub.mlx);
+	load_image(&cub);
 	raycasting(&cub);
 	mlx_hook(cub.mlx->win, KeyPress, KeyPressMask, ft_handle_key_press, &cub);
 	mlx_hook(cub.mlx->win, 17, 0, close_game, &cub);

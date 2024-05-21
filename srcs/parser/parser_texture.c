@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:23:09 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/16 16:05:00 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:10:35 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_texture(t_texture *texture)
 {
-	if (!texture->north || !texture->south || !texture->west || !texture->east
+	if (!texture->north_path || !texture->south_path || !texture->west_path || !texture->east_path
 		|| !texture->floor || !texture->ceiling)
 	{
 		printf("Error: texture not found\n");
