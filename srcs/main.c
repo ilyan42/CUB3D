@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/17 17:33:46 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:16:11 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ void init_struct_cub(t_cub *cub)
 	cub->color->F_b = 0;
 	cub->color->F_g = 0;
 	cub->color->F_r = 0;
+	cub->color->color_ceiling = 0;
+	cub->color->color_floor = 0;
+	cub->player = malloc(sizeof(t_player));
+	if (!cub->player)
+	{
+		printf("Error: malloc failed\n");
+		exit(0);
+	}
 	
 }
 
@@ -88,7 +96,9 @@ int	main(int ac, char **av)
 	get_map_and_tex(av[1], &cub);
 	texture_processing(&cub);
 	map_is_valid(&cub);
+	printf ("map is valid\n");
 	init_window(cub.mlx);
+	raycasting(&cub);
 	mlx_hook(cub.mlx->win, KeyPress, KeyPressMask, ft_handle_key_press, &cub);
 	mlx_hook(cub.mlx->win, 17, 0, close_game, &cub);
 	mlx_loop(cub.mlx->mlx_ptr);

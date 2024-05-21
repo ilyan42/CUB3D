@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:50:55 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/21 12:05:14 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:14:58 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void texture_processing(t_cub *cub)
 	parsing_texture(cub);
 	if (open_texture(cub) == 0)
 		exit(EXIT_FAILURE);
+	printf ("Textures are opened\n");
 }
 
 // void	load_texture_detatils()

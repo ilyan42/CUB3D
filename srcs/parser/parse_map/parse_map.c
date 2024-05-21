@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:54:24 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/17 19:50:27 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:15:46 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,34 @@ void get_size_map(t_cub *cub)
     cub->map->size_y = y;
 }
 
+void get_player_position(t_cub *cub)
+{
+	int x;
+	int y;
+
+	y = 0;
+	while (cub->map->map[y])
+	{
+		x = 0;
+		while (cub->map->map[y][x])
+		{
+			if (cub->map->map[y][x] == 'N' || cub->map->map[y][x] == 'S' || cub->map->map[y][x] == 'E' || cub->map->map[y][x] == 'W')
+			{
+				cub->player->pos_x = x;
+				cub->player->pos_y = y;
+				cub->player->angle = cub->map->map[y][x];
+                cub->player->dir_x = -1;
+                cub->player->dir_y = 0;
+                cub->player->plane_x = 0;
+                cub->player->plane_y = 0.66;
+				return;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
 void check_first_colone(t_cub *cub)
 {
     int y;
@@ -115,4 +143,7 @@ void map_is_valid(t_cub *cub)
         x = 0;
         y++;
     }
+    get_player_position(cub);
+    printf("player->pos_x = %f\n", cub->player->pos_x);
+    printf("player->pos_y = %f\n", cub->player->pos_y);
 }

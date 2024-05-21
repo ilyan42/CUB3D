@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/21 11:59:02 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:32:17 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <math.h>
+# include <string.h>
 
 # define ESCAPE_KEY 65307
 # define SIZE 50
@@ -52,6 +54,9 @@
 # define WRONG_NUMBER_OK_TEXTURES "Error\n -> Wrong number of textures\n"
 # define INVALIDE_FLOOR_COLOR "Error\n -> Invalid floor color\n"
 # define INVALIDE_CEILING_COLOR "Error\n -> Invalid ceiling color\n"
+
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 
 typedef struct s_minilibx
 {
@@ -92,6 +97,17 @@ typedef struct s_texture
 	char **texture;
 }			t_texture;
 
+typedef struct s_player
+{
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	angle;
+}			t_player;
+
 typedef struct s_color
 {
 	unsigned int	C_r;
@@ -104,9 +120,39 @@ typedef struct s_color
 	unsigned int  color_ceiling;
 }			t_color;
 
+typedef struct s_raycast
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		tex_num;
+	double	wall_x;
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
+	int		color;
+	double distance;
+}			t_raycast;
+
 typedef struct s_cub
 {
 	t_minilibx	*mlx;
+	t_player	*player;
 	t_map		*map;
 	t_texture	*texture;
 	t_image		*image;
@@ -144,5 +190,6 @@ void parse_ceiling_color(t_cub *cub, char *line);
 void map_is_valid(t_cub *cub);
 void get_size_map(t_cub *cub);
 void print_and_exit(char *msg);
+void raycasting(t_cub *cub);
 
 #endif
