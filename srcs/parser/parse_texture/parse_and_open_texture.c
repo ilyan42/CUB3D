@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:50:55 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/17 19:03:39 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:05:14 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,14 @@ void parsing_texture(t_cub *cub)
 	printf ("%s\n", cub->texture->south);
 	printf ("%s\n", cub->texture->west);
 	printf ("%s\n", cub->texture->east);
-	printf ("%d\n", cub->color->F_r);
-	printf ("%d\n", cub->color->F_g);
-	printf ("%d\n", cub->color->F_b);
-	printf ("%d\n", cub->color->C_r);
-	printf ("%d\n", cub->color->C_g);
-	printf ("%d\n", cub->color->C_b);
+	// printf ("%d\n", cub->color->F_r);
+	// printf ("%d\n", cub->color->F_g);
+	// printf ("%d\n", cub->color->F_b);
+	// printf ("%d\n", cub->color->C_r);
+	// printf ("%d\n", cub->color->C_g);
+	// printf ("%d\n", cub->color->C_b);
+	printf ("%x\n", cub->color->color_floor);
+	printf ("%x\n", cub->color->color_ceiling);
 }
 
 int open_texture(t_cub *cub)

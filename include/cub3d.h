@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/17 19:00:08 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:59:02 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ typedef struct s_color
 	unsigned int	F_r;
 	unsigned int	F_g;
 	unsigned int	F_b;
+	unsigned int  color_floor;
+	unsigned int  color_ceiling;
 }			t_color;
 
 typedef struct s_cub

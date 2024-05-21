@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:49:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/17 19:01:31 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:04:58 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,12 @@ void parse_east_texture(t_cub *cub, char *line, int x)
 	}
 }
 
+void convert_color_hex(t_cub *cub)
+{
+	cub->color->color_floor = ((cub->color->F_r & 0xff) << 16) + ((cub->color->F_g & 0xff) << 8) + (cub->color->F_b & 0xff);
+	cub->color->color_ceiling = ((cub->color->C_r & 0xff) << 16) + ((cub->color->C_g & 0xff) << 8) + (cub->color->C_b & 0xff);
+}
+
 void parse_floor_color(t_cub *cub, char *line)
 {
 	char **tmp_line;
@@ -147,6 +153,7 @@ void parse_floor_color(t_cub *cub, char *line)
 		cub->color->F_g = ft_atoi(tmp_line[1]);
 		cub->color->F_b = ft_atoi(tmp_line[2]);
 	}
+	convert_color_hex(cub);
 }
 
 void parse_ceiling_color(t_cub *cub, char *line)
@@ -172,4 +179,6 @@ void parse_ceiling_color(t_cub *cub, char *line)
 		cub->color->C_g = ft_atoi(tmp_line[1]);
 		cub->color->C_b = ft_atoi(tmp_line[2]);
 	}
+	convert_color_hex(cub);
 }
+
