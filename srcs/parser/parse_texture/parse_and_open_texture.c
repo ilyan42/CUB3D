@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:50:55 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/21 18:16:10 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/22 11:34:03 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,10 @@ void load_image(t_cub *cub)
 	cub->image->SO_img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, cub->texture->south_path, &width, &height);
 	cub->image->WE_img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, cub->texture->west_path, &width, &height);
 	cub->image->EA_img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, cub->texture->east_path, &width, &height);
+	printf ("la\n");
+	cub->image->img = mlx_new_image(cub->mlx->mlx_ptr, 1920, 1080);
+	cub->image->addr = mlx_get_data_addr(cub->image->img, &cub->image->bits_per_pixel, &cub->image->line_length, &cub->image->endian);
+	printf ("ici\n");
 }
 
 void texture_processing(t_cub *cub)

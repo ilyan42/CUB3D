@@ -11,6 +11,9 @@ _SRCS = 		srcs/main.c \
 				srcs/parser/parse_map/parse_map.c \
 				srcs/error/print_error.c \
 				srcs/raycasting/raycasting.c \
+				srcs/player_movement/move.c \
+				srcs/player_movement/move_minimap.c \
+				srcs/player_movement/rotate_minimap.c \
 
 SRC_DIR = .
 

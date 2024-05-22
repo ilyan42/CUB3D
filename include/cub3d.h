@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/21 18:16:32 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:13:40 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@
 # define WRONG_TEXTURE_EXTENTION "Error\n -> Wrong texture extention\n"
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+#define NUM_TEXTURES 4 
+#define MOVE_SPEED 4
+#define ROTATE_SPEED 0.1
+#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 1080
+#define TILE_SIZE 64
 
 typedef struct s_minilibx
 {
@@ -75,6 +81,7 @@ typedef struct s_map
 
 typedef struct s_image
 {
+	void	*img;
 	void	*NO_img;
 	void	*SO_img;
 	void	*WE_img;
@@ -110,6 +117,10 @@ typedef struct s_player
 	double	plane_x;
 	double	plane_y;
 	double	angle;
+	double	move_speed;
+	double	rot_speed;
+	float	fov_angle;
+	
 }			t_player;
 
 typedef struct s_color
@@ -151,6 +162,7 @@ typedef struct s_raycast
 	double	tex_pos;
 	int		color;
 	double distance;
+	double ray_angle;
 }			t_raycast;
 
 typedef struct s_cub
@@ -161,6 +173,7 @@ typedef struct s_cub
 	t_texture	*texture;
 	t_image		*image;
 	t_color		color[2];
+	t_raycast	*raycast;
 	char		*line;
 }			t_cub;
 
@@ -196,5 +209,18 @@ void get_size_map(t_cub *cub);
 void print_and_exit(char *msg);
 void raycasting(t_cub *cub);
 void load_image(t_cub *cub);
+
+void display_map_pixel_color(t_cub *cub);
+int ft_handle_key_press(int keycode, void *param);
+int close_game(t_minilibx *game);
+void move_player(t_cub *cub, int key);
+
+
+
+void display_map_pixel_color(t_cub *cub);
+void	rotate_left(t_cub *cub);
+void	rotate_right(t_cub *cub);
+void display_raycast_distance_wall(t_cub *cub);
+void renderer_wall(t_cub *cub, int ray);
 
 #endif
