@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:50:55 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/22 11:34:03 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/23 19:17:46 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,6 @@ void parsing_texture(t_cub *cub)
 	printf ("%s\n", cub->texture->south_path);
 	printf ("%s\n", cub->texture->west_path);
 	printf ("%s\n", cub->texture->east_path);
-	// printf ("%d\n", cub->color->F_r);
-	// printf ("%d\n", cub->color->F_g);
-	// printf ("%d\n", cub->color->F_b);
-	// printf ("%d\n", cub->color->C_r);
-	// printf ("%d\n", cub->color->C_g);
-	// printf ("%d\n", cub->color->C_b);
 	printf ("%x\n", cub->color->color_floor);
 	printf ("%x\n", cub->color->color_ceiling);
 }

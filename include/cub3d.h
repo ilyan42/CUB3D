@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/22 18:13:40 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/23 19:17:32 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define DOWN 65364
 # define RIGHT 65363
 # define LEFT 65361
+#define M_PI 3.14159265358979323846
 
 # define MAP_IS_NOT_VALID "Error\n -> Map is not valid\n"
 # define WRONG_ARGUMENTS_IN_MAP "Error\n -> Wrong arguments in map\n"
@@ -58,11 +59,26 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 #define NUM_TEXTURES 4 
-#define MOVE_SPEED 4
+#define MOVE_SPEED 0.1
 #define ROTATE_SPEED 0.1
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1080
 #define TILE_SIZE 64
+#define FOV 60
+#define ROT_SPEED 0.1
+#define MAP_BLOCK_SIZE 64
+
+
+
+#define WALL_CHAR '1'
+
+#define MOVE_FORWARD_KEY W
+#define MOVE_BACKWARD_KEY S
+#define MOVE_LEFT_KEY A
+#define MOVE_RIGHT_KEY D
+
+
+
 
 typedef struct s_minilibx
 {
@@ -110,8 +126,8 @@ typedef struct s_texture
 
 typedef struct s_player
 {
-	double	pos_x;
-	double	pos_y;
+	float	pos_x;
+	float	pos_y;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
@@ -120,6 +136,7 @@ typedef struct s_player
 	double	move_speed;
 	double	rot_speed;
 	float	fov_angle;
+	float	fov_rad;
 	
 }			t_player;
 
@@ -163,6 +180,11 @@ typedef struct s_raycast
 	int		color;
 	double distance;
 	double ray_angle;
+	double horiz_x;
+	double horiz_y;
+	double vertical_x;
+	double vertical_y;
+	int flag;
 }			t_raycast;
 
 typedef struct s_cub
@@ -221,6 +243,7 @@ void display_map_pixel_color(t_cub *cub);
 void	rotate_left(t_cub *cub);
 void	rotate_right(t_cub *cub);
 void display_raycast_distance_wall(t_cub *cub);
-void renderer_wall(t_cub *cub, int ray);
+void renderer_wall(t_cub *cub, t_raycast *raycast, int ray);
+void raycasting(t_cub *cub);
 
 #endif

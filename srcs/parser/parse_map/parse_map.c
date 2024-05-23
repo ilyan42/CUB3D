@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:54:24 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/22 15:26:50 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/23 19:15:25 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void get_player_position(t_cub *cub)
 				cub->player->angle = cub->map->map[y][x];
                 cub->player->plane_x = 0;
                 cub->player->plane_y = 0.66;
+                cub->map->map[y][x] = '0';
 				return;
 			}
 			x++;
@@ -135,42 +136,7 @@ void check_first_colone(t_cub *cub)
         y++;
     }
 }
-void keycod_handler(int keycod, t_cub *cub)
-{
-    if (keycod == 53)
-    {
-        mlx_destroy_window(cub->mlx->mlx_ptr, cub->mlx->win);
-        exit(0);
-    }
-    if (keycod == S_QW)
-    {
-        cub->player->pos_x += cub->player->dir_x;
-        cub->player->pos_y += cub->player->dir_y;
-    }
-    if (keycod == W)
-    {
-        cub->player->pos_x -= cub->player->dir_x;
-        cub->player->pos_y -= cub->player->dir_y;
-    }
-    if (keycod == A)
-    {
-        double old_dir_x = cub->player->dir_x;
-        cub->player->dir_x = cub->player->dir_x * cos(-0.1) - cub->player->dir_y * sin(-0.1);
-        cub->player->dir_y = old_dir_x * sin(-0.1) + cub->player->dir_y * cos(-0.1);
-        double old_plane_x = cub->player->plane_x;
-        cub->player->plane_x = cub->player->plane_x * cos(-0.1) - cub->player->plane_y * sin(-0.1);
-        cub->player->plane_y = old_plane_x * sin(-0.1) + cub->player->plane_y * cos(-0.1);
-    }
-    if (keycod == D_QW)
-    {
-        double old_dir_x = cub->player->dir_x;
-        cub->player->dir_x = cub->player->dir_x * cos(0.1) - cub->player->dir_y * sin(0.1);
-        cub->player->dir_y = old_dir_x * sin(0.1) + cub->player->dir_y * cos(0.1);
-        double old_plane_x = cub->player->plane_x;
-        cub->player->plane_x = cub->player->plane_x * cos(0.1) - cub->player->plane_y * sin(0.1);
-        cub->player->plane_y = old_plane_x * sin(0.1) + cub->player->plane_y * cos(0.1);
-    }
-}
+
 
 
 void display_map_pixel_color(t_cub *cub)
@@ -195,11 +161,6 @@ void display_map_pixel_color(t_cub *cub)
                         int color = 0x00FF0000; // Rouge pour les murs
                         mlx_pixel_put(cub->mlx->mlx_ptr, cub->mlx->win, screen_x, screen_y, color);
                     }
-                    else if (cub->map->map[y][x] == 'N' || cub->map->map[y][x] == 'S' || cub->map->map[y][x] == 'E' || cub->map->map[y][x] == 'W')
-                    {
-                        int color1 = 0x0000FF00; // Vert pour le joueur
-                        mlx_pixel_put(cub->mlx->mlx_ptr, cub->mlx->win, screen_x, screen_y, color1);
-                    }
                     else if (cub->map->map[y][x] == '0')
                     {
                         int color2 = 0xFFFFFFFF; // Bleu pour les espaces vides
@@ -207,13 +168,26 @@ void display_map_pixel_color(t_cub *cub)
                     }
                 }
             }
+            int player_center_x = cub->player->pos_x * map_block_size;
+            int player_center_y = cub->player->pos_y * map_block_size;
+            int player_size = map_block_size / 2;
+            int player_color = 0x0000FF00;
+            int start_x = player_center_x - player_size / 2;
+            int start_y = player_center_y - player_size / 2;
+            for (int i = 0; i < player_size; i++)
+            {
+                for (int j = 0; j < player_size; j++)
+                {
+                    mlx_pixel_put(cub->mlx->mlx_ptr, cub->mlx->win, start_x + j, start_y + i, player_color);
+                }
+            }
             x++;
         }
         y++;
     }
+    printf ("player->pos_x = %f\n", cub->player->pos_x);
+    printf ("player->pos_y = %f\n", cub->player->pos_y);
 }
-
-
 
 void map_is_valid(t_cub *cub)
 {
@@ -245,9 +219,6 @@ void map_is_valid(t_cub *cub)
     }
     get_player_position(cub);
     init_dir_player(cub->player);
-    
-    printf("player->pos_x = %f\n", cub->player->pos_x);
-    printf("player->pos_y = %f\n", cub->player->pos_y);
 }
 
 
