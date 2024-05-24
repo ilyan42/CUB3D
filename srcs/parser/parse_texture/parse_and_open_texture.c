@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:50:55 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/23 19:17:46 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:26:48 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void load_image(t_cub *cub)
 	cub->image->WE_img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, cub->texture->west_path, &width, &height);
 	cub->image->EA_img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, cub->texture->east_path, &width, &height);
 	printf ("la\n");
-	cub->image->img = mlx_new_image(cub->mlx->mlx_ptr, 1920, 1080);
+	cub->image->img = mlx_new_image(cub->mlx->mlx_ptr, cub->res_x, cub->res_y);
 	cub->image->addr = mlx_get_data_addr(cub->image->img, &cub->image->bits_per_pixel, &cub->image->line_length, &cub->image->endian);
 	printf ("ici\n");
 }

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:54:24 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/23 19:15:25 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:26:05 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,26 @@ void get_size_map(t_cub *cub)
     cub->map->size_y = y;
 }
 
+void init_player(t_cub *cub, int x, int y)
+{
+    if (cub->map->map[y][x] == 'N')
+        cub->player->angle = -M_PI_2;
+    else if (cub->map->map[y][x] == 'S')
+        cub->player->angle = M_PI_2;
+    else if (cub->map->map[y][x] == 'E')
+        cub->player->angle = 0.0;
+    else if (cub->map->map[y][x] == 'W')
+        cub->player->angle = M_PI;
+    cub->player->pos_x = x;
+    cub->player->pos_y = y;
+    cub->player->dir_x = cos(cub->player->angle);
+    cub->player->dir_y = sin(cub->player->angle);
+    cub->player->plane_x = cos(cub->player->angle + M_PI_2);
+    cub->player->plane_y = sin(cub->player->angle + M_PI_2);
+    cub->map->map[y][x] = '0';
+}
+
+
 void get_player_position(t_cub *cub)
 {
 	int x;
@@ -84,12 +104,13 @@ void get_player_position(t_cub *cub)
 		{
 			if (cub->map->map[y][x] == 'N' || cub->map->map[y][x] == 'S' || cub->map->map[y][x] == 'E' || cub->map->map[y][x] == 'W')
 			{
-				cub->player->pos_x = x;
-				cub->player->pos_y = y;
-				cub->player->angle = cub->map->map[y][x];
-                cub->player->plane_x = 0;
-                cub->player->plane_y = 0.66;
-                cub->map->map[y][x] = '0';
+				// cub->player->pos_x = x;
+				// cub->player->pos_y = y;
+				// cub->player->angle = cub->map->map[y][x];
+                // cub->player->plane_x = FOV_RAD;
+                // cub->player->plane_y = FOV_RAD;
+                // cub->map->map[y][x] = '0';
+                init_player(cub, x, y);
 				return;
 			}
 			x++;
@@ -98,29 +119,29 @@ void get_player_position(t_cub *cub)
 	}
 }
 
-void init_dir_player(t_player *player)
-{
-    if (player->angle == 'N')
-    {
-        player->dir_x = -1;
-        player->dir_y = 0;
-    }
-    else if (player->angle == 'S')
-    {
-        player->dir_x = 1;
-        player->dir_y = 0;
-    }
-    else if (player->angle == 'E')
-    {
-        player->dir_x = 0;
-        player->dir_y = 1;
-    }
-    else if (player->angle == 'W')
-    {
-        player->dir_x = 0;
-        player->dir_y = -1;
-    }
-}
+// void init_dir_player(t_player *player)
+// {
+//     if (player->angle == 'N')
+//     {
+//         player->dir_x = 0;
+//         player->dir_y = -1;
+//     }
+//     else if (player->angle == 'S')
+//     {
+//         player->dir_x = 0;
+//         player->dir_y = 1;
+//     }
+//     else if (player->angle == 'E')
+//     {
+//         player->dir_x = 1;
+//         player->dir_y = 0;
+//     }
+//     else if (player->angle == 'W')
+//     {
+//         player->dir_x = -1;
+//         player->dir_y = 0;
+//     }
+// }
 
 void check_first_colone(t_cub *cub)
 {
@@ -218,7 +239,7 @@ void map_is_valid(t_cub *cub)
         y++;
     }
     get_player_position(cub);
-    init_dir_player(cub->player);
+    // init_dir_player(cub->player);
 }
 
 

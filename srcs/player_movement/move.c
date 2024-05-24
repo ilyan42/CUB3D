@@ -6,55 +6,30 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:46:46 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/23 18:21:30 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:29:28 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-// void cam_rotate_left(t_cub *cube)
-// {
-// 	float old_dir_x;
-// 	float old_plane_x;
 
-// 	old_dir_x = cube->player->dir_x;
-// 	old_plane_x = cube->player->plane_x;
-// 	cube->player->dir_x = cube->player->dir_x * cos(ROT_SPEED) - cube->player->dir_y * sin(ROT_SPEED);
-// 	cube->player->dir_y = old_dir_x * sin(ROT_SPEED) + cube->player->dir_y * cos(ROT_SPEED);
-// 	cube->player->plane_x = cube->player->plane_x * cos(ROT_SPEED) - cube->player->plane_y * sin(ROT_SPEED);
-// 	cube->player->plane_y = old_plane_x * sin(ROT_SPEED) + cube->player->plane_y * cos(ROT_SPEED);
-// }
+void	cam_rotate_left(t_cub *data)
+{
+	data->player->angle -= ROTATE_SPEED;
+	data->player->dir_x = cos(data->player->angle);
+	data->player->dir_y = sin(data->player->angle);
+	data->player->plane_x = cos(data->player->angle + M_PI);
+	data->player->plane_x = sin(data->player->angle + M_PI);
+}
 
-// void cam_rotate_right(t_cub *cube)
-// {
-// 	float old_dir_x;
-// 	float old_plane_x;
-
-// 	old_dir_x = cube->player->dir_x;
-// 	old_plane_x = cube->player->plane_x;
-// 	cube->player->dir_x = cube->player->dir_x * cos(-ROT_SPEED) - cube->player->dir_y * sin(-ROT_SPEED);
-// 	cube->player->dir_y = old_dir_x * sin(-ROT_SPEED) + cube->player->dir_y * cos(-ROT_SPEED);
-// 	cube->player->plane_x = cube->player->plane_x * cos(-ROT_SPEED) - cube->player->plane_y * sin(-ROT_SPEED);
-// 	cube->player->plane_y = old_plane_x * sin(-ROT_SPEED) + cube->player->plane_y * cos(-ROT_SPEED);
-// }
-
-// void	cam_rotate_left(t_cub *data)
-// {
-// 	data->player->angle -= ROTATE_SPEED;
-// 	data->player->dir_x = cos(data->player->angle);
-// 	data->player->dir_y = sin(data->player->angle);
-// 	data->player->plane_x = cos(data->player->angle + M_PI);
-// 	data->player->plane_x = sin(data->player->angle + M_PI);
-// }
-
-// void	cam_rotate_right(t_cub *data)
-// {
-// 	data->player->angle += ROTATE_SPEED;
-// 	data->player->dir_x = cos(data->player->angle);
-// 	data->player->dir_y = sin(data->player->angle);
-// 	data->player->plane_x = cos(data->player->angle + M_PI);
-// 	data->player->plane_y = sin(data->player->angle + M_PI);
-// }
+void	cam_rotate_right(t_cub *data)
+{
+	data->player->angle += ROTATE_SPEED;
+	data->player->dir_x = cos(data->player->angle);
+	data->player->dir_y = sin(data->player->angle);
+	data->player->plane_x = cos(data->player->angle + M_PI);
+	data->player->plane_y = sin(data->player->angle + M_PI);
+}
 
 
 
@@ -115,6 +90,12 @@ void	move_backward(t_cub *cub)
 		cub->player->pos_y += cub->player->plane_y * (MOVE_SPEED);
 }
 
+void maj_plane_player(t_cub *cub)
+{
+	cub->player->plane_x = cub->player->dir_y * FOV_RAD;
+	cub->player->plane_y = -cub->player->dir_x * FOV_RAD;
+}
+
 int ft_handle_key_press(int keycode, void *param)
 {
 	t_cub *cub;
@@ -124,10 +105,10 @@ int ft_handle_key_press(int keycode, void *param)
 	{
 		close_game(cub->mlx);
 	}
-	// if (keycode == LEFT)
-	// 	cam_rotate_left(cub);
-	// if (keycode == RIGHT)
-	// 	cam_rotate_right(cub);
+	if (keycode == LEFT)
+		cam_rotate_left(cub);
+	if (keycode == RIGHT)
+		cam_rotate_right(cub);
 	if (keycode == W)
 		move_forward(cub);
 	if (keycode == S_QW)
@@ -136,6 +117,7 @@ int ft_handle_key_press(int keycode, void *param)
 		move_left(cub);
 	if (keycode == D_QW)
 		move_right(cub);
+	// maj_plane_player(cub);
 	// printf ("keycode = %d\n", keycode);
 	return (1);
 }

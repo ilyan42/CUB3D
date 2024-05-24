@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/23 19:17:32 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:24:33 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,11 @@
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1080
 #define TILE_SIZE 64
-#define FOV 60
+#define FOV 66
 #define ROT_SPEED 0.1
 #define MAP_BLOCK_SIZE 64
+#define PI 3.1415926535
+#define FOV_RAD (FOV * PI / 180)
 
 
 
@@ -185,6 +187,8 @@ typedef struct s_raycast
 	double vertical_x;
 	double vertical_y;
 	int flag;
+	int res_x;
+	int res_y;
 }			t_raycast;
 
 typedef struct s_cub
@@ -197,6 +201,8 @@ typedef struct s_cub
 	t_color		color[2];
 	t_raycast	*raycast;
 	char		*line;
+	int res_x;
+	int res_y;
 }			t_cub;
 
 int			check_texture(t_texture *texture);
@@ -245,5 +251,11 @@ void	rotate_right(t_cub *cub);
 void display_raycast_distance_wall(t_cub *cub);
 void renderer_wall(t_cub *cub, t_raycast *raycast, int ray);
 void raycasting(t_cub *cub);
+
+
+void init_raycast(t_cub *cub, t_raycast *raycast, int x);
+void get_step_and_side_dist(t_cub *cub, t_raycast *raycast);
+void perform_dda(t_cub *cub, t_raycast *raycast);
+void get_distance(t_cub *cub, t_raycast *raycast);
 
 #endif

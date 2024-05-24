@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/23 19:18:57 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:35:07 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int close_game(t_minilibx *game)
 }
 
 
-void 	init_window(t_minilibx *window)
+void 	init_window(t_minilibx *window, t_cub *cub)
 {
 	window->mlx_ptr = mlx_init();
 	if (!window->mlx_ptr)
@@ -29,11 +29,13 @@ void 	init_window(t_minilibx *window)
 		printf("Error: environement not set\n");
 		return (exit(0), (void)0);
 	}
-	window->win = mlx_new_window(window->mlx_ptr, 1920, 1080, "cub3d");
+	window->win = mlx_new_window(window->mlx_ptr, cub->res_x, cub->res_y, "cub3d");
 }
 
 void init_all_struct(t_cub *cub)
 {
+	cub->res_x = 1920;
+	cub->res_y = 1080;
 	cub->mlx = malloc(sizeof(t_minilibx));
 	if (!cub->mlx)
 	{
@@ -149,7 +151,6 @@ void init_all_struct(t_cub *cub)
 
 int update(t_cub *cub)
 {
-	display_map_pixel_color(cub);
 	raycasting(cub);
 	return (0);
 }
@@ -188,9 +189,8 @@ int main(int ac, char **av)
     printf("texture_processing\n");
     map_is_valid(&cub);
     printf("map_is_valid\n");
-    init_window(cub.mlx);
+    init_window(cub.mlx, &cub);
     printf("init_window\n");
-    display_map_pixel_color(&cub);
     printf("display_map_pixel_color\n");
     load_image(&cub);
     printf("load_image\n");
