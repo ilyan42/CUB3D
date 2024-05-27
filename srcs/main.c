@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/24 17:35:07 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:24:48 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void init_all_struct(t_cub *cub)
 int update(t_cub *cub)
 {
 	raycasting(cub);
+	display_map_pixel_color(cub);
 	return (0);
 }
 
@@ -174,33 +175,25 @@ void init_struct_raycast(t_raycast *raycast)
 
 int main(int ac, char **av)
 {
-    t_cub cub;
+	t_cub cub;
 
-    if (ac < 2)
-    {
-        printf("Error: map file not found\n");
-        return (0);
-    }
-    init_all_struct(&cub);
-    printf("init_struct_cub\n");
-    get_map_and_tex(av[1], &cub);
-    printf("get_map_and_tex\n");
-    texture_processing(&cub);
-    printf("texture_processing\n");
-    map_is_valid(&cub);
-    printf("map_is_valid\n");
-    init_window(cub.mlx, &cub);
-    printf("init_window\n");
-    printf("display_map_pixel_color\n");
-    load_image(&cub);
-    printf("load_image\n");
-    raycasting(&cub);
-    printf("raycasting\n");
-    mlx_loop_hook(cub.mlx->mlx_ptr, update, &cub);
-    mlx_hook(cub.mlx->win, KeyPress, KeyPressMask, ft_handle_key_press, &cub);
-    mlx_hook(cub.mlx->win, 17, 0, close_game, &cub);
-    mlx_loop(cub.mlx->mlx_ptr);
-    return (0);
+	if (ac < 2)
+	{
+		printf("Error: map file not found\n");
+		return (0);
+	}
+	init_all_struct(&cub);
+	get_map_and_tex(av[1], &cub);
+	texture_processing(&cub);
+	map_is_valid(&cub);
+	init_window(cub.mlx, &cub);
+	load_image(&cub);
+	raycasting(&cub);
+	mlx_loop_hook(cub.mlx->mlx_ptr, update, &cub);
+	mlx_hook(cub.mlx->win, KeyPress, KeyPressMask, ft_handle_key_press, &cub);
+	mlx_hook(cub.mlx->win, 17, 0, close_game, &cub);
+	mlx_loop(cub.mlx->mlx_ptr);
+	return (0);
 }
 
 

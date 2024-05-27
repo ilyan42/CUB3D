@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:09:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/24 17:35:47 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:28:02 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ int get_pixel_color(t_image *image, int x, int y)
 	return (color);
 }
 
+
 void draw_wall(t_cub *cub, int x, t_raycast *ray)
 {
 	int y;
-	int tex_y;
+	// int tex_y;
 	int color;
 	int tex_x;
 
 	y = ray->draw_start;
-	printf ("ray->draw_start = %d\n", ray->draw_start);
 	while (y < ray->draw_end + 1)
 	{
 		if (ray->line_height == 0)
@@ -67,50 +67,43 @@ void draw_wall(t_cub *cub, int x, t_raycast *ray)
 			ray->wall_x = cub->player->pos_y + ray->perp_wall_dist * ray->ray_dir_y;
 		else
 			ray->wall_x = cub->player->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
-		printf ("la 1\n");
 		tex_x = ((int)ray->wall_x * cub->image->width);
-		printf ("la 2\n");
 		if (ray->side == 0 && ray->ray_dir_x > 0)
 			tex_x = cub->image->width - tex_x - 1;
-		printf ("la 3\n");
-		if (!cub->raycast->line_height)
-		{
-			printf ("la 3.1\n");
-		}
-
-		tex_y = (((y - (cub->res_y / 2) + (ray->line_height / 2)) * cub->image->height) / ray->line_height);
-		printf ("la 4\n");
-		color = get_pixel_color(cub->image, tex_x, tex_y);
-		printf ("la 5\n");
+		// tex_y = (((y - (cub->res_y / 2) + (ray->line_height / 2)) * cub->image->height) / ray->line_height);
+		// color = get_pixel_color(cub->image, tex_x, tex_y);
+		// // color = get_pixel_color(cub->image, tex_x, y);
+		//une couleur pour chaque fasse nord sud est ouest
+		if (ray->side == 0 && ray->ray_dir_x > 0)
+			color = 0x00FF0000; // direction = est couleur rouge
+		else if (ray->side == 0 && ray->ray_dir_x < 0)
+			color = 0x0000FF00; // direction = ouest couleur verte
+		else if (ray->side == 1 && ray->ray_dir_y > 0)
+			color = 0x000000FF; // direction = sud couleur bleu 
+		else
+			color = 0x00FFFF00; // direction = nord couleur jaune
 		my_pixel_put(cub, x, y, color);
-		printf ("la 6\n");
 		y++;
 	}
 }
 
 
-void raycasting(t_cub *cub)
+void raycasting(void *param)
 {
-    int x;
-    t_raycast *raycasts = malloc(sizeof(t_raycast) * cub->res_x);
+	t_cub *cub = (t_cub *)param;
+	int x;
 
-    // if (!raycasts) {
-    //     printf("Memory allocation failed\n");
-    //     return;
-    // }
-    x = 0;
-	// int y = 0;
-	printf ("cub->raycast->res_x = %d\n", cub->raycast->res_x);
+	x = 0;
 	while (x < cub->res_x)
 	{
-		init_raycast(cub, &raycasts[x], x); // Initialisation des paramètres du rayon
-		get_step_and_side_dist(cub, &raycasts[x]); // Calcul des étapes et des distances initiales
-		perform_dda(cub, &raycasts[x]); // Exécution de l'algorithme DDA
-		get_distance(cub, &raycasts[x]); // Calcul de la distance au mur
-		cub->raycast->draw_start = (int)(cub->res_y / 2) - (int)(cub->raycast->line_height / 2); // Calcul du début du mur
+		init_raycast(cub, cub->raycast, x);
+		get_step_and_side_dist(cub, cub->raycast);
+		perform_dda(cub, cub->raycast);
+		get_distance(cub, cub->raycast);
+		cub->raycast->draw_start = (int)(cub->res_y / 2) - (int)(cub->raycast->line_height / 2);
 		if (cub->raycast->draw_start < 0)
 			cub->raycast->draw_start = 0;
-		cub->raycast->draw_end = (int)(cub->raycast->line_height / 2) + (int)(cub->res_y / 2); // Calcul de la fin du mur
+		cub->raycast->draw_end = (int)(cub->raycast->line_height / 2) + (int)(cub->res_y / 2);
 		if (cub->raycast->draw_end >= cub->res_y)
 			cub->raycast->draw_end = cub->res_y - 1;
 		draaw_line(cub, x, cub->raycast->draw_start, cub->raycast);

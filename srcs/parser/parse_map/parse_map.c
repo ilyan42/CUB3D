@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:54:24 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/24 16:26:05 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:57:05 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void check_first_colone(t_cub *cub)
 
 void display_map_pixel_color(t_cub *cub)
 {
-    int map_block_size = 64; // Taille d'un bloc de la carte en pixels
+    int map_block_size = 16; // Taille d'un bloc de la carte en pixels
     int x, y, i, j;
 
     y = 0;
@@ -206,8 +206,7 @@ void display_map_pixel_color(t_cub *cub)
         }
         y++;
     }
-    printf ("player->pos_x = %f\n", cub->player->pos_x);
-    printf ("player->pos_y = %f\n", cub->player->pos_y);
+
 }
 
 void map_is_valid(t_cub *cub)
@@ -239,7 +238,6 @@ void map_is_valid(t_cub *cub)
         y++;
     }
     get_player_position(cub);
-    // init_dir_player(cub->player);
 }
 
 

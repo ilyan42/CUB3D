@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/24 17:24:33 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:08:17 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,7 @@ void parse_ceiling_color(t_cub *cub, char *line);
 void map_is_valid(t_cub *cub);
 void get_size_map(t_cub *cub);
 void print_and_exit(char *msg);
-void raycasting(t_cub *cub);
+void raycasting(void *param);
 void load_image(t_cub *cub);
 
 void display_map_pixel_color(t_cub *cub);
@@ -250,7 +250,7 @@ void	rotate_left(t_cub *cub);
 void	rotate_right(t_cub *cub);
 void display_raycast_distance_wall(t_cub *cub);
 void renderer_wall(t_cub *cub, t_raycast *raycast, int ray);
-void raycasting(t_cub *cub);
+
 
 
 void init_raycast(t_cub *cub, t_raycast *raycast, int x);

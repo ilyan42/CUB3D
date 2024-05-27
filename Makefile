@@ -1,7 +1,7 @@
 NAME = cub3d
 CC = gcc -g3
 CFLAGS = -Wall -Wextra -Werror
-_HEADERS = cub3d.h
+_HEADERS_DIR = ./include
 
 _SRCS = 		srcs/main.c \
 				srcs/parser/parser_texture.c \
@@ -21,9 +21,9 @@ SRC_DIR = .
 
 SRCS = $(_SRCS:%=$(SRC_DIR)/%)
 
-HEADERS_DIR = .
+# HEADERS_DIR = .
 
-HEADERS = $(_HEADERS:%=$(HEADERS_DIR)/%)
+# HEADERS = $(_HEADERS:%=$(HEADERS_DIR)/%)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -42,8 +42,8 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -I$(HEADERS_DIR) -c $< -o $@
+%.o: %.c $(_HEADERS_DIR)/cub3d.h Makefile
+	$(CC) -I$(HEADERS_DIR) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	$(MAKE) all -C ./LIBFT 
