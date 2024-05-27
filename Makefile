@@ -3,6 +3,7 @@ CC = gcc -g3
 CFLAGS = -Wall -Wextra -Werror
 _HEADERS_DIR = ./include
 
+_OBJ_DIR = .obj
 _SRCS = 		srcs/main.c \
 				srcs/parser/parser_texture.c \
 				srcs/parser/get_file.c \
@@ -16,14 +17,11 @@ _SRCS = 		srcs/main.c \
 				srcs/player_movement/rotate_minimap.c \
 				srcs/raycasting/get_distance_wall.c \
 				srcs/raycasting/render_raycast.c \
+				srcs/parser/get_mini_map.c \
 
 SRC_DIR = .
 
 SRCS = $(_SRCS:%=$(SRC_DIR)/%)
-
-# HEADERS_DIR = .
-
-# HEADERS = $(_HEADERS:%=$(HEADERS_DIR)/%)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -35,15 +33,23 @@ else
 endif
 
 AR = ar
-
 ARFLAGS = rcs
 
-OBJS = $(SRCS:.c=.o)
+# Ajouter la création du dossier des objets
+OBJS = $(patsubst $(SRC_DIR)/%.c, $(_OBJ_DIR)/%.o, $(SRCS))
 
-all: $(NAME)
+# Créer le dossier des objets si nécessaire
+$(_OBJ_DIR):
+	mkdir -p $(_OBJ_DIR)/srcs/parser/parse_texture
+	mkdir -p $(_OBJ_DIR)/srcs/parser/parse_map
+	mkdir -p $(_OBJ_DIR)/srcs/error
+	mkdir -p $(_OBJ_DIR)/srcs/raycasting
+	mkdir -p $(_OBJ_DIR)/srcs/player_movement
 
-%.o: %.c $(_HEADERS_DIR)/cub3d.h Makefile
-	$(CC) -I$(HEADERS_DIR) $(CFLAGS) -c $< -o $@
+all: $(_OBJ_DIR) $(NAME)
+
+$(_OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(_HEADERS_DIR)/cub3d.h Makefile
+	$(CC) -I$(_HEADERS_DIR) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	$(MAKE) all -C ./LIBFT 
@@ -52,6 +58,7 @@ $(NAME): $(OBJS)
 
 clean:
 	rm -f $(OBJS)
+	rm -rf $(_OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/27 15:08:17 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:05:03 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 # define OPEN_SOUTH_TEXTURE "Error\n -> Open south texture\n"
 # define OPEN_WEST_TEXTURE "Error\n -> Open west texture\n"
 # define OPEN_EAST_TEXTURE "Error\n -> Open east texture\n"
-# define WRONG_NUMBER_OK_TEXTURES "Error\n -> Wrong number of textures\n"
+# define WRONG_NUMBER_OF_TEXTURES "Error\n -> Wrong number of textures\n"
 # define INVALIDE_FLOOR_COLOR "Error\n -> Invalid floor color\n"
 # define INVALIDE_CEILING_COLOR "Error\n -> Invalid ceiling color\n"
 # define WRONG_TEXTURE_EXTENTION "Error\n -> Wrong texture extention\n"
@@ -191,6 +191,21 @@ typedef struct s_raycast
 	int res_y;
 }			t_raycast;
 
+typedef struct s_mini_map
+{
+	int		map_block_size;
+	int		player_size;
+	int		player_color;
+	int		start_x;
+	int		start_y;
+	int		i;
+	int		j;
+	int		srceen_x;
+	int		screen_y;
+	int		player_center_x;
+	int		player_center_y;
+}			t_mini_map;
+
 typedef struct s_cub
 {
 	t_minilibx	*mlx;
@@ -200,10 +215,13 @@ typedef struct s_cub
 	t_image		*image;
 	t_color		color[2];
 	t_raycast	*raycast;
+	t_mini_map	*mini_map;
 	char		*line;
 	int res_x;
 	int res_y;
 }			t_cub;
+
+
 
 int			check_texture(t_texture *texture);
 char		**parse_texture_file(t_cub *cub, int fd);
@@ -223,13 +241,13 @@ void		parse_ceiling_texture(t_cub *cub, char *line, int x);
 void		parsing_texture(t_cub *cub);
 int			open_texture(t_cub *cub);
 void		texture_processing(t_cub *cub);
-void		parse_north_texture(t_cub *cub, char *line, int x);
-void		parse_south_texture(t_cub *cub, char *line, int x);
-void		parse_west_texture(t_cub *cub, char *line, int x);
-void		parse_east_texture(t_cub *cub, char *line, int x);
+int parse_north_texture(t_cub *cub, char *line, int x);
+int parse_south_texture(t_cub *cub, char *line, int x);
+int parse_west_texture(t_cub *cub, char *line, int x);
+int parse_east_texture(t_cub *cub, char *line, int x);
 void		parse_floor_texture(t_cub *cub, char *line, int x);
-void parse_floor_color(t_cub *cub, char *line);
-void parse_ceiling_color(t_cub *cub, char *line);
+int parse_floor_color(t_cub *cub, char *line);
+int parse_ceiling_color(t_cub *cub, char *line);
 
 
 void map_is_valid(t_cub *cub);
@@ -257,5 +275,17 @@ void init_raycast(t_cub *cub, t_raycast *raycast, int x);
 void get_step_and_side_dist(t_cub *cub, t_raycast *raycast);
 void perform_dda(t_cub *cub, t_raycast *raycast);
 void get_distance(t_cub *cub, t_raycast *raycast);
+
+void my_pixel_put(t_cub *cub, int x, int y, int color);
+
+/********************************************************/
+/*					GET_MINI_MAP						*/
+/********************************************************/
+
+void	init_struct_mini_map(t_mini_map *mini_map);
+void	draw_mini_map_wall(t_cub *cub, t_mini_map *mini_map, int x, int y);
+void	draw_mini_map_floor(t_cub *cub, t_mini_map *mini_map, int x, int y);
+void	draw_mini_map_player(t_cub *cub, t_mini_map *mini_map);
+void	display_map_pixel_color(t_cub *cub);
 
 #endif

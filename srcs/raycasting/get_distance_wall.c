@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:01:43 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/27 14:55:10 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:15:55 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void draw_filled_square(t_cub *cub, int x, int y, int size, int color)
 
 void get_step_and_side_dist(t_cub *cub, t_raycast *raycast)
 {
-	// Calcul des étapes et des distances initiales pour le DDA
 	if (raycast->ray_dir_x < 0)
 	{
 		raycast->step_x = -1;
@@ -74,23 +73,20 @@ void get_step_and_side_dist(t_cub *cub, t_raycast *raycast)
 
 void perform_dda(t_cub *cub, t_raycast *raycast)
 {
-
-	// Boucle DDA pour trouver l'intersection avec un mur
 	while (raycast->hit == 0)
 	{
 		if (raycast->side_dist_x < raycast->side_dist_y)
 		{
 			raycast->side_dist_x += raycast->delta_dist_x;
 			raycast->map_x += raycast->step_x;
-			raycast->side = 0; // Mur touché sur l'axe X
+			raycast->side = 0;
 		}
 		else
 		{
 			raycast->side_dist_y += raycast->delta_dist_y;
 			raycast->map_y += raycast->step_y;
-			raycast->side = 1; // Mur touché sur l'axe Y
+			raycast->side = 1;
 		}
-		// Vérification de la collision avec un mur
 		if (cub->map->map[raycast->map_y][raycast->map_x] == '1')
 		{
 			raycast->hit = 1;

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:09:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/27 14:28:02 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:07:20 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void draw_wall(t_cub *cub, int x, t_raycast *ray)
 		y++;
 	}
 }
-
 
 void raycasting(void *param)
 {

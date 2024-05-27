@@ -6,16 +6,11 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:50:55 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/27 13:01:04 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:05:22 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
-
-// void handle_get_ceilling_color(t_cub *cub, char *line, int x)
-// {
-	
-// }
 
 
 void parsing_texture(t_cub *cub)
@@ -24,8 +19,6 @@ void parsing_texture(t_cub *cub)
 	int x = 0;
 	int check = 0;
 
-	// if (cub->texture->texture[y] == NULL)
-	// 	print_and_exit("bababab");
 	while (cub->texture->texture[y])
 	{
 		char *line = cub->texture->texture[y];
@@ -33,47 +26,23 @@ void parsing_texture(t_cub *cub)
 		while (line[x])
 		{
 			if (line[x] == 'N' && line[x + 1] == 'O')
-			{
-				parse_north_texture(cub, line, x);
-				check++;
-			}
+				check += parse_north_texture(cub, line, x);
 			else if (line[x] == 'S' && line[x + 1] == 'O')
-			{
-				parse_south_texture(cub, line, x);
-				check++;
-			}
+				check += parse_south_texture(cub, line, x);
 			else if (line[x] == 'W' && line[x + 1] == 'E')
-			{
-				parse_west_texture(cub, line, x);
-				check++;
-			}
+				check += parse_west_texture(cub, line, x);
 			else if (line[x] == 'E' && line[x + 1] == 'A')
-			{
-				parse_east_texture(cub, line, x);
-				check++;
-			}
+				check += parse_east_texture(cub, line, x);
 			else if (line[x] == 'F' && line[x + 1] == ' ')
-			{
-				parse_floor_color(cub, line);
-				check++;
-			}
+				check += parse_floor_color(cub, line);
 			else if (line[x] == 'C' && line[x + 1] == ' ')
-			{
-				parse_ceiling_color(cub, line);
-				check++;
-			}
+				check += parse_ceiling_color(cub, line);
 			x++;
 		}
 		y++;
 	}
 	if (check != 6)
-		print_and_exit(WRONG_NUMBER_OK_TEXTURES);
-	printf ("\n%s\n", cub->texture->north_path);
-	printf ("%s\n", cub->texture->south_path);
-	printf ("%s\n", cub->texture->west_path);
-	printf ("%s\n", cub->texture->east_path);
-	printf ("%x\n", cub->color->color_floor);
-	printf ("%x\n", cub->color->color_ceiling);
+		print_and_exit(WRONG_NUMBER_OF_TEXTURES);
 }
 
 int open_texture(t_cub *cub)
