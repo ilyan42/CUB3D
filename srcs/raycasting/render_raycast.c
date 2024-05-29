@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:09:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/27 18:07:20 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/29 19:13:20 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int get_pixel_color(t_image *image, int x, int y)
 	return (color);
 }
 
-
 void draw_wall(t_cub *cub, int x, t_raycast *ray)
 {
 	int y;
@@ -72,8 +71,8 @@ void draw_wall(t_cub *cub, int x, t_raycast *ray)
 			tex_x = cub->image->width - tex_x - 1;
 		// tex_y = (((y - (cub->res_y / 2) + (ray->line_height / 2)) * cub->image->height) / ray->line_height);
 		// color = get_pixel_color(cub->image, tex_x, tex_y);
-		// // color = get_pixel_color(cub->image, tex_x, y);
-		//une couleur pour chaque fasse nord sud est ouest
+		// color = get_pixel_color(cub->image, tex_x, y);
+		// //une couleur pour chaque fasse nord sud est ouest
 		if (ray->side == 0 && ray->ray_dir_x > 0)
 			color = 0x00FF0000; // direction = est couleur rouge
 		else if (ray->side == 0 && ray->ray_dir_x < 0)
@@ -93,6 +92,7 @@ void raycasting(void *param)
 	int x;
 
 	x = 0;
+	ft_handle_key_press(cub);
 	while (x < cub->res_x)
 	{
 		init_raycast(cub, cub->raycast, x);

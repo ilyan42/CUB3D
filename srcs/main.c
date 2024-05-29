@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/27 14:24:48 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/29 19:54:03 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,13 +144,29 @@ void init_all_struct(t_cub *cub)
 	cub->color->F_r = 0;
 	cub->color->color_ceiling = 0;
 	cub->color->color_floor = 0;
-	
+	cub->mini_map->key = malloc(sizeof(t_key));
+	if (!cub->mini_map->key)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	cub->mini_map->key->forward = _false;
+	cub->mini_map->key->backward = _false;
+	cub->mini_map->key->left = _false;
+	cub->mini_map->key->right = _false;
+	cub->mini_map->key->rotate_left = _false;
+	cub->mini_map->key->rotate_right = _false;
 }
 
 
 
-int update(t_cub *cub)
+int update(void *param)
 {
+	t_cub *cub;
+	
+	cub = (t_cub *)param;
+	// mlx_hook(cub->mlx->win, 2, 1L << 0, key_press, cub);
+	// mlx_hook(cub->mlx->win, 3, 1L << 1, key_release, cub);
 	raycasting(cub);
 	display_map_pixel_color(cub);
 	return (0);
@@ -190,7 +206,8 @@ int main(int ac, char **av)
 	load_image(&cub);
 	raycasting(&cub);
 	mlx_loop_hook(cub.mlx->mlx_ptr, update, &cub);
-	mlx_hook(cub.mlx->win, KeyPress, KeyPressMask, ft_handle_key_press, &cub);
+	mlx_hook(cub.mlx->win, 2, 1L << 0, key_press, &cub);
+	mlx_hook(cub.mlx->win, 3, 1L << 1, key_release, &cub);
 	mlx_hook(cub.mlx->win, 17, 0, close_game, &cub);
 	mlx_loop(cub.mlx->mlx_ptr);
 	return (0);

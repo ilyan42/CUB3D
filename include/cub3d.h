@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/27 17:05:03 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/29 19:45:21 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,17 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 #define NUM_TEXTURES 4 
-#define MOVE_SPEED 0.1
-#define ROTATE_SPEED 0.1
+#define MOVE_SPEED 0.05
+#define ROTATE_SPEED 0.03
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1080
 #define TILE_SIZE 64
 #define FOV 66
-#define ROT_SPEED 0.1
+#define ROT_SPEED 5
 #define MAP_BLOCK_SIZE 64
 #define PI 3.1415926535
 #define FOV_RAD (FOV * PI / 180)
+#define MAP 109
 
 
 
@@ -76,11 +77,15 @@
 
 #define MOVE_FORWARD_KEY W
 #define MOVE_BACKWARD_KEY S
-#define MOVE_LEFT_KEY A
-#define MOVE_RIGHT_KEY D
+#define MOVE_LEFt_key A
+#define MOVE_RIGHt_key D
 
 
-
+typedef enum t_boolean
+{
+	_false = 0,
+	_true = 1
+}	t_boolean;
 
 typedef struct s_minilibx
 {
@@ -191,6 +196,18 @@ typedef struct s_raycast
 	int res_y;
 }			t_raycast;
 
+typedef struct s_key
+{
+	int		forward;
+	int		backward;
+	int		left;
+	int		right;
+	int		rotate_left;
+	int		rotate_right;
+	int		escape;
+	int		map;
+}			t_key;
+
 typedef struct s_mini_map
 {
 	int		map_block_size;
@@ -204,6 +221,7 @@ typedef struct s_mini_map
 	int		screen_y;
 	int		player_center_x;
 	int		player_center_y;
+	t_key	*key;
 }			t_mini_map;
 
 typedef struct s_cub
@@ -257,7 +275,7 @@ void raycasting(void *param);
 void load_image(t_cub *cub);
 
 void display_map_pixel_color(t_cub *cub);
-int ft_handle_key_press(int keycode, void *param);
+int ft_handle_key_press(t_cub *cub);
 int close_game(t_minilibx *game);
 void move_player(t_cub *cub, int key);
 
@@ -287,5 +305,10 @@ void	draw_mini_map_wall(t_cub *cub, t_mini_map *mini_map, int x, int y);
 void	draw_mini_map_floor(t_cub *cub, t_mini_map *mini_map, int x, int y);
 void	draw_mini_map_player(t_cub *cub, t_mini_map *mini_map);
 void	display_map_pixel_color(t_cub *cub);
+
+
+
+int	key_press(int key, t_cub *data);
+int	key_release(int key, t_cub *data);
 
 #endif

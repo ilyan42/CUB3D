@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:46:46 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/27 17:41:02 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/29 19:53:55 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,26 +94,59 @@ void maj_plane_player(t_cub *cub)
 	cub->player->plane_y = cub->player->dir_x * FOV_RAD;
 }
 
-int ft_handle_key_press(int keycode, void *param)
+int	key_press(int key, t_cub *data)
 {
-	t_cub *cub;
+	if (key == LEFT)
+		data->mini_map->key->rotate_left = _true;
+	else if (key == RIGHT)
+		data->mini_map->key->rotate_right = _true;
+	else if (key == W)
+		data->mini_map->key->forward = _true;
+	else if (key == S_QW)
+		data->mini_map->key->backward = _true;
+	else if (key == A)
+		data->mini_map->key->left = _true;
+	else if (key == D_QW)
+		data->mini_map->key->right = _true;
+	else if (key == ESCAPE_KEY)
+		close_game(data->mlx);
+	return (0);
+}
 
-	cub = (t_cub *)param;
-	if (keycode == ESCAPE_KEY || keycode == 53)
+int	key_release(int key, t_cub *data)
+{
+	if (key == LEFT)
+		data->mini_map->key->rotate_left = _false;
+	else if (key == RIGHT)
+		data->mini_map->key->rotate_right = _false;
+	else if (key == W)
+		data->mini_map->key->forward = _false;
+	else if (key == S_QW)
+		data->mini_map->key->backward = _false;
+	else if (key == A)
+		data->mini_map->key->left = _false;
+	else if (key == D_QW)
+		data->mini_map->key->right = _false;
+	return (0);
+}
+
+int ft_handle_key_press(t_cub *cub)
+{
+	if (cub->mini_map->key->escape)
 	{
 		close_game(cub->mlx);
 	}
-	if (keycode == LEFT)
+	if (cub->mini_map->key->rotate_left)
 		cam_rotate_left(cub);
-	if (keycode == RIGHT)
+	if (cub->mini_map->key->rotate_right)
 		cam_rotate_right(cub);
-	if (keycode == D_QW)
-		move_right(cub);
-	if (keycode == A)
-		move_left(cub);
-	if (keycode == W)
+	if (cub->mini_map->key->forward)
 		move_forward(cub);
-	if (keycode == S_QW)
+	if (cub->mini_map->key->left)
+		move_left(cub);
+	if (cub->mini_map->key->right)
+		move_right(cub);
+	if (cub->mini_map->key->backward)
 		move_backward(cub);
 	maj_plane_player(cub);
 	return (1);
