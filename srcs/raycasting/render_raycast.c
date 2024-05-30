@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:09:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/29 19:13:20 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/30 17:02:47 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int get_pixel_color(t_image *image, int x, int y)
 	color = *(unsigned int *)(image->addr + index);
 	return (color);
 }
+
+
 
 void draw_wall(t_cub *cub, int x, t_raycast *ray)
 {

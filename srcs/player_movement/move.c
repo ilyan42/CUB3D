@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:46:46 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/29 19:53:55 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:40:51 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	move_forward(t_cub *cub)
 	float	x;
 	float	y;
 
-	x = cub->player->pos_x + cub->player->plane_x * (MOVE_SPEED);
-	y = cub->player->pos_y - cub->player->plane_x * (MOVE_SPEED);
+	x = cub->player->pos_x + cub->player->plane_x * cub->player->move_speed;
+	y = cub->player->pos_y - cub->player->plane_x * cub->player->move_speed;
 	if (cub->map->map[(int)cub->player->pos_y][(int)x] != '1')
-		cub->player->pos_x += cub->player->plane_y * MOVE_SPEED;
+		cub->player->pos_x += cub->player->plane_y * cub->player->move_speed;
 	if (cub->map->map[(int)y][(int)cub->player->pos_x] != '1')
-		cub->player->pos_y -= cub->player->plane_x * MOVE_SPEED;
+		cub->player->pos_y -= cub->player->plane_x * cub->player->move_speed;
 }
 
 void	move_backward(t_cub *cub)
@@ -52,12 +52,12 @@ void	move_backward(t_cub *cub)
 	float	x;
 	float	y;
 
-	x = cub->player->pos_x - cub->player->plane_y * (MOVE_SPEED);
-	y = cub->player->pos_y + cub->player->plane_x * (MOVE_SPEED);
+	x = cub->player->pos_x - cub->player->plane_y * cub->player->move_speed;
+	y = cub->player->pos_y + cub->player->plane_x * cub->player->move_speed;
 	if (cub->map->map[(int)cub->player->pos_y][(int)x] != '1')
-		cub->player->pos_x -= cub->player->plane_y * MOVE_SPEED;
+		cub->player->pos_x -= cub->player->plane_y * cub->player->move_speed;
 	if (cub->map->map[(int)y][(int)cub->player->pos_x] != '1')
-		cub->player->pos_y += cub->player->plane_x * MOVE_SPEED;
+		cub->player->pos_y += cub->player->plane_x * cub->player->move_speed;
 }
 
 
@@ -67,12 +67,12 @@ void	move_left(t_cub *cub)
 	int x;
 	int y;
 
-	x = cub->player->pos_x - cub->player->plane_x * (MOVE_SPEED);
-	y = cub->player->pos_y - cub->player->plane_y * (MOVE_SPEED);
+	x = cub->player->pos_x - cub->player->plane_x * cub->player->move_speed;
+	y = cub->player->pos_y - cub->player->plane_y * cub->player->move_speed;
 	if (cub->map->map[(int)cub->player->pos_y][(int)x] != '1')
-		cub->player->pos_x -= cub->player->plane_x * (MOVE_SPEED);
+		cub->player->pos_x -= cub->player->plane_x * cub->player->move_speed;
 	if (cub->map->map[(int)y][(int)cub->player->pos_x] != '1')
-		cub->player->pos_y -= cub->player->plane_y * (MOVE_SPEED);
+		cub->player->pos_y -= cub->player->plane_y * cub->player->move_speed;
 }
 
 void	move_right(t_cub *cub)
@@ -80,12 +80,12 @@ void	move_right(t_cub *cub)
 	int x;
 	int y;
 
-	x = cub->player->pos_x + cub->player->plane_x * (MOVE_SPEED);
-	y = cub->player->pos_y + cub->player->plane_y * (MOVE_SPEED);
+	x = cub->player->pos_x + cub->player->plane_x * cub->player->move_speed;
+	y = cub->player->pos_y + cub->player->plane_y * cub->player->move_speed;
 	if (cub->map->map[(int)cub->player->pos_y][(int)x] != '1')
-		cub->player->pos_x += cub->player->plane_x * (MOVE_SPEED);
+		cub->player->pos_x += cub->player->plane_x * cub->player->move_speed;
 	if (cub->map->map[(int)y][(int)cub->player->pos_x] != '1')
-		cub->player->pos_y += cub->player->plane_y * (MOVE_SPEED);
+		cub->player->pos_y += cub->player->plane_y * cub->player->move_speed;
 }
 
 void maj_plane_player(t_cub *cub)
@@ -110,6 +110,10 @@ int	key_press(int key, t_cub *data)
 		data->mini_map->key->right = _true;
 	else if (key == ESCAPE_KEY)
 		close_game(data->mlx);
+	else if (key == MAP)
+		data->mini_map->key->map = _true;
+	else if (key == LEFT_SHIFT)
+		data->mini_map->key->left_shift = _true;
 	return (0);
 }
 
@@ -127,15 +131,17 @@ int	key_release(int key, t_cub *data)
 		data->mini_map->key->left = _false;
 	else if (key == D_QW)
 		data->mini_map->key->right = _false;
+	else if (key == MAP)
+		data->mini_map->key->map = _false;
+	else if (key == LEFT_SHIFT)
+		data->mini_map->key->left_shift = _false;
 	return (0);
 }
 
 int ft_handle_key_press(t_cub *cub)
 {
 	if (cub->mini_map->key->escape)
-	{
 		close_game(cub->mlx);
-	}
 	if (cub->mini_map->key->rotate_left)
 		cam_rotate_left(cub);
 	if (cub->mini_map->key->rotate_right)
@@ -148,6 +154,12 @@ int ft_handle_key_press(t_cub *cub)
 		move_right(cub);
 	if (cub->mini_map->key->backward)
 		move_backward(cub);
+	if (cub->mini_map->key->left_shift)
+		cub->player->move_speed = 0.1;
+	else
+		cub->player->move_speed = 0.05;
+	if (cub->mini_map->key->map)
+		cub->mini_map->key->good->good = _true;
 	maj_plane_player(cub);
 	return (1);
 }

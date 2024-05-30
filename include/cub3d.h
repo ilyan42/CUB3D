@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/29 19:45:21 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:34:31 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@
 #define PI 3.1415926535
 #define FOV_RAD (FOV * PI / 180)
 #define MAP 109
+#define LEFT_SHIFT 65505
 
 
 
@@ -196,6 +197,11 @@ typedef struct s_raycast
 	int res_y;
 }			t_raycast;
 
+typedef struct s_good
+{
+	bool good;
+	bool not_good;
+}		t_good;
 typedef struct s_key
 {
 	int		forward;
@@ -206,6 +212,8 @@ typedef struct s_key
 	int		rotate_right;
 	int		escape;
 	int		map;
+	int		left_shift;
+	t_good	*good;
 }			t_key;
 
 typedef struct s_mini_map
@@ -237,6 +245,7 @@ typedef struct s_cub
 	char		*line;
 	int res_x;
 	int res_y;
+	// int move_speed;
 }			t_cub;
 
 

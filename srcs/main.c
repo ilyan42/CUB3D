@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/29 19:54:03 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:35:51 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void init_all_struct(t_cub *cub)
 	cub->player->plane_x = 0;
 	cub->player->plane_y = 0;
 	cub->player->angle = 0;
-	cub->player->move_speed = 0;
+	cub->player->move_speed = 0.05;
 	cub->player->rot_speed = 0;
 	cub->player->fov_angle = 0;
 	cub->player->fov_rad = (FOV * M_PI) / 180;
@@ -156,6 +156,16 @@ void init_all_struct(t_cub *cub)
 	cub->mini_map->key->right = _false;
 	cub->mini_map->key->rotate_left = _false;
 	cub->mini_map->key->rotate_right = _false;
+	cub->mini_map->key->map = _false;
+	cub->mini_map->key->left_shift = _false;
+	cub->mini_map->key->good = malloc(sizeof(t_key));
+	if (!cub->mini_map->key->good)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	cub->mini_map->key->good->good = _false;
+	cub->mini_map->key->good->not_good = _false;
 }
 
 
@@ -165,10 +175,13 @@ int update(void *param)
 	t_cub *cub;
 	
 	cub = (t_cub *)param;
-	// mlx_hook(cub->mlx->win, 2, 1L << 0, key_press, cub);
-	// mlx_hook(cub->mlx->win, 3, 1L << 1, key_release, cub);
 	raycasting(cub);
-	display_map_pixel_color(cub);
+	if (cub->mini_map->key->good->good)
+	{
+		mlx_clear_window(cub->mlx->mlx_ptr, cub->mlx->win);
+		display_map_pixel_color(cub);
+	}
+	cub->mini_map->key->good->good = _false;
 	return (0);
 }
 
