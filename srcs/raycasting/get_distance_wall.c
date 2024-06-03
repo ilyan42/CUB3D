@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:01:43 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/03 15:39:31 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:27:00 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 void init_raycast(t_cub *cub, t_raycast *raycast, int x)
 {
-	// Calcul de la position de la caméra pour le rayon actuel
 	raycast->camera_x = 2 * x / (double)cub->res_x - 1;
-	// Direction du rayon en utilisant la direction et le plan de la caméra
 	raycast->ray_dir_x = cub->player->dir_x + cub->player->plane_x * raycast->camera_x;
 	raycast->ray_dir_y = cub->player->dir_y + cub->player->plane_y * raycast->camera_x;
-	// Position de départ du rayon sur la carte (position du joueur)
 	raycast->map_x = cub->player->pos_x;
 	raycast->map_y = cub->player->pos_y;
-	// Calcul des distances delta pour le DDA
 	if (raycast->ray_dir_x != 0)
 		raycast->delta_dist_x = fabs(1 / raycast->ray_dir_x);
 	else
