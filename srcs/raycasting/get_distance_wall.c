@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:01:43 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/29 19:47:09 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:39:31 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void init_raycast(t_cub *cub, t_raycast *raycast, int x)
 {
 	// Calcul de la position de la caméra pour le rayon actuel
-	raycast->camera_x = 2.0 * x / cub->res_x - 1;
+	raycast->camera_x = 2 * x / (double)cub->res_x - 1;
 	// Direction du rayon en utilisant la direction et le plan de la caméra
 	raycast->ray_dir_x = cub->player->dir_x + cub->player->plane_x * raycast->camera_x;
 	raycast->ray_dir_y = cub->player->dir_y + cub->player->plane_y * raycast->camera_x;

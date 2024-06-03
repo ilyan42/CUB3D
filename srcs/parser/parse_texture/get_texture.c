@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:49:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/27 17:03:28 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:48:07 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int parse_north_texture(t_cub *cub, char *line, int x)
 	if (path_start && path_end)
 	{
 		path_len = path_end - path_start;
-		cub->texture->north_path = malloc(path_len + 1);
-		if (cub->texture->north_path)
+		cub->texture_file->north_path = malloc(path_len + 1);
+		if (cub->texture_file->north_path)
 		{
-			strncpy(cub->texture->north_path, path_start, path_len);
-			cub->texture->north_path[path_len] = '\0';
+			strncpy(cub->texture_file->north_path, path_start, path_len);
+			cub->texture_file->north_path[path_len] = '\0';
 		}
 		else
 		{
@@ -50,11 +50,11 @@ int parse_south_texture(t_cub *cub, char *line, int x)
 	if (path_start && path_end)
 	{
 		path_len = path_end - path_start;
-		cub->texture->south_path = malloc(path_len + 1);
-		if (cub->texture->south_path)
+		cub->texture_file->south_path = malloc(path_len + 1);
+		if (cub->texture_file->south_path)
 		{
-			strncpy(cub->texture->south_path, path_start, path_len);
-			cub->texture->south_path[path_len] = '\0';
+			strncpy(cub->texture_file->south_path, path_start, path_len);
+			cub->texture_file->south_path[path_len] = '\0';
 		}
 		else
 		{
@@ -79,11 +79,11 @@ int parse_west_texture(t_cub *cub, char *line, int x)
 	if (path_start && path_end)
 	{
 		path_len = path_end - path_start;
-		cub->texture->west_path = malloc(path_len + 1);
-		if (cub->texture->west_path)
+		cub->texture_file->west_path = malloc(path_len + 1);
+		if (cub->texture_file->west_path)
 		{
-			strncpy(cub->texture->west_path, path_start, path_len);
-			cub->texture->west_path[path_len] = '\0';
+			strncpy(cub->texture_file->west_path, path_start, path_len);
+			cub->texture_file->west_path[path_len] = '\0';
 		}
 		else
 		{
@@ -108,11 +108,11 @@ int parse_east_texture(t_cub *cub, char *line, int x)
 	if (path_start && path_end)
 	{
 		path_len = path_end - path_start;
-		cub->texture->east_path = malloc(path_len + 1);
-		if (cub->texture->east_path)
+		cub->texture_file->east_path = malloc(path_len + 1);
+		if (cub->texture_file->east_path)
 		{
-			strncpy(cub->texture->east_path, path_start, path_len);
-			cub->texture->east_path[path_len] = '\0';
+			strncpy(cub->texture_file->east_path, path_start, path_len);
+			cub->texture_file->east_path[path_len] = '\0';
 		}
 		else
 		{

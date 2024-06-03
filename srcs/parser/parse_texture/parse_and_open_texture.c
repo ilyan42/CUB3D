@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:50:55 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/27 17:05:22 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:48:46 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void parsing_texture(t_cub *cub)
 	int x = 0;
 	int check = 0;
 
+	printf ("parsing_texture\n");
 	while (cub->texture->texture[y])
 	{
 		char *line = cub->texture->texture[y];
@@ -49,19 +50,19 @@ int open_texture(t_cub *cub)
 {
 	int fd;
 	
-	fd = open(cub->texture->north_path, O_RDONLY);
+	fd = open(cub->texture_file->north_path, O_RDONLY);
 	if (fd == -1)
 		print_and_exit(OPEN_NORTH_TEXTURE);
 	close(fd);
-	fd = open(cub->texture->south_path, O_RDONLY);
+	fd = open(cub->texture_file->south_path, O_RDONLY);
 	if (fd == -1)
 		print_and_exit(OPEN_SOUTH_TEXTURE);
 	close(fd);
-	fd = open(cub->texture->west_path, O_RDONLY);
+	fd = open(cub->texture_file->west_path, O_RDONLY);
 	if (fd == -1)
 		print_and_exit(OPEN_WEST_TEXTURE);
 	close(fd);
-	fd = open(cub->texture->east_path, O_RDONLY);
+	fd = open(cub->texture_file->east_path, O_RDONLY);
 	if (fd == -1)
 		print_and_exit(OPEN_EAST_TEXTURE);
 	close(fd);
@@ -85,28 +86,22 @@ void check_extention_texture(char *path)
 	print_and_exit(WRONG_TEXTURE_EXTENTION);
 }
 
-void load_image(t_cub *cub)
-{
-	int width;
-	int height;
-	
-	cub->image->NO_img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, cub->texture->north_path, &width, &height);
-	cub->image->SO_img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, cub->texture->south_path, &width, &height);
-	cub->image->WE_img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, cub->texture->west_path, &width, &height);
-	cub->image->EA_img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, cub->texture->east_path, &width, &height);
-	cub->image->img = mlx_new_image(cub->mlx->mlx_ptr, cub->res_x, cub->res_y);
-	cub->image->addr = mlx_get_data_addr(cub->image->img, &cub->image->bits_per_pixel, &cub->image->line_length, &cub->image->endian);
-}
 
 void texture_processing(t_cub *cub)
 {
 	parsing_texture(cub);
-	if (!cub->texture->north_path || !cub->texture->south_path || !cub->texture->west_path || !cub->texture->east_path)
+	if (!cub->texture_file->north_path || !cub->texture_file->south_path || !cub->texture_file->west_path || !cub->texture_file->east_path)
 		exit(EXIT_FAILURE);
-	check_extention_texture(cub->texture->north_path);
-	check_extention_texture(cub->texture->south_path);
-	check_extention_texture(cub->texture->west_path);
-	check_extention_texture(cub->texture->east_path);
+	check_extention_texture(cub->texture_file->north_path);
+	check_extention_texture(cub->texture_file->south_path);
+	check_extention_texture(cub->texture_file->west_path);
+	check_extention_texture(cub->texture_file->east_path);
+	printf ("texture no = %s\n", cub->texture_file->north_path);
+	printf ("texture so = %s\n", cub->texture_file->south_path);
+	printf ("texture we = %s\n", cub->texture_file->west_path);
+	printf ("texture ea = %s\n", cub->texture_file->east_path);
+	printf ("texture floor = %d\n", cub->color->color_floor);
+	printf ("texture ceiling = %d\n", cub->color->color_ceiling);
 	if (open_texture(cub) == 0)
 		exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:49:33 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/30 17:41:26 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:03:38 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 void	init_struct_mini_map(t_mini_map *mini_map)
 {
+	printf ("init_struct_mini_map\n");
+	mini_map = malloc(sizeof(t_mini_map));
+	if (!mini_map)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	mini_map->start_x = 0;
+	mini_map->start_y = 0;
 	mini_map->map_block_size = 16;
 	mini_map->player_size = mini_map->map_block_size / 2;
 	mini_map->player_color = 0x00FFFF00;
@@ -35,7 +44,7 @@ void	draw_mini_map_wall(t_cub *cub, t_mini_map *mini_map, int x, int y)
 		{
 			mini_map->srceen_x = x * mini_map->map_block_size + mini_map->j;
 			mini_map->screen_y = y * mini_map->map_block_size + mini_map->i;
-			my_pixel_put(cub, mini_map->srceen_x,
+			pixel_put(cub, mini_map->srceen_x,
 				mini_map->screen_y, 0x00000000);
 			mini_map->j++;
 		}
@@ -54,7 +63,7 @@ void	draw_mini_map_floor(t_cub *cub, t_mini_map *mini_map, int x, int y)
 		{
 			mini_map->srceen_x = x * mini_map->map_block_size + mini_map->j;
 			mini_map->screen_y = y * mini_map->map_block_size + mini_map->i;
-			my_pixel_put(cub, mini_map->srceen_x,
+			pixel_put(cub, mini_map->srceen_x,
 				mini_map->screen_y, 0x00808080);
 			mini_map->j++;
 		}
@@ -77,7 +86,7 @@ void	draw_mini_map_player(t_cub *cub, t_mini_map *mini_map)
 		{
 			mini_map->srceen_x = mini_map->start_x + mini_map->j;
 			mini_map->screen_y = mini_map->start_y + mini_map->i;
-			my_pixel_put(cub, mini_map->srceen_x,
+			pixel_put(cub, mini_map->srceen_x,
 				mini_map->screen_y, mini_map->player_color);
 			mini_map->j++;
 		}
@@ -93,7 +102,7 @@ void	display_map_pixel_color(t_cub *cub)
 
 	y = 0;
 	init_struct_mini_map(cub->mini_map);
-	while (cub->map->map[y])
+	while (cub->map->map[y] != NULL)
 	{
 		x = 0;
 		while (cub->map->map[y][x])

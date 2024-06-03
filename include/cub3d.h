@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/30 18:34:31 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:55:43 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,16 @@ typedef enum t_boolean
 	_true = 1
 }	t_boolean;
 
+enum e_texture
+{
+	NORTH = 0,
+	SOUTH = 1,
+	EAST = 2,
+	WEST = 3,
+	F,
+	C
+};
+
 typedef struct s_minilibx
 {
 	void	*mlx_ptr;
@@ -119,17 +129,29 @@ typedef struct s_image
 	char 	*path;
 }			t_image;
 
-
-typedef struct s_texture
+typedef struct s_texture_file
 {
+	char **text;
 	char	*north_path;
 	char	*south_path;
 	char	*west_path;
 	char	*east_path;
 	char	*floor;
 	char	*ceiling;
+}		t_texture_file;
+
+typedef struct s_texture
+{
 	int 	height;
-	char **texture;
+	int 	width;
+	char	**texture;
+	void			*reference;
+	unsigned char	*pixels;
+	int				x;
+	int				y;
+	int				bits_per_pixel;
+	int				line_len;
+	int				endian;
 }			t_texture;
 
 typedef struct s_player
@@ -195,6 +217,8 @@ typedef struct s_raycast
 	int flag;
 	int res_x;
 	int res_y;
+	int true_pos_x;
+	int true_pos_y;
 }			t_raycast;
 
 typedef struct s_good
@@ -202,6 +226,7 @@ typedef struct s_good
 	bool good;
 	bool not_good;
 }		t_good;
+
 typedef struct s_key
 {
 	int		forward;
@@ -229,23 +254,33 @@ typedef struct s_mini_map
 	int		screen_y;
 	int		player_center_x;
 	int		player_center_y;
-	t_key	*key;
 }			t_mini_map;
+
+typedef struct s_pixel_column
+{
+	int		tex_x;
+	int		tex_y;
+	int		y_start;
+	int		y_end;
+	int		height;
+	int		color;
+}	t_pixel_column;
 
 typedef struct s_cub
 {
 	t_minilibx	*mlx;
 	t_player	*player;
 	t_map		*map;
-	t_texture	*texture;
+	t_texture	texture[4];
 	t_image		*image;
 	t_color		color[2];
 	t_raycast	*raycast;
 	t_mini_map	*mini_map;
+	t_texture_file	*texture_file;
+	t_key		*key;
 	char		*line;
 	int res_x;
 	int res_y;
-	// int move_speed;
 }			t_cub;
 
 
@@ -303,7 +338,7 @@ void get_step_and_side_dist(t_cub *cub, t_raycast *raycast);
 void perform_dda(t_cub *cub, t_raycast *raycast);
 void get_distance(t_cub *cub, t_raycast *raycast);
 
-void my_pixel_put(t_cub *cub, int x, int y, int color);
+void my_pixel_put(t_image *image, int x, int y, int color);
 
 /********************************************************/
 /*					GET_MINI_MAP						*/
@@ -319,5 +354,7 @@ void	display_map_pixel_color(t_cub *cub);
 
 int	key_press(int key, t_cub *data);
 int	key_release(int key, t_cub *data);
+void	create_raycast_img(t_cub *data);
+void pixel_put(t_cub *cub, int x, int y, int color);
 
 #endif

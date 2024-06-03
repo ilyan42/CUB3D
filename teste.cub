@@ -1,10 +1,10 @@
-NO ./texture/north.xpm
-SO ./texture/south.xpm
-WE ./texture/west.xpm
+NO ./texture/rubiksN.xpm
+SO ./texture/rubiksS.xpm
+WE ./texture/rubiksW.xpm
 EA ./texture/east.xpm
 
 
-F 80,80,80
+F 255,255,255
 C 0,200,255
 
 

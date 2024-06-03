@@ -6,22 +6,22 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:23:09 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/21 15:10:35 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:47:28 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	check_texture(t_texture *texture)
-{
-	if (!texture->north_path || !texture->south_path || !texture->west_path || !texture->east_path
-		|| !texture->floor || !texture->ceiling)
-	{
-		printf("Error: texture not found\n");
-		return (0);
-	}
-	return (1);
-}
+// int	check_texture(t_texture *texture)
+// {
+// 	if (!texture->texture_file->north_path || !texture->texture_file->south_path || !texture->texture_file->west_path || !texture->texture_file->east_path
+// 		|| !texture->texture_file->floor || !texture->texture_file->ceiling)
+// 	{
+// 		printf("Error: texture not found\n");
+// 		return (0);
+// 	}
+// 	return (1);
+// }
 
 
 void count_texture_height(t_cub *cub, int fd)

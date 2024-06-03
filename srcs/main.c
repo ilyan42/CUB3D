@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/30 18:35:51 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:08:57 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ void 	init_window(t_minilibx *window, t_cub *cub)
 
 void init_all_struct(t_cub *cub)
 {
+	printf ("init_all_struct\n");
 	cub->res_x = 1920;
+	printf ("cub->res_x = %d\n", cub->res_x);
 	cub->res_y = 1080;
+	printf ("cub->res_y = %d\n", cub->res_y);
 	cub->mlx = malloc(sizeof(t_minilibx));
 	if (!cub->mlx)
 	{
@@ -43,7 +46,9 @@ void init_all_struct(t_cub *cub)
 		exit(EXIT_FAILURE);
 	}
 	cub->mlx->mlx_ptr = NULL;
+	printf ("good 1\n");
 	cub->mlx->win = NULL;
+	printf ("good 2\n");
 	cub->map = malloc(sizeof(t_map));
 	if (!cub->map)
 	{
@@ -51,10 +56,15 @@ void init_all_struct(t_cub *cub)
 		exit(EXIT_FAILURE);
 	}
 	cub->map->map = NULL;
+	printf ("good 3\n");
 	cub->map->size_x = 0;
+	printf ("good 4\n");
 	cub->map->size_y = 0;
+	printf ("good 5\n");
 	cub->map->height = 0;
+	printf ("good 6\n");
 	cub->map->width = 0;
+	printf ("good 7\n");
 	cub->image = malloc(sizeof(t_image));
 	if (!cub->image)
 	{
@@ -62,31 +72,29 @@ void init_all_struct(t_cub *cub)
 		exit(EXIT_FAILURE);
 	}
 	cub->image->img = NULL;
+	printf ("good 8\n");
 	cub->image->NO_img = NULL;
+	printf ("good 9\n");
 	cub->image->SO_img = NULL;
+	printf ("good 10\n");
 	cub->image->WE_img = NULL;
+	printf ("good 11\n");
 	cub->image->EA_img = NULL;
+	printf ("good 12\n");
 	cub->image->addr = NULL;
+	printf ("good 13\n");
 	cub->image->bits_per_pixel = 0;
+	printf ("good 14\n");
 	cub->image->line_length = 0;
+	printf ("good 15\n");
 	cub->image->endian = 0;
+	printf ("good 16\n");
 	cub->image->width = 0;
+	printf ("good 17\n");
 	cub->image->height = 0;
+	printf ("good 18\n");
 	cub->image->path = NULL;
-	cub->texture = malloc(sizeof(t_texture));
-	if (!cub->texture)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-	cub->texture->north_path = NULL;
-	cub->texture->south_path = NULL;
-	cub->texture->west_path = NULL;
-	cub->texture->east_path = NULL;
-	cub->texture->floor = NULL;
-	cub->texture->ceiling = NULL;
-	cub->texture->height = 0;
-	cub->texture->texture = NULL;
+	printf ("good 19\n");
 	cub->player = malloc(sizeof(t_player));
 	if (!cub->player)
 	{
@@ -94,10 +102,15 @@ void init_all_struct(t_cub *cub)
 		exit(EXIT_FAILURE);
 	}
 	cub->player->pos_x = 0;
+	printf ("good 20\n");
 	cub->player->pos_y = 0;
+	printf ("good 21\n");
 	cub->player->dir_x = 0;
+	printf ("good 22\n");
 	cub->player->dir_y = 0;
+	printf ("good 23\n");
 	cub->player->plane_x = 0;
+	printf ("good 24\n");
 	cub->player->plane_y = 0;
 	cub->player->angle = 0;
 	cub->player->move_speed = 0.05;
@@ -141,34 +154,95 @@ void init_all_struct(t_cub *cub)
 	cub->color->C_r = 0;
 	cub->color->F_b = 0;
 	cub->color->F_g = 0;
+	printf ("good 24\n");
 	cub->color->F_r = 0;
 	cub->color->color_ceiling = 0;
 	cub->color->color_floor = 0;
-	cub->mini_map->key = malloc(sizeof(t_key));
-	if (!cub->mini_map->key)
+	printf ("good 24\n");
+	cub->texture_file = malloc(sizeof(t_texture_file));
+	if (!cub->texture_file)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	cub->mini_map->key->forward = _false;
-	cub->mini_map->key->backward = _false;
-	cub->mini_map->key->left = _false;
-	cub->mini_map->key->right = _false;
-	cub->mini_map->key->rotate_left = _false;
-	cub->mini_map->key->rotate_right = _false;
-	cub->mini_map->key->map = _false;
-	cub->mini_map->key->left_shift = _false;
-	cub->mini_map->key->good = malloc(sizeof(t_key));
-	if (!cub->mini_map->key->good)
+	printf ("good 28\n");
+	cub->key = malloc(sizeof(t_key));
+	if (!cub->key)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	cub->mini_map->key->good->good = _false;
-	cub->mini_map->key->good->not_good = _false;
+	cub->key->forward = _false;
+	cub->key->backward = _false;
+	cub->key->left = _false;
+	cub->key->right = _false;
+	cub->key->rotate_left = _false;
+	cub->key->rotate_right = _false;
+	cub->key->map = _false;
+	cub->key->left_shift = _false;
+	cub->key->good = malloc(sizeof(t_good));
+	if (!cub->key->good)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	cub->key->good->good = _false;
+	cub->key->good->not_good = _false;
+	printf ("good 233\n");
+}
+
+t_texture new_sprite(t_cub *cub, int i)
+{
+    t_texture *texture = (t_texture *)malloc(sizeof(t_texture));
+    if (!texture)
+    {
+        printf("Error: malloc failed for texture\n");
+        exit(EXIT_FAILURE);
+    }
+    texture->reference = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, cub->texture_file->text[i], &texture->width, &texture->height);
+    if (!texture->reference)
+    {
+        printf("Error: texture not found\n");
+        free(texture);
+        exit(EXIT_FAILURE);
+    }
+
+    texture->pixels = (unsigned char *)mlx_get_data_addr(texture->reference, &texture->bits_per_pixel, &texture->line_len, &texture->endian);
+    t_texture result = *texture;
+    free(texture);
+    return result;
+}
+
+void init_sprite(t_cub *cub)
+{
+    int i = 0;
+    while (i < 4)
+    {
+        cub->texture[i] = new_sprite(cub, i);
+        i++;
+    }
+}
+
+void initialize_textures(t_cub *cub)
+{
+	cub->texture_file->text = (char **)malloc(sizeof(char *) * 4);
+	if (!cub->texture_file->text)
+	{
+		printf("Error: malloc failed for texture_file->text\n");
+		exit(EXIT_FAILURE);
+	}
+	cub->texture_file->text[0] = cub->texture_file->north_path;
+	cub->texture_file->text[1] = cub->texture_file->south_path;
+	cub->texture_file->text[2] = cub->texture_file->west_path;
+	cub->texture_file->text[3] = cub->texture_file->east_path;
 }
 
 
+void init_image(t_cub *cub)
+{
+	cub->image->img = mlx_new_image(cub->mlx->mlx_ptr, cub->res_x, cub->res_y);
+	cub->image->addr = mlx_get_data_addr(cub->image->img, &cub->image->bits_per_pixel, &cub->image->line_length, &cub->image->endian);
+}
 
 int update(void *param)
 {
@@ -176,30 +250,13 @@ int update(void *param)
 	
 	cub = (t_cub *)param;
 	raycasting(cub);
-	if (cub->mini_map->key->good->good)
-	{
-		mlx_clear_window(cub->mlx->mlx_ptr, cub->mlx->win);
-		display_map_pixel_color(cub);
-	}
-	cub->mini_map->key->good->good = _false;
+	// if (cub->key->good->good)
+	// {
+	// 	mlx_clear_window(cub->mlx->mlx_ptr, cub->mlx->win);
+	// 	display_map_pixel_color(cub);
+	// }
+	// cub->key->good->good = _false;
 	return (0);
-}
-
-void init_struct_raycast(t_raycast *raycast)
-{
-	raycast = malloc(sizeof(t_raycast));
-	if (!raycast)
-	{
-		fprintf(stderr, "Erreur d'allocation mémoire pour raycast\n");
-		exit(EXIT_FAILURE);
-	}
-	raycast->ray_angle = 0.0;
-	raycast->distance = 1.0;
-	raycast->tex_pos = 0.0;
-	raycast->step = 0.0;
-	raycast->side = 0;
-	raycast->tex_x = 0;
-	raycast->tex_y = 0;
 }
 
 int main(int ac, char **av)
@@ -211,12 +268,27 @@ int main(int ac, char **av)
 		printf("Error: map file not found\n");
 		return (0);
 	}
+	// printf ("map file found\n");
 	init_all_struct(&cub);
+	// printf ("all struct initialized\n");
 	get_map_and_tex(av[1], &cub);
-	texture_processing(&cub);
+	// printf ("map and tex initialized\n");
 	map_is_valid(&cub);
+	// printf ("map is valid\n");
 	init_window(cub.mlx, &cub);
-	load_image(&cub);
+	// printf ("window initialized\n");
+	init_image(&cub);
+	// printf ("image initialized\n");
+	texture_processing(&cub);
+	// printf ("texture processed\n");
+	initialize_textures(&cub);
+	// printf ("textures initialized\n");
+	// printf ("texture[0] = %s\n", cub.texture_file->text[0]);
+	// printf ("texture[1] = %s\n", cub.texture_file->text[1]);
+	// printf ("texture[2] = %s\n", cub.texture_file->text[2]);
+	// printf ("texture[3] = %s\n", cub.texture_file->text[3]);
+	init_sprite(&cub);
+	// printf ("sprite initialized\n");
 	raycasting(&cub);
 	mlx_loop_hook(cub.mlx->mlx_ptr, update, &cub);
 	mlx_hook(cub.mlx->win, 2, 1L << 0, key_press, &cub);

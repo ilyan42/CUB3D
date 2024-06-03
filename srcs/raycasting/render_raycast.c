@@ -6,14 +6,22 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:09:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/30 17:02:47 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:41:35 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
 
-void my_pixel_put(t_cub *cub, int x, int y, int color)
+void my_pixel_put(t_image *image, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
+void pixel_put(t_cub *cub, int x, int y, int color)
 {
 	char	*dst;
 
@@ -28,65 +36,89 @@ void draaw_line(t_cub *cub, int x, int draw_start, t_raycast *ray)
 	y = 0;
 	while (y < draw_start)
 	{
-		my_pixel_put(cub, x, y, cub->color->color_ceiling);
+		my_pixel_put(cub->image, x, y, cub->color->color_ceiling);
 		y++;
 	}
 	y = ray->draw_end;
 	while (y < cub->res_y)
 	{
-		my_pixel_put(cub, x, y, cub->color->color_floor);
+		my_pixel_put(cub->image, x, y, cub->color->color_floor);
 		y++;
 	}
 }
+void load_texture(t_cub *cub, t_texture *texture, char *file_path) {
+    texture->reference = mlx_xpm_file_to_image(cub->mlx->mlx_ptr, file_path, &texture->width, &texture->height);
 
-int get_pixel_color(t_image *image, int x, int y)
-{
-	int color;
-	int index;
 
-	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, &image->line_length, &image->endian);
-	index = (y * image->line_length + x * (image->bits_per_pixel / 8));
-	color = *(unsigned int *)(image->addr + index);
-	return (color);
+    texture->pixels = (unsigned char *)mlx_get_data_addr(texture->reference, &texture->bits_per_pixel, &texture->line_len, &texture->endian);
 }
 
+int get_pixel_color(t_texture *texture, int x, int y) {
+	int color;
+	unsigned char *dst;
 
+	dst = texture->pixels + (y * texture->line_len + x * (texture->bits_per_pixel / 8));
+	color = *(unsigned int *)dst;
+	return color;
+}
 
 void draw_wall(t_cub *cub, int x, t_raycast *ray)
 {
-	int y;
-	// int tex_y;
-	int color;
-	int tex_x;
+    int y;
+    int color;
+    int tex_x, tex_y;
+    t_texture texture;
 
-	y = ray->draw_start;
-	while (y < ray->draw_end + 1)
-	{
-		if (ray->line_height == 0)
-			break ;
-		if (ray->side == 0)
-			ray->wall_x = cub->player->pos_y + ray->perp_wall_dist * ray->ray_dir_y;
-		else
-			ray->wall_x = cub->player->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
-		tex_x = ((int)ray->wall_x * cub->image->width);
-		if (ray->side == 0 && ray->ray_dir_x > 0)
-			tex_x = cub->image->width - tex_x - 1;
-		// tex_y = (((y - (cub->res_y / 2) + (ray->line_height / 2)) * cub->image->height) / ray->line_height);
-		// color = get_pixel_color(cub->image, tex_x, tex_y);
-		// color = get_pixel_color(cub->image, tex_x, y);
-		// //une couleur pour chaque fasse nord sud est ouest
-		if (ray->side == 0 && ray->ray_dir_x > 0)
-			color = 0x00FF0000; // direction = est couleur rouge
-		else if (ray->side == 0 && ray->ray_dir_x < 0)
-			color = 0x0000FF00; // direction = ouest couleur verte
-		else if (ray->side == 1 && ray->ray_dir_y > 0)
-			color = 0x000000FF; // direction = sud couleur bleu 
-		else
-			color = 0x00FFFF00; // direction = nord couleur jaune
-		my_pixel_put(cub, x, y, color);
+    // Déterminer la texture à utiliser en fonction de la direction du mur
+    if (ray->side == 0) {
+        if (ray->ray_dir_x > 0) {
+            texture = cub->texture[0]; // Est
+        } else {
+            texture = cub->texture[1]; // Ouest
+        }
+    } else {
+        if (ray->ray_dir_y > 0) {
+            texture = cub->texture[2]; // Sud
+        } else {
+            texture = cub->texture[3]; // Nord
+        }
+    }
+
+    // Calculer la position x sur la texture
+    if (ray->side == 0) {
+        ray->wall_x = cub->player->pos_y + ray->perp_wall_dist * ray->ray_dir_y;
+    } else {
+        ray->wall_x = cub->player->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
+    }
+    ray->wall_x -= floor(ray->wall_x);
+
+    tex_x = (int)(ray->wall_x * (double)(texture.width));
+    if (ray->side == 0 && ray->ray_dir_x > 0) {
+        tex_x = texture.width - tex_x - 1;
+    }
+    if (ray->side == 1 && ray->ray_dir_y < 0) {
+        tex_x = texture.width - tex_x - 1;
+    }
+
+    y = ray->draw_start;
+	while (y < ray->draw_end + 1) {
+		int d = y * 256 - cub->res_y * 128 + ray->line_height * 128;
+		tex_y = ((d * texture.height) / ray->line_height) / 256;
+		// Récupérer la couleur du pixel de la texture
+		color = get_pixel_color(&texture, tex_x, tex_y);
+		
+		// Debug: Afficher les coordonnées de texture et la couleur
+		printf("tex_x: %d, tex_y: %d, color: %d\n", tex_x, tex_y, color);
+		
+		// Appliquer la couleur au pixel de l'image
+		my_pixel_put(cub->image, x, y, color);
 		y++;
 	}
+
 }
+
+
+
 
 void raycasting(void *param)
 {

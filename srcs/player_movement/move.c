@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:46:46 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/30 18:40:51 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:04:41 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,69 +97,69 @@ void maj_plane_player(t_cub *cub)
 int	key_press(int key, t_cub *data)
 {
 	if (key == LEFT)
-		data->mini_map->key->rotate_left = _true;
+		data->key->rotate_left = _true;
 	else if (key == RIGHT)
-		data->mini_map->key->rotate_right = _true;
+		data->key->rotate_right = _true;
 	else if (key == W)
-		data->mini_map->key->forward = _true;
+		data->key->forward = _true;
 	else if (key == S_QW)
-		data->mini_map->key->backward = _true;
+		data->key->backward = _true;
 	else if (key == A)
-		data->mini_map->key->left = _true;
+		data->key->left = _true;
 	else if (key == D_QW)
-		data->mini_map->key->right = _true;
+		data->key->right = _true;
 	else if (key == ESCAPE_KEY)
 		close_game(data->mlx);
 	else if (key == MAP)
-		data->mini_map->key->map = _true;
+		data->key->map = _true;
 	else if (key == LEFT_SHIFT)
-		data->mini_map->key->left_shift = _true;
+		data->key->left_shift = _true;
 	return (0);
 }
 
 int	key_release(int key, t_cub *data)
 {
 	if (key == LEFT)
-		data->mini_map->key->rotate_left = _false;
+		data->key->rotate_left = _false;
 	else if (key == RIGHT)
-		data->mini_map->key->rotate_right = _false;
+		data->key->rotate_right = _false;
 	else if (key == W)
-		data->mini_map->key->forward = _false;
+		data->key->forward = _false;
 	else if (key == S_QW)
-		data->mini_map->key->backward = _false;
+		data->key->backward = _false;
 	else if (key == A)
-		data->mini_map->key->left = _false;
+		data->key->left = _false;
 	else if (key == D_QW)
-		data->mini_map->key->right = _false;
+		data->key->right = _false;
 	else if (key == MAP)
-		data->mini_map->key->map = _false;
+		data->key->map = _false;
 	else if (key == LEFT_SHIFT)
-		data->mini_map->key->left_shift = _false;
+		data->key->left_shift = _false;
 	return (0);
 }
 
 int ft_handle_key_press(t_cub *cub)
 {
-	if (cub->mini_map->key->escape)
+	if (cub->key->escape)
 		close_game(cub->mlx);
-	if (cub->mini_map->key->rotate_left)
+	if (cub->key->rotate_left)
 		cam_rotate_left(cub);
-	if (cub->mini_map->key->rotate_right)
+	if (cub->key->rotate_right)
 		cam_rotate_right(cub);
-	if (cub->mini_map->key->forward)
+	if (cub->key->forward)
 		move_forward(cub);
-	if (cub->mini_map->key->left)
+	if (cub->key->left)
 		move_left(cub);
-	if (cub->mini_map->key->right)
+	if (cub->key->right)
 		move_right(cub);
-	if (cub->mini_map->key->backward)
+	if (cub->key->backward)
 		move_backward(cub);
-	if (cub->mini_map->key->left_shift)
+	if (cub->key->left_shift)
 		cub->player->move_speed = 0.1;
 	else
 		cub->player->move_speed = 0.05;
-	if (cub->mini_map->key->map)
-		cub->mini_map->key->good->good = _true;
+	if (cub->key->map)
+		cub->key->good->good = _true;
 	maj_plane_player(cub);
 	return (1);
 }
