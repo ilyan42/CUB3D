@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:49:33 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/03 16:03:38 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:04:04 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	draw_mini_map_wall(t_cub *cub, t_mini_map *mini_map, int x, int y)
 		{
 			mini_map->srceen_x = x * mini_map->map_block_size + mini_map->j;
 			mini_map->screen_y = y * mini_map->map_block_size + mini_map->i;
-			pixel_put(cub, mini_map->srceen_x,
+			my_pixel_put(cub->image, mini_map->srceen_x,
 				mini_map->screen_y, 0x00000000);
 			mini_map->j++;
 		}
@@ -63,7 +63,7 @@ void	draw_mini_map_floor(t_cub *cub, t_mini_map *mini_map, int x, int y)
 		{
 			mini_map->srceen_x = x * mini_map->map_block_size + mini_map->j;
 			mini_map->screen_y = y * mini_map->map_block_size + mini_map->i;
-			pixel_put(cub, mini_map->srceen_x,
+			my_pixel_put(cub->image, mini_map->srceen_x,
 				mini_map->screen_y, 0x00808080);
 			mini_map->j++;
 		}
@@ -86,7 +86,7 @@ void	draw_mini_map_player(t_cub *cub, t_mini_map *mini_map)
 		{
 			mini_map->srceen_x = mini_map->start_x + mini_map->j;
 			mini_map->screen_y = mini_map->start_y + mini_map->i;
-			pixel_put(cub, mini_map->srceen_x,
+			my_pixel_put(cub->image, mini_map->srceen_x,
 				mini_map->screen_y, mini_map->player_color);
 			mini_map->j++;
 		}

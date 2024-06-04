@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:46:46 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/03 14:04:41 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:51:25 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,61 +31,65 @@ void	cam_rotate_right(t_cub *data)
 	data->player->plane_y = sin(data->player->angle + M_PI);
 }
 
-
-
-
-void	move_forward(t_cub *cub)
+int is_position_valid(t_cub *cub, double new_x, double new_y)
 {
-	float	x;
-	float	y;
+	const double MIN_DIST = 0.1;  // Distance minimale (10 pixels)
 
-	x = cub->player->pos_x + cub->player->plane_x * cub->player->move_speed;
-	y = cub->player->pos_y - cub->player->plane_x * cub->player->move_speed;
-	if (cub->map->map[(int)cub->player->pos_y][(int)x] != '1')
-		cub->player->pos_x += cub->player->plane_y * cub->player->move_speed;
-	if (cub->map->map[(int)y][(int)cub->player->pos_x] != '1')
-		cub->player->pos_y -= cub->player->plane_x * cub->player->move_speed;
+	int map_x = (int)new_x;
+	int map_y = (int)new_y;
+
+	// Vérifier les quatre coins autour de la nouvelle position pour la collision
+	if (cub->map->map[map_y][map_x] == '1')
+		return (0);
+	if (cub->map->map[map_y][(int)(new_x + MIN_DIST)] == '1')
+		return (0);
+	if (cub->map->map[map_y][(int)(new_x - MIN_DIST)] == '1')
+		return (0);
+	if (cub->map->map[(int)(new_y + MIN_DIST)][map_x] == '1')
+		return (0);
+	if (cub->map->map[(int)(new_y - MIN_DIST)][map_x] == '1')
+		return (0);
+	return (1);
 }
 
-void	move_backward(t_cub *cub)
+void move_forward(t_cub *cub)
 {
-	float	x;
-	float	y;
-
-	x = cub->player->pos_x - cub->player->plane_y * cub->player->move_speed;
-	y = cub->player->pos_y + cub->player->plane_x * cub->player->move_speed;
-	if (cub->map->map[(int)cub->player->pos_y][(int)x] != '1')
-		cub->player->pos_x -= cub->player->plane_y * cub->player->move_speed;
-	if (cub->map->map[(int)y][(int)cub->player->pos_x] != '1')
-		cub->player->pos_y += cub->player->plane_x * cub->player->move_speed;
+	double new_x = cub->player->pos_x + cub->player->dir_x * cub->player->move_speed;
+	double new_y = cub->player->pos_y + cub->player->dir_y * cub->player->move_speed;
+	if (is_position_valid(cub, new_x, cub->player->pos_y))
+		cub->player->pos_x = new_x;
+	if (is_position_valid(cub, cub->player->pos_x, new_y))
+		cub->player->pos_y = new_y;
 }
 
-
-
-void	move_left(t_cub *cub)
+void move_backward(t_cub *cub)
 {
-	int x;
-	int y;
-
-	x = cub->player->pos_x - cub->player->plane_x * cub->player->move_speed;
-	y = cub->player->pos_y - cub->player->plane_y * cub->player->move_speed;
-	if (cub->map->map[(int)cub->player->pos_y][(int)x] != '1')
-		cub->player->pos_x -= cub->player->plane_x * cub->player->move_speed;
-	if (cub->map->map[(int)y][(int)cub->player->pos_x] != '1')
-		cub->player->pos_y -= cub->player->plane_y * cub->player->move_speed;
+	double new_x = cub->player->pos_x - cub->player->dir_x * cub->player->move_speed;
+	double new_y = cub->player->pos_y - cub->player->dir_y * cub->player->move_speed;
+	if (is_position_valid(cub, new_x, cub->player->pos_y))
+		cub->player->pos_x = new_x;
+	if (is_position_valid(cub, cub->player->pos_x, new_y))
+		cub->player->pos_y = new_y;
 }
 
-void	move_right(t_cub *cub)
+void move_left(t_cub *cub)
 {
-	int x;
-	int y;
+	double new_x = cub->player->pos_x - cub->player->plane_x * cub->player->move_speed;
+	double new_y = cub->player->pos_y - cub->player->plane_y * cub->player->move_speed;
+	if (is_position_valid(cub, new_x, cub->player->pos_y))
+		cub->player->pos_x = new_x;
+	if (is_position_valid(cub, cub->player->pos_x, new_y))
+		cub->player->pos_y = new_y;
+}
 
-	x = cub->player->pos_x + cub->player->plane_x * cub->player->move_speed;
-	y = cub->player->pos_y + cub->player->plane_y * cub->player->move_speed;
-	if (cub->map->map[(int)cub->player->pos_y][(int)x] != '1')
-		cub->player->pos_x += cub->player->plane_x * cub->player->move_speed;
-	if (cub->map->map[(int)y][(int)cub->player->pos_x] != '1')
-		cub->player->pos_y += cub->player->plane_y * cub->player->move_speed;
+void move_right(t_cub *cub)
+{
+	double new_x = cub->player->pos_x + cub->player->plane_x * cub->player->move_speed;
+	double new_y = cub->player->pos_y + cub->player->plane_y * cub->player->move_speed;
+	if (is_position_valid(cub, new_x, cub->player->pos_y))
+		cub->player->pos_x = new_x;
+	if (is_position_valid(cub, cub->player->pos_x, new_y))
+		cub->player->pos_y = new_y;
 }
 
 void maj_plane_player(t_cub *cub)

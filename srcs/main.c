@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/03 18:26:41 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:43:50 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,27 +61,17 @@ void init_all_struct(t_cub *cub)
 		exit(EXIT_FAILURE);
 	}
 	cub->image->img = NULL;
-		cub->image->NO_img = NULL;
-		cub->image->SO_img = NULL;
-	
+	cub->image->NO_img = NULL;
+	cub->image->SO_img = NULL;
 	cub->image->WE_img = NULL;
-	
 	cub->image->EA_img = NULL;
-	
 	cub->image->addr = NULL;
-	
 	cub->image->bits_per_pixel = 0;
-	
 	cub->image->line_length = 0;
-	
 	cub->image->endian = 0;
-	
 	cub->image->width = 0;
-	
 	cub->image->height = 0;
-	
 	cub->image->path = NULL;
-	
 	cub->player = malloc(sizeof(t_player));
 	if (!cub->player)
 	{
@@ -89,15 +79,10 @@ void init_all_struct(t_cub *cub)
 		exit(EXIT_FAILURE);
 	}
 	cub->player->pos_x = 0;
-	
 	cub->player->pos_y = 0;
-	
 	cub->player->dir_x = 0;
-	
 	cub->player->dir_y = 0;
-	
 	cub->player->plane_x = 0;
-	
 	cub->player->plane_y = 0;
 	cub->player->angle = 0;
 	cub->player->move_speed = 0.05;
@@ -236,12 +221,6 @@ int update(void *param)
 	
 	cub = (t_cub *)param;
 	raycasting(cub);
-	// if (cub->key->good->good)
-	// {
-	// 	mlx_clear_window(cub->mlx->mlx_ptr, cub->mlx->win);
-	// 	display_map_pixel_color(cub);
-	// }
-	// cub->key->good->good = _false;
 	return (0);
 }
 
@@ -255,6 +234,7 @@ int main(int ac, char **av)
 		return (0);
 	}
 	init_all_struct(&cub);
+	// init_struct_cub(&cub);
 	get_map_and_tex(av[1], &cub);
 	map_is_valid(&cub);
 	init_window(cub.mlx, &cub);

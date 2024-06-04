@@ -17,6 +17,8 @@ _SRCS = 		srcs/main.c \
 				srcs/raycasting/render_raycast.c \
 				srcs/raycasting/get_distance_wall.c \
 				srcs/parser/get_mini_map.c \
+				srcs/raycasting/raycasting.c \
+				srcs/init/init_struct.c \
 
 SRC_DIR = .
 
@@ -44,6 +46,7 @@ $(_OBJ_DIR):
 	mkdir -p $(_OBJ_DIR)/srcs/error
 	mkdir -p $(_OBJ_DIR)/srcs/raycasting
 	mkdir -p $(_OBJ_DIR)/srcs/player_movement
+	mkdir -p $(_OBJ_DIR)/srcs/init
 
 all: $(_OBJ_DIR) $(NAME)
 

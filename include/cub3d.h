@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/03 15:55:43 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:14:15 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,5 +356,13 @@ int	key_press(int key, t_cub *data);
 int	key_release(int key, t_cub *data);
 void	create_raycast_img(t_cub *data);
 void pixel_put(t_cub *cub, int x, int y, int color);
+
+
+
+void draw_wall(t_cub *cub, int x, t_raycast *ray);
+void draw_floor_ceilling(t_cub *cub, int x, int draw_start, t_raycast *ray);
+
+
+void	init_struct_cub(t_cub *cub);
 
 #endif
