@@ -21,6 +21,7 @@ _SRCS = 		srcs/main.c \
 				srcs/player_movement/handle_key.c \
 				srcs/player_movement/key_utils.c \
 				srcs/parser/mini_map/get_mini_map.c \
+				srcs/parser/parse_map/parse_map_utils.c \
 
 SRC_DIR = .
 

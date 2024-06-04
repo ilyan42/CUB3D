@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:23:09 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 18:19:45 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:35:30 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	count_texture_height(t_cub *cub, int fd)
 	int	y;
 	int	check_nb_tex;
 
-	y = 0;
+	y = 1;
 	check_nb_tex = 1;
 	cub->line = get_next_line_map(fd);
 	cub->texture->height = 0;
@@ -33,7 +33,8 @@ void	count_texture_height(t_cub *cub, int fd)
 	{
 		while (cub->line[y] != '\n')
 		{
-			while ((cub->line[y] >= 9 && cub->line[y] <= 13) || cub->line[y] == ' ')
+			while ((cub->line[y] >= 9 && cub->line[y] <= 13)
+				|| cub->line[y] == ' ')
 				y++;
 			if (check_nb_texture(cub, y))
 			{

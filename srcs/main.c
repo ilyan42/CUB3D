@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 11:43:50 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:55:30 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,6 @@ void init_all_struct(t_cub *cub)
 		exit(EXIT_FAILURE);
 	}
 	cub->image->img = NULL;
-	cub->image->NO_img = NULL;
-	cub->image->SO_img = NULL;
-	cub->image->WE_img = NULL;
-	cub->image->EA_img = NULL;
 	cub->image->addr = NULL;
 	cub->image->bits_per_pixel = 0;
 	cub->image->line_length = 0;
@@ -121,13 +117,13 @@ void init_all_struct(t_cub *cub)
 	cub->raycast->hit = 0;
 	cub->raycast->side = 0;
 	cub->raycast->tex_num = 0;
-	cub->color->C_b = 0;
-	cub->color->C_g = 0;
-	cub->color->C_r = 0;
-	cub->color->F_b = 0;
-	cub->color->F_g = 0;
+	cub->color->c_b = 0;
+	cub->color->c_g = 0;
+	cub->color->c_r = 0;
+	cub->color->f_b = 0;
+	cub->color->f_g = 0;
 	
-	cub->color->F_r = 0;
+	cub->color->f_r = 0;
 	cub->color->color_ceiling = 0;
 	cub->color->color_floor = 0;
 	

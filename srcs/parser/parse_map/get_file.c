@@ -6,13 +6,13 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:57:05 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 17:25:32 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:49:10 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-void count_map_height(t_cub *cub, int fd)
+void	count_map_height(t_cub *cub, int fd)
 {
 	cub->line = get_next_line_map(fd);
 	cub->map->height = 1;
@@ -24,9 +24,9 @@ void count_map_height(t_cub *cub, int fd)
 	}
 }
 
-char **allocate_and_fill_map(t_cub *cub, int fd)
+char	**allocate_and_fill_map(t_cub *cub, int fd)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	cub->map->map = malloc(sizeof(char *) * (cub->map->height + 1));
@@ -43,7 +43,7 @@ char **allocate_and_fill_map(t_cub *cub, int fd)
 	return (cub->map->map);
 }
 
-void is_cub_file(char *map)
+void	is_cub_file(char *map)
 {
 	char	*extensions_check;
 
@@ -57,7 +57,7 @@ void is_cub_file(char *map)
 
 void	get_map_and_tex(char *file, t_cub *cub)
 {
-	int fd;
+	int	fd;
 
 	cub->line = NULL;
 	is_cub_file(file);
@@ -67,13 +67,6 @@ void	get_map_and_tex(char *file, t_cub *cub)
 	close(fd);
 	fd = open(file, O_RDONLY);
 	cub->texture->texture = parse_texture_file(cub, fd);
-	int i = -1;
-	while (cub->texture->texture[++i])
-		printf ("%s", cub->texture->texture[i]);
 	cub->map->map = allocate_and_fill_map(cub, fd);
-	int j = -1;
-	while (cub->map->map[++j])
-		printf ("%s", cub->map->map[j]);
 	close(fd);
 }
-

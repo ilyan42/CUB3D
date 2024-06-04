@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 11:07:01 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 11:20:44 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:55:30 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,6 @@ void	init_struct_image(t_image *image)
 		exit(EXIT_FAILURE);
 	}
 	image->img = NULL;
-	image->NO_img = NULL;
-	image->SO_img = NULL;
-	image->WE_img = NULL;
-	image->EA_img = NULL;
 	image->addr = NULL;
 	image->bits_per_pixel = 0;
 	image->line_length = 0;
@@ -137,12 +133,12 @@ void	init_struct_raycast(t_raycast *raycast)
 
 void	init_struct_color(t_color *color)
 {
-	color->C_b = 0;
-	color->C_g = 0;
-	color->C_r = 0;
-	color->F_b = 0;
-	color->F_g = 0;
-	color->F_r = 0;
+	color->c_b = 0;
+	color->c_g = 0;
+	color->c_r = 0;
+	color->f_b = 0;
+	color->f_g = 0;
+	color->f_r = 0;
 	color->color_ceiling = 0;
 	color->color_floor = 0;
 }

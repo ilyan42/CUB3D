@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:13:28 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/14 19:43:49 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:52:57 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char				*ft_substr_gnl(char *s, unsigned int start, size_t len);
 char				*ft_strchr_gnl(char *s, int c);
 size_t				ft_strlen_gnl(char *str);
 char				*ft_strdup_gnl(char *s);
-void				*ft_calloc_gnl(size_t nmemb, size_t size);
+void				*ft_calloC_gnl(size_t nmemb, size_t size);
 void				ft_bzero_gnl(void *s, size_t n);
 char				*fill_line_buffer(int fd, char *str, char *buffer);
 char				*set_line(char *line_buffer);
