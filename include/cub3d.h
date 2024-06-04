@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 11:14:15 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:10:05 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@
 # define INVALIDE_FLOOR_COLOR "Error\n -> Invalid floor color\n"
 # define INVALIDE_CEILING_COLOR "Error\n -> Invalid ceiling color\n"
 # define WRONG_TEXTURE_EXTENTION "Error\n -> Wrong texture extention\n"
+# define MALLOC_FAILED "Error\n -> Memory allocation failed\n"
+# define INVALIDE_NORTH_TEXTURE "Error\n -> Invalid north texture format\n"
+# define INVALIDE_SOUTH_TEXTURE "Error\n -> Invalid south texture format\n"
+# define INVALIDE_WEST_TEXTURE "Error\n -> Invalid west texture format\n"
+# define INVALIDE_EAST_TEXTURE "Error\n -> Invalid east texture format\n"
+# define MISSING_TEXTURE "Error\n -> Missing texture\n"
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 #define NUM_TEXTURES 4 
@@ -281,64 +287,75 @@ typedef struct s_cub
 	char		*line;
 	int res_x;
 	int res_y;
+	int d;
 }			t_cub;
 
 
 
-int			check_texture(t_texture *texture);
 char		**parse_texture_file(t_cub *cub, int fd);
 void		count_map_height(t_cub *cub, int fd);
 char		**allocate_and_fill_map(t_cub *cub, int fd);
 void		is_cub_file(char *map);
 void		get_map_and_tex(char *file, t_cub *cub);
 void		count_texture_height(t_cub *cub, int fd);
-void		parsing_texture(t_cub *cub);
-void		texture_processing(t_cub *cub);
 
 /************************************************/
 /*					PARSING						*/
 /************************************************/
 
-void		parse_ceiling_texture(t_cub *cub, char *line, int x);
-void		parsing_texture(t_cub *cub);
-int			open_texture(t_cub *cub);
-void		texture_processing(t_cub *cub);
-int parse_north_texture(t_cub *cub, char *line, int x);
-int parse_south_texture(t_cub *cub, char *line, int x);
-int parse_west_texture(t_cub *cub, char *line, int x);
-int parse_east_texture(t_cub *cub, char *line, int x);
-void		parse_floor_texture(t_cub *cub, char *line, int x);
-int parse_floor_color(t_cub *cub, char *line);
-int parse_ceiling_color(t_cub *cub, char *line);
 
 
 void map_is_valid(t_cub *cub);
 void get_size_map(t_cub *cub);
 void print_and_exit(char *msg);
 void raycasting(void *param);
-void load_image(t_cub *cub);
+
 
 void display_map_pixel_color(t_cub *cub);
 int ft_handle_key_press(t_cub *cub);
 int close_game(t_minilibx *game);
-void move_player(t_cub *cub, int key);
+
+
 
 
 
 void display_map_pixel_color(t_cub *cub);
-void	rotate_left(t_cub *cub);
-void	rotate_right(t_cub *cub);
-void display_raycast_distance_wall(t_cub *cub);
-void renderer_wall(t_cub *cub, t_raycast *raycast, int ray);
 
+/********************************************************/
+/*					PARSE_AND_OPEN_TEXTURE				*/
+/********************************************************/
 
+int	put_texture(char *line, int check, int x, t_cub *cub);
+void	parsing_texture(t_cub *cub);
+int	open_texture(t_cub *cub);
+void	check_extention_texture(char *path);
+void	texture_processing(t_cub *cub);
 
-void init_raycast(t_cub *cub, t_raycast *raycast, int x);
-void get_step_and_side_dist(t_cub *cub, t_raycast *raycast);
-void perform_dda(t_cub *cub, t_raycast *raycast);
-void get_distance(t_cub *cub, t_raycast *raycast);
+/********************************************************/
+/*					GET_TEXTURE							*/
+/********************************************************/
 
-void my_pixel_put(t_image *image, int x, int y, int color);
+int	parse_north_texture(t_cub *cub, char *line, int x);
+int	parse_south_texture(t_cub *cub, char *line, int x);
+int	parse_west_texture(t_cub *cub, char *line, int x);
+int	parse_east_texture(t_cub *cub, char *line, int x);
+
+/********************************************************/
+/*					COLOR								*/
+/********************************************************/
+
+void	convert_color_hex(t_cub *cub);
+int		parse_floor_color(t_cub *cub, char *line);
+int		parse_ceiling_color(t_cub *cub, char *line);
+
+/********************************************************/
+/*					GET_DISTANCE_WALL					*/
+/********************************************************/
+
+void	init_raycast(t_cub *cub, t_raycast *raycast, int x);
+void	get_step_and_side_dist(t_cub *cub, t_raycast *raycast);
+void	perform_dda(t_cub *cub, t_raycast *raycast);
+void	get_distance(t_cub *cub, t_raycast *raycast);
 
 /********************************************************/
 /*					GET_MINI_MAP						*/
@@ -350,19 +367,45 @@ void	draw_mini_map_floor(t_cub *cub, t_mini_map *mini_map, int x, int y);
 void	draw_mini_map_player(t_cub *cub, t_mini_map *mini_map);
 void	display_map_pixel_color(t_cub *cub);
 
+/********************************************************/
+/*					PLAYER_MOUVEMENT					*/
+/********************************************************/
 
+int		key_press(int key, t_cub *data);
+int		key_release(int key, t_cub *data);
+void	cam_rotate_left(t_cub *data);
+void	cam_rotate_right(t_cub *data);
+int		key_press(int key, t_cub *data);
+int		key_release(int key, t_cub *data);
+int		ft_handle_key_press(t_cub *cub);
+int		is_position_valid(t_cub *cub, double new_x, double new_y);
+void	maj_plane_player(t_cub *cub);
+void	move_forward(t_cub *cub);
+void	move_backward(t_cub *cub);
+void	move_left(t_cub *cub);
+void	move_right(t_cub *cub);
 
-int	key_press(int key, t_cub *data);
-int	key_release(int key, t_cub *data);
-void	create_raycast_img(t_cub *data);
-void pixel_put(t_cub *cub, int x, int y, int color);
+/********************************************************/
+/*					RENDER_RAYCAST						*/
+/********************************************************/
 
+void		draw_wall(t_cub *cub, int x, t_raycast *ray);
+int			get_pixel_color(t_texture *texture, int x, int y);
+t_texture	get_player_direction(t_cub *cub, t_raycast *ray, t_texture texture);
+void		ray_wall_x_init(t_cub *cub, t_raycast *ray);
 
-
-void draw_wall(t_cub *cub, int x, t_raycast *ray);
-void draw_floor_ceilling(t_cub *cub, int x, int draw_start, t_raycast *ray);
-
+/********************************************************/
+/*					INIT_STRUCT							*/
+/********************************************************/
 
 void	init_struct_cub(t_cub *cub);
+
+/********************************************************/
+/*					RENDER_UTILS						*/
+/********************************************************/
+
+void	my_pixel_put(t_image *image, int x, int y, int color);
+void	draw_floor_ceilling(t_cub *cub, int x, int draw_start, t_raycast *ray);
+void	init_draw_start_end(t_cub *cub);
 
 #endif

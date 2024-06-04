@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:01:43 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 14:49:03 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:27:01 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,12 @@ void	perform_dda(t_cub *cub, t_raycast *raycast)
 void	get_distance(t_cub *cub, t_raycast *raycast)
 {
 	if (raycast->side == 0)
-	{
 		cub->raycast->distance = raycast->side_dist_x
 			- raycast->delta_dist_x;
-	}
 	else
-	{
 		cub->raycast->distance = raycast->side_dist_y
 			- raycast->delta_dist_y;
-	}
 	cub->raycast->line_height = (int)(cub->res_y / cub->raycast->distance);
 	cub->raycast->draw_start = (int)(-cub->raycast->line_height / 2)
 		+ ((int)cub->res_y / 2);
 }
-

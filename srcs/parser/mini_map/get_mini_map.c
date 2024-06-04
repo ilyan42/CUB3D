@@ -6,11 +6,11 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:49:33 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 11:04:04 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:17:46 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
 void	init_struct_mini_map(t_mini_map *mini_map)
 {

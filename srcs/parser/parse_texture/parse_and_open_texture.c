@@ -6,38 +6,46 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:50:55 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/03 12:48:46 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:07:38 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-
-void parsing_texture(t_cub *cub)
+int	put_texture(char *line, int check, int x, t_cub *cub)
 {
-	int y = 0;
-	int x = 0;
-	int check = 0;
+	if (line[x] == 'N' && line[x + 1] == 'O')
+		check += parse_north_texture(cub, line, x);
+	else if (line[x] == 'S' && line[x + 1] == 'O')
+		check += parse_south_texture(cub, line, x);
+	else if (line[x] == 'W' && line[x + 1] == 'E')
+		check += parse_west_texture(cub, line, x);
+	else if (line[x] == 'E' && line[x + 1] == 'A')
+		check += parse_east_texture(cub, line, x);
+	else if (line[x] == 'F' && line[x + 1] == ' ')
+		check += parse_floor_color(cub, line);
+	else if (line[x] == 'C' && line[x + 1] == ' ')
+		check += parse_ceiling_color(cub, line);
+	return (check);
+}
 
-	printf ("parsing_texture\n");
+void	parsing_texture(t_cub *cub)
+{
+	int		y;
+	int		x;
+	int		check;
+	char	*line;
+
+	y = 0;
+	x = 0;
+	check = 0;
 	while (cub->texture->texture[y])
 	{
-		char *line = cub->texture->texture[y];
+		line = cub->texture->texture[y];
 		x = 0;
 		while (line[x])
 		{
-			if (line[x] == 'N' && line[x + 1] == 'O')
-				check += parse_north_texture(cub, line, x);
-			else if (line[x] == 'S' && line[x + 1] == 'O')
-				check += parse_south_texture(cub, line, x);
-			else if (line[x] == 'W' && line[x + 1] == 'E')
-				check += parse_west_texture(cub, line, x);
-			else if (line[x] == 'E' && line[x + 1] == 'A')
-				check += parse_east_texture(cub, line, x);
-			else if (line[x] == 'F' && line[x + 1] == ' ')
-				check += parse_floor_color(cub, line);
-			else if (line[x] == 'C' && line[x + 1] == ' ')
-				check += parse_ceiling_color(cub, line);
+			check = put_texture(line, check, x, cub);
 			x++;
 		}
 		y++;
@@ -46,10 +54,10 @@ void parsing_texture(t_cub *cub)
 		print_and_exit(WRONG_NUMBER_OF_TEXTURES);
 }
 
-int open_texture(t_cub *cub)
+int	open_texture(t_cub *cub)
 {
-	int fd;
-	
+	int	fd;
+
 	fd = open(cub->texture_file->north_path, O_RDONLY);
 	if (fd == -1)
 		print_and_exit(OPEN_NORTH_TEXTURE);
@@ -69,9 +77,9 @@ int open_texture(t_cub *cub)
 	return (1);
 }
 
-void check_extention_texture(char *path)
+void	check_extention_texture(char *path)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (path[i])
@@ -86,22 +94,15 @@ void check_extention_texture(char *path)
 	print_and_exit(WRONG_TEXTURE_EXTENTION);
 }
 
-
-void texture_processing(t_cub *cub)
+void	texture_processing(t_cub *cub)
 {
 	parsing_texture(cub);
-	if (!cub->texture_file->north_path || !cub->texture_file->south_path || !cub->texture_file->west_path || !cub->texture_file->east_path)
-		exit(EXIT_FAILURE);
+	if (!cub->texture_file->north_path || !cub->texture_file->south_path
+		|| !cub->texture_file->west_path || !cub->texture_file->east_path)
+		print_and_exit(MISSING_TEXTURE);
 	check_extention_texture(cub->texture_file->north_path);
 	check_extention_texture(cub->texture_file->south_path);
 	check_extention_texture(cub->texture_file->west_path);
 	check_extention_texture(cub->texture_file->east_path);
-	printf ("texture no = %s\n", cub->texture_file->north_path);
-	printf ("texture so = %s\n", cub->texture_file->south_path);
-	printf ("texture we = %s\n", cub->texture_file->west_path);
-	printf ("texture ea = %s\n", cub->texture_file->east_path);
-	printf ("texture floor = %d\n", cub->color->color_floor);
-	printf ("texture ceiling = %d\n", cub->color->color_ceiling);
-	if (open_texture(cub) == 0)
-		exit(EXIT_FAILURE);
+	open_texture(cub);
 }

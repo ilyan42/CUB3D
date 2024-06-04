@@ -6,11 +6,11 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:57:05 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/17 14:42:22 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:25:32 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
 void count_map_height(t_cub *cub, int fd)
 {

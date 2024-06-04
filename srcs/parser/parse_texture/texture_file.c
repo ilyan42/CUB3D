@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_texture.c                                   :+:      :+:    :+:   */
+/*   texture_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:23:09 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/03 12:47:28 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:19:45 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-// int	check_texture(t_texture *texture)
-// {
-// 	if (!texture->texture_file->north_path || !texture->texture_file->south_path || !texture->texture_file->west_path || !texture->texture_file->east_path
-// 		|| !texture->texture_file->floor || !texture->texture_file->ceiling)
-// 	{
-// 		printf("Error: texture not found\n");
-// 		return (0);
-// 	}
-// 	return (1);
-// }
-
-
-void count_texture_height(t_cub *cub, int fd)
+int	check_nb_texture(t_cub *cub, int y)
 {
+	if (cub->line[y] == 'N' || cub->line[y] == 'S' || cub->line[y] == 'W'
+		|| cub->line[y] == 'E' || cub->line[y] == 'F' || cub->line[y] == 'C')
+		return (1);
+	return (0);
+}
+
+void	count_texture_height(t_cub *cub, int fd)
+{
+	int	y;
+	int	check_nb_tex;
+
+	y = 0;
+	check_nb_tex = 1;
 	cub->line = get_next_line_map(fd);
 	cub->texture->height = 0;
-	int y = 0;
-	int check_nb_tex = 1;
 	while (cub->line)
 	{
 		while (cub->line[y] != '\n')
 		{
 			while ((cub->line[y] >= 9 && cub->line[y] <= 13) || cub->line[y] == ' ')
 				y++;
-			if (cub->line[y] == 'N' || cub->line[y] == 'S' || cub->line[y] == 'W' || cub->line[y] == 'E' || cub->line[y] == 'F' || cub->line[y] == 'C')
+			if (check_nb_texture(cub, y))
 			{
 				check_nb_tex++;
 				break ;
@@ -52,14 +51,15 @@ void count_texture_height(t_cub *cub, int fd)
 	}
 }
 
-
-char **parse_texture_file(t_cub *cub, int fd)
+char	**parse_texture_file(t_cub *cub, int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	cub->line = get_next_line_map(fd);
 	cub->texture->texture = malloc(sizeof(char *) * (cub->texture->height + 1));
+	if (!cub->texture->texture)
+		print_and_exit(MALLOC_FAILED);
 	while ((cub->line && i < cub->texture->height))
 	{
 		cub->texture->texture[i] = ft_strdup(cub->line);
@@ -70,5 +70,3 @@ char **parse_texture_file(t_cub *cub, int fd)
 	cub->texture->texture[i] = NULL;
 	return (cub->texture->texture);
 }
-
-

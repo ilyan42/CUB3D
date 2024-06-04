@@ -5,20 +5,22 @@ _HEADERS_DIR = ./include
 
 _OBJ_DIR = .obj
 _SRCS = 		srcs/main.c \
-				srcs/parser/parser_texture.c \
-				srcs/parser/get_file.c \
+				srcs/parser/parse_map/get_file.c \
 				srcs/parser/parse_texture/get_texture.c \
 				srcs/parser/parse_texture/parse_and_open_texture.c \
+				srcs/parser/parse_texture/texture_file.c \
+				srcs/parser/parse_texture/color.c \
 				srcs/parser/parse_map/parse_map.c \
 				srcs/error/print_error.c \
 				srcs/player_movement/move.c \
-				srcs/player_movement/move_minimap.c \
-				srcs/player_movement/rotate_minimap.c \
 				srcs/raycasting/render_raycast.c \
 				srcs/raycasting/get_distance_wall.c \
-				srcs/parser/get_mini_map.c \
 				srcs/raycasting/raycasting.c \
 				srcs/init/init_struct.c \
+				srcs/raycasting/render_utils.c \
+				srcs/player_movement/handle_key.c \
+				srcs/player_movement/key_utils.c \
+				srcs/parser/mini_map/get_mini_map.c \
 
 SRC_DIR = .
 
@@ -36,10 +38,8 @@ endif
 AR = ar
 ARFLAGS = rcs
 
-# Ajouter la création du dossier des objets
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(_OBJ_DIR)/%.o, $(SRCS))
 
-# Créer le dossier des objets si nécessaire
 $(_OBJ_DIR):
 	mkdir -p $(_OBJ_DIR)/srcs/parser/parse_texture
 	mkdir -p $(_OBJ_DIR)/srcs/parser/parse_map
@@ -47,6 +47,7 @@ $(_OBJ_DIR):
 	mkdir -p $(_OBJ_DIR)/srcs/raycasting
 	mkdir -p $(_OBJ_DIR)/srcs/player_movement
 	mkdir -p $(_OBJ_DIR)/srcs/init
+	mkdir -p $(_OBJ_DIR)/srcs/parser/mini_map
 
 all: $(_OBJ_DIR) $(NAME)
 
