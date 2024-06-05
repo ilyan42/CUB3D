@@ -3,6 +3,7 @@ CC = gcc -g3
 CFLAGS = -Wall -Wextra -Werror
 _HEADERS_DIR = ./include
 
+NORM = @norminette include srcs map texture LIBFT
 _OBJ_DIR = .obj
 _SRCS = 		srcs/main.c \
 				srcs/parser/parse_map/get_file.c \
@@ -22,6 +23,8 @@ _SRCS = 		srcs/main.c \
 				srcs/player_movement/key_utils.c \
 				srcs/parser/mini_map/get_mini_map.c \
 				srcs/parser/parse_map/parse_map_utils.c \
+				srcs/init/init_struct_utils.c \
+				srcs/init/init_sprite_window.c \
 
 SRC_DIR = .
 
@@ -69,6 +72,9 @@ fclean: clean
 	$(MAKE) fclean -C ./LIBFT
 	$(MAKE) clean -C minilibx-linux
 
+norminette:
+	$(NORM)
+
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re norminette

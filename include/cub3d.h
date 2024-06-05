@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 19:42:32 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:37:44 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,5 +164,30 @@ int			close_game(t_minilibx *game);
 /********************************************************/
 
 void		raycasting(void *param);
+
+/********************************************************/
+/*					INIT_STRUCT							*/
+/********************************************************/
+
+void		init_struct_mlx(t_cub *cub);
+void		init_struct_map(t_cub *cub);
+void		init_struct_image(t_cub *cub);
+void		init_struct_player(t_cub *cub);
+void		init_struct_color(t_cub *cub);
+void		init_struct_key(t_cub *cub);
+void		init_struct_key_good(t_cub *cub);
+void		init_struct_raycast(t_cub *cub);
+void		init_struct_cub(t_cub *cub);
+void		init_struct_raycast_utils(t_cub *cub);
+
+/********************************************************/
+/*					INIT_SPRITE_WINDOW					*/
+/********************************************************/
+
+void		init_window(t_minilibx *window, t_cub *cub);
+t_texture	new_sprite(t_cub *cub, int i);
+void		init_sprite(t_cub *cub);
+void		initialize_textures(t_cub *cub);
+void		init_image(t_cub *cub);
 
 #endif

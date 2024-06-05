@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:57:05 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 18:49:10 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:58:48 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	get_map_and_tex(char *file, t_cub *cub)
 	cub->line = NULL;
 	is_cub_file(file);
 	fd = open(file, O_RDONLY);
+	cub->texture->height = 0;
 	count_texture_height(cub, fd);
 	count_map_height(cub, fd);
 	close(fd);

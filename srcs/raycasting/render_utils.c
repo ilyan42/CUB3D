@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:24:20 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 16:36:30 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:38:07 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	draw_floor_ceilling(t_cub *cub, int x, int draw_start, t_raycast *ray)
 	}
 }
 
-void init_draw_start_end(t_cub *cub)
+void	init_draw_start_end(t_cub *cub)
 {
-	cub->raycast->draw_start = (int)(cub->res_y / 2) 
+	cub->raycast->draw_start = (int)(cub->res_y / 2)
 		- (int)(cub->raycast->line_height / 2);
 	if (cub->raycast->draw_start < 0)
 		cub->raycast->draw_start = 0;

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:23:09 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 18:35:30 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:59:25 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ int	check_nb_texture(t_cub *cub, int y)
 	return (0);
 }
 
+int	is_in_space(char *line, int y)
+{
+	while ((line[y] >= 9 && line[y] <= 13) || line[y] == ' ')
+		y++;
+	return (y);
+}
+
 void	count_texture_height(t_cub *cub, int fd)
 {
 	int	y;
@@ -28,14 +35,11 @@ void	count_texture_height(t_cub *cub, int fd)
 	y = 1;
 	check_nb_tex = 1;
 	cub->line = get_next_line_map(fd);
-	cub->texture->height = 0;
 	while (cub->line)
 	{
 		while (cub->line[y] != '\n')
 		{
-			while ((cub->line[y] >= 9 && cub->line[y] <= 13)
-				|| cub->line[y] == ' ')
-				y++;
+			y = is_in_space(cub->line, y);
 			if (check_nb_texture(cub, y))
 			{
 				check_nb_tex++;

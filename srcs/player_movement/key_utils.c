@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:54:42 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 16:58:11 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:40:46 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	is_position_valid(t_cub *cub, double new_x, double new_y)
 
 void	maj_plane_player(t_cub *cub)
 {
-	cub->player->plane_x = -cub->player->dir_y * FOV_RAD;
-	cub->player->plane_y = cub->player->dir_x * FOV_RAD;
+	cub->player->plane_x = -cub->player->dir_y * (FOV * PI / 180);
+	cub->player->plane_y = cub->player->dir_x * (FOV * PI / 180);
 }

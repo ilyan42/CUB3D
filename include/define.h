@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:37:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 19:44:00 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:41:39 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@
 # define ROT_SPEED 5
 # define MAP_BLOCK_SIZE 64
 # define PI 3.1415926535
-# define FOV_RAD (FOV * PI / 180)
 # define MAP 109
 # define LEFT_SHIFT 65505
 # define WALL_CHAR '1'

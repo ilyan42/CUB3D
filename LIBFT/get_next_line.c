@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 10:30:10 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/05/14 19:44:15 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:32:10 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,32 +60,6 @@ char	*fill_line_buffer(int fd, char *str, char *buffer)
 	}
 	return (str);
 }
-
-// char	*get_next_line(int fd, char **line)
-// {
-// 	static char	*line_buffer;
-// 	char		*buffer;
-// 	char		*str;
-
-// 	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
-// 		return (NULL);
-// 	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-// 	if (!buffer)
-// 		return (NULL);
-// 	str = fill_line_buffer(fd, line_buffer, buffer);
-// 	free(buffer);
-// 	if (!str)
-// 	{
-// 		free(line_buffer);
-// 		line_buffer = NULL;
-// 		return (NULL);
-// 	}
-// 	*line = set_line(line_buffer);
-// 	free(line_buffer);
-// 	line_buffer = str;
-// 	return (*line);
-// }
-
 
 char	*get_next_line_map(int fd)
 {
