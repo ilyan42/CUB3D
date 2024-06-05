@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 11:07:01 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 12:31:23 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:08:19 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_struct_key(t_cub *cub)
 	cub->key->rotate_right = _false;
 	cub->key->map = _false;
 	cub->key->left_shift = _false;
+	cub->key->escape = _false;
 }
 
 void	init_struct_key_good(t_cub *cub)

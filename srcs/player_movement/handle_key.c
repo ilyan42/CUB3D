@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:53:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 16:58:04 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:05:54 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	key_press(int key, t_cub *data)
 	else if (key == D_QW)
 		data->key->right = _true;
 	else if (key == ESCAPE_KEY)
-		close_game(data->mlx);
+		close_game(data);
 	else if (key == MAP)
 		data->key->map = _true;
 	else if (key == LEFT_SHIFT)
@@ -76,8 +76,6 @@ int	key_release(int key, t_cub *data)
 
 int	ft_handle_key_press(t_cub *cub)
 {
-	if (cub->key->escape)
-		close_game(cub->mlx);
 	if (cub->key->rotate_left)
 		cam_rotate_left(cub);
 	if (cub->key->rotate_right)
@@ -96,6 +94,8 @@ int	ft_handle_key_press(t_cub *cub)
 		cub->player->move_speed = 0.05;
 	if (cub->key->map)
 		cub->key->good->good = _true;
+	if (cub->key->escape)
+		close_game(cub);
 	maj_plane_player(cub);
 	return (1);
 }

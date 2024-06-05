@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:37:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 13:41:39 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 14:45:14 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@
 # define INVALIDE_WEST_TEXTURE "Error\n -> Invalid west texture format\n"
 # define INVALIDE_EAST_TEXTURE "Error\n -> Invalid east texture format\n"
 # define MISSING_TEXTURE "Error\n -> Missing texture\n"
+# define INVALIDE_FILE_EXTENSION "Error\n -> Invalid file extension\n"
 
 #endif

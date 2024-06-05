@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:55:16 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 19:55:30 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:24:58 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ int	parse_floor_color(t_cub *cub, char *line)
 	if (cub->color->c_r > 255 || cub->color->c_b > 255 || cub->color->c_g > 255)
 		print_and_exit(INVALIDE_CEILING_COLOR);
 	convert_color_hex(cub);
+	for (int i = 0; tmp_line[i]; i++)
+		free(tmp_line[i]);
+	free (tmp_line);
 	return (1);
 }
 
@@ -73,5 +76,8 @@ int	parse_ceiling_color(t_cub *cub, char *line)
 	if (cub->color->c_r > 255 || cub->color->c_b > 255 || cub->color->c_g > 255)
 		print_and_exit(INVALIDE_CEILING_COLOR);
 	convert_color_hex(cub);
+	for (int i = 0; tmp_line[i]; i++)
+		free(tmp_line[i]);
+	free (tmp_line);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:57:05 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 13:58:48 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:01:58 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	**allocate_and_fill_map(t_cub *cub, int fd)
 
 	i = 1;
 	cub->map->map = malloc(sizeof(char *) * (cub->map->height + 1));
+	if (!cub->map->map)
+		print_and_exit(MALLOC_FAILED);
 	cub->map->map[0] = cub->line;
 	cub->line = get_next_line_map(fd);
 	while (cub->line && i <= cub->map->height)
@@ -40,8 +42,11 @@ char	**allocate_and_fill_map(t_cub *cub, int fd)
 		i++;
 	}
 	cub->map->map[i] = NULL;
+	if (cub->line)
+		free(cub->line);
 	return (cub->map->map);
 }
+
 
 void	is_cub_file(char *map)
 {
@@ -49,10 +54,7 @@ void	is_cub_file(char *map)
 
 	extensions_check = ft_strnstr(map, ".cub", ft_strlen(map));
 	if (extensions_check == NULL || ft_strlen(extensions_check) != 4)
-	{
-		ft_printf("Error\nExtensions check\n");
-		exit(EXIT_FAILURE);
-	}
+		print_and_exit(INVALIDE_FILE_EXTENSION);
 }
 
 void	get_map_and_tex(char *file, t_cub *cub)
