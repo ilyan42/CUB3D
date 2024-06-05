@@ -1,13 +1,13 @@
 WE ./texture/doom1.xpm
 EA ./texture/doom1.xpm
 NO ./texture/doom1.xpm
-
 SO ./texture/doom1.xpm
 
 
 
 F 0,0,0
 C 255 , 150 , 0
+
 
 
 111111111111111111111111111111111

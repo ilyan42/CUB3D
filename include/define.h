@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:37:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 14:45:14 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:43:04 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@
 # define INVALIDE_EAST_TEXTURE "Error\n -> Invalid east texture format\n"
 # define MISSING_TEXTURE "Error\n -> Missing texture\n"
 # define INVALIDE_FILE_EXTENSION "Error\n -> Invalid file extension\n"
+# define TO_MANY_PLAYERS_OR_NO_PLAYER "Error\n -> To many players or no player\n"
+# define WRONG_TEXTURE_FORMAT "Error\n -> Wrong texture format\n"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 18:13:41 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:22:27 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void		map_is_valid(t_cub *cub);
 int			check_nb_texture(t_cub *cub, int y);
 void		count_texture_height(t_cub *cub, int fd);
 char		**parse_texture_file(t_cub *cub, int fd);
+int			is_in_space(char *line, int y);
 
 /********************************************************/
 /*					PARSE_AND_OPEN_TEXTURE				*/
