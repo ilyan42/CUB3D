@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:55:16 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 15:24:58 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:34:55 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,19 @@ void	convert_color_hex(t_cub *cub)
 		+ ((cub->color->f_g & 0xff) << 8) + (cub->color->f_b & 0xff);
 	cub->color->color_ceiling = ((cub->color->c_r & 0xff) << 16)
 		+ ((cub->color->c_g & 0xff) << 8) + (cub->color->c_b & 0xff);
+}
+
+void	free_split(char **tmp_line)
+{
+	int	i;
+
+	i = 0;
+	while (tmp_line[i])
+	{
+		free(tmp_line[i]);
+		i++;
+	}
+	free (tmp_line);
 }
 
 int	parse_floor_color(t_cub *cub, char *line)
@@ -45,9 +58,7 @@ int	parse_floor_color(t_cub *cub, char *line)
 	if (cub->color->c_r > 255 || cub->color->c_b > 255 || cub->color->c_g > 255)
 		print_and_exit(INVALIDE_CEILING_COLOR);
 	convert_color_hex(cub);
-	for (int i = 0; tmp_line[i]; i++)
-		free(tmp_line[i]);
-	free (tmp_line);
+	free_split(tmp_line);
 	return (1);
 }
 
@@ -76,8 +87,6 @@ int	parse_ceiling_color(t_cub *cub, char *line)
 	if (cub->color->c_r > 255 || cub->color->c_b > 255 || cub->color->c_g > 255)
 		print_and_exit(INVALIDE_CEILING_COLOR);
 	convert_color_hex(cub);
-	for (int i = 0; tmp_line[i]; i++)
-		free(tmp_line[i]);
-	free (tmp_line);
+	free_split(tmp_line);
 	return (1);
 }

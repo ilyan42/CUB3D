@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:39:01 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 17:16:39 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:23:52 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ t_texture	new_sprite(t_cub *cub, int i)
 	texture->pixels = (unsigned char *)mlx_get_data_addr(texture->reference,
 			&texture->bits_per_pixel, &texture->line_len, &texture->endian);
 	result = *texture;
-	// for (int i = 0; texture->texture[i]; i++)
-	// 	free(texture->texture[i]);
 	free(texture);
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:23:09 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 17:23:04 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:33:52 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ void	count_texture_height(t_cub *cub, int fd)
 				break ;
 			}
 			if (cub->line[y] == '1')
-			{
-				free(cub->line);
-				return ;
-			}
+				return (free(cub->line));
 			y++;
 		}
 		cub->texture->height++;
@@ -65,8 +62,6 @@ char	**parse_texture_file(t_cub *cub, int fd)
 
 	i = 0;
 	cub->line = get_next_line_map(fd);
-	// free (cub->texture->texture);
-	// cub->texture->texture = NULL;
 	cub->texture->texture = malloc(sizeof(char *) * (cub->texture->height + 1));
 	if (!cub->texture->texture)
 		print_and_exit(MALLOC_FAILED);

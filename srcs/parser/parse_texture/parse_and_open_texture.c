@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:50:55 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 18:07:38 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:23:14 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ void	check_extention_texture(char *path)
 
 void	texture_processing(t_cub *cub)
 {
+	int	i;
+
+	i = 0;
 	parsing_texture(cub);
 	if (!cub->texture_file->north_path || !cub->texture_file->south_path
 		|| !cub->texture_file->west_path || !cub->texture_file->east_path)
@@ -105,4 +108,10 @@ void	texture_processing(t_cub *cub)
 	check_extention_texture(cub->texture_file->west_path);
 	check_extention_texture(cub->texture_file->east_path);
 	open_texture(cub);
+	while (cub->texture->texture[i])
+	{
+		free(cub->texture->texture[i]);
+		i++;
+	}
+	free(cub->texture->texture);
 }

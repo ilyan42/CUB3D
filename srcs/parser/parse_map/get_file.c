@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:57:05 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 15:01:58 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:24:11 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	**allocate_and_fill_map(t_cub *cub, int fd)
 		free(cub->line);
 	return (cub->map->map);
 }
-
 
 void	is_cub_file(char *map)
 {

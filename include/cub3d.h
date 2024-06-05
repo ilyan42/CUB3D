@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 14:03:53 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:13:41 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ void		init_draw_start_end(t_cub *cub);
 /********************************************************/
 
 void		print_and_exit(char *msg);
-int			close_game(t_cub *game);
+int			close_game(t_cub *cub);
 
 /********************************************************/
 /*					RAYCASTING							*/
