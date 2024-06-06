@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:49:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 14:57:53 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:18:11 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,30 @@ int	parse_east_texture(t_cub *cub, char *line, int x)
 	}
 	else
 		print_and_exit(INVALIDE_EAST_TEXTURE, cub);
+	return (1);
+}
+
+int	parse_door_texture(t_cub *cub, char *line, int x)
+{
+	char	*path_start;
+	char	*path_end;
+	size_t	path_len;
+
+	path_start = strchr(&line[x], '.');
+	path_end = strchr(&line[x], '\n');
+	if (path_start && path_end)
+	{
+		path_len = path_end - path_start;
+		cub->texture_file->door_path = malloc(path_len + 1);
+		if (cub->texture_file->door_path)
+		{
+			strncpy(cub->texture_file->door_path, path_start, path_len);
+			cub->texture_file->door_path[path_len] = '\0';
+		}
+		else
+			print_and_exit(MALLOC_FAILED, cub);
+	}
+	else
+		print_and_exit(INVALIDE_DOOR_TEXTURE, cub);
 	return (1);
 }

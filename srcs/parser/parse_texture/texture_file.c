@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:23:09 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 14:58:38 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:19:23 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	check_nb_texture(t_cub *cub, int y)
 {
 	if (cub->line[y] == 'N' || cub->line[y] == 'S' || cub->line[y] == 'W'
-		|| cub->line[y] == 'E' || cub->line[y] == 'F' || cub->line[y] == 'C')
+		|| cub->line[y] == 'E' || cub->line[y] == 'F'
+		|| cub->line[y] == 'C' || cub->line[y] == 'D')
 		return (1);
 	return (0);
 }

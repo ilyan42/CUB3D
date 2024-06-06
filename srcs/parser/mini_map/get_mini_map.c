@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:49:33 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 13:45:33 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:21:19 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void	display_map_pixel_color(t_cub *cub)
 				draw_mini_map_wall(cub, cub->mini_map, x, y);
 			else if (cub->map->map[y][x] == '0')
 				draw_mini_map_floor(cub, cub->mini_map, x, y);
+			else if (cub->map->map[y][x] == 'D')
+				draw_mini_map_door(cub, cub->mini_map, x, y);
 			x++;
 		}
 		y++;

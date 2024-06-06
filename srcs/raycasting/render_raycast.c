@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:09:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 16:24:53 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:22:44 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,24 @@ int	get_pixel_color(t_texture *texture, int x, int y)
 
 t_texture	get_player_direction(t_cub *cub, t_raycast *ray, t_texture texture)
 {
-	if (ray->side == 0)
-	{
-		if (ray->ray_dir_x > 0)
-			texture = cub->texture[3];
-		else
-			texture = cub->texture[2];
-	}
+	if (cub->map->map[ray->map_y][ray->map_x] == 'D')
+		texture = cub->texture[4];
 	else
 	{
-		if (ray->ray_dir_y > 0)
-			texture = cub->texture[1];
+		if (ray->side == 0)
+		{
+			if (ray->ray_dir_x > 0)
+				texture = cub->texture[3];
+			else
+				texture = cub->texture[2];
+		}
 		else
-			texture = cub->texture[0];
+		{
+			if (ray->ray_dir_y > 0)
+				texture = cub->texture[1];
+			else
+				texture = cub->texture[0];
+		}
 	}
 	return (texture);
 }

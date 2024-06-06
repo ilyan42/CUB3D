@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:01:43 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 16:27:01 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:22:25 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	perform_dda(t_cub *cub, t_raycast *raycast)
 			raycast->map_y += raycast->step_y;
 			raycast->side = 1;
 		}
-		if (cub->map->map[raycast->map_y][raycast->map_x] == '1')
+		if (cub->map->map[raycast->map_y][raycast->map_x] == '1'
+			|| cub->map->map[raycast->map_y][raycast->map_x] == 'D')
 		{
 			raycast->hit = 1;
 		}

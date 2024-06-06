@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 15:00:45 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:21:39 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 void		count_map_height(t_cub *cub, int fd);
 char		**allocate_and_fill_map(t_cub *cub, int fd);
-void	is_cub_file(char *map, t_cub *cub);
+void		is_cub_file(char *map, t_cub *cub);
 void		get_map_and_tex(char *file, t_cub *cub);
 
 /********************************************************/
@@ -69,7 +69,7 @@ int			is_in_space(char *line, int y);
 int			put_texture(char *line, int *check, int x, t_cub *cub);
 void		parsing_texture(t_cub *cub);
 int			open_texture(t_cub *cub);
-void	check_extention_texture(char *path, t_cub *cub);
+void		check_extention_texture(char *path, t_cub *cub);
 void		texture_processing(t_cub *cub);
 
 /********************************************************/
@@ -190,5 +190,22 @@ t_texture	new_sprite(t_cub *cub, int i);
 void		init_sprite(t_cub *cub);
 void		initialize_textures(t_cub *cub);
 void		init_image(t_cub *cub);
+
+/********************************************************/
+/*					DOOR								*/
+/********************************************************/
+
+int			parse_door_texture(t_cub *cub, char *line, int x);
+void		open_close_door(t_cub *cub);
+void		draw_mini_map_door(t_cub *cub, t_mini_map *mini_map, int x, int y);
+
+/********************************************************/
+/*					CHECK_MAP							*/
+/********************************************************/
+
+void		check_to_many_player(t_cub *cub);
+void		check_character_in_map(t_cub *cub);
+void		check_first_colone(t_cub *cub);
+void		check_map(t_cub *cub);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:35:52 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 15:24:06 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:08:44 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_texture_file
 	char	*east_path;
 	char	*floor;
 	char	*ceiling;
+	char	*door_path;
 }		t_texture_file;
 
 typedef struct s_texture
@@ -165,6 +166,7 @@ typedef struct s_key
 	int		map;
 	int		left_shift;
 	bool	map_displayed;
+	bool	open_door;
 	t_good	*good;
 }			t_key;
 
@@ -199,7 +201,7 @@ typedef struct s_cub
 	t_minilibx		*mlx;
 	t_player		*player;
 	t_map			*map;
-	t_texture		texture[4];
+	t_texture		texture[5];
 	t_image			*image;
 	t_color			color[2];
 	t_raycast		*raycast;

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:39:01 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 18:23:52 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:07:41 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init_sprite(t_cub *cub)
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		cub->texture[i] = new_sprite(cub, i);
 		i++;
@@ -64,7 +64,7 @@ void	init_sprite(t_cub *cub)
 
 void	initialize_textures(t_cub *cub)
 {
-	cub->texture_file->text = (char **)malloc(sizeof(char *) * 4);
+	cub->texture_file->text = (char **)malloc(sizeof(char *) * 5);
 	if (!cub->texture_file->text)
 	{
 		printf("Error: malloc failed for texture_file->text\n");
@@ -74,6 +74,7 @@ void	initialize_textures(t_cub *cub)
 	cub->texture_file->text[1] = cub->texture_file->south_path;
 	cub->texture_file->text[2] = cub->texture_file->west_path;
 	cub->texture_file->text[3] = cub->texture_file->east_path;
+	cub->texture_file->text[4] = cub->texture_file->door_path;
 }
 
 void	init_image(t_cub *cub)

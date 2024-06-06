@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:50:55 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 15:34:58 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:18:48 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	put_texture(char *line, int *check, int x, t_cub *cub)
 		*check += parse_floor_color(cub, line);
 	else if (line[x] == 'C' && line[x + 1] == ' ' && *check == 5)
 		*check += parse_ceiling_color(cub, line);
+	else if (line[x] == 'D' && line[x + 1] == 'O' && *check == 6)
+		*check += parse_door_texture(cub, line, x);
 	return (*check);
 }
 
@@ -49,10 +51,9 @@ void	parsing_texture(t_cub *cub)
 		}
 		y++;
 	}
-	if (check != 6)
+	if (check != 7)
 		print_and_exit(WRONG_NUMBER_OR_ORDER_OF_TEXTURES, cub);
 }
-
 
 int	open_texture(t_cub *cub)
 {
@@ -73,6 +74,10 @@ int	open_texture(t_cub *cub)
 	fd = open(cub->texture_file->east_path, O_RDONLY);
 	if (fd == -1)
 		print_and_exit(OPEN_EAST_TEXTURE, cub);
+	close(fd);
+	fd = open(cub->texture_file->door_path, O_RDONLY);
+	if (fd == -1)
+		print_and_exit(OPEN_DOOR_TEXTURE, cub);
 	close(fd);
 	return (1);
 }
@@ -101,12 +106,14 @@ void	texture_processing(t_cub *cub)
 	i = 0;
 	parsing_texture(cub);
 	if (!cub->texture_file->north_path || !cub->texture_file->south_path
-		|| !cub->texture_file->west_path || !cub->texture_file->east_path)
+		|| !cub->texture_file->west_path || !cub->texture_file->east_path
+		|| !cub->texture_file->door_path)
 		print_and_exit(MISSING_TEXTURE, cub);
 	check_extention_texture(cub->texture_file->north_path, cub);
 	check_extention_texture(cub->texture_file->south_path, cub);
 	check_extention_texture(cub->texture_file->west_path, cub);
 	check_extention_texture(cub->texture_file->east_path, cub);
+	check_extention_texture(cub->texture_file->door_path, cub);
 	open_texture(cub);
 	while (cub->texture->texture[i])
 	{

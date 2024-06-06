@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 15:25:29 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:00:58 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_destroy(t_cub *cub)
 	mlx_destroy_image(cub->mlx->mlx_ptr, cub->texture[1].reference);
 	mlx_destroy_image(cub->mlx->mlx_ptr, cub->texture[2].reference);
 	mlx_destroy_image(cub->mlx->mlx_ptr, cub->texture[3].reference);
+	mlx_destroy_image(cub->mlx->mlx_ptr, cub->texture[4].reference);
 	mlx_clear_window(cub->mlx->mlx_ptr, cub->mlx->win);
 	mlx_destroy_window(cub->mlx->mlx_ptr, cub->mlx->win);
 	mlx_destroy_display(cub->mlx->mlx_ptr);
@@ -53,6 +54,7 @@ int	close_game(t_cub *cub)
 	free(cub->texture_file->south_path);
 	free(cub->texture_file->west_path);
 	free(cub->texture_file->east_path);
+	free(cub->texture_file->door_path);
 	free(cub->texture_file);
 	printf("Programme terminé.\n");
 	exit(EXIT_SUCCESS);
