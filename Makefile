@@ -26,6 +26,7 @@ _SRCS = 		srcs/main.c \
 				srcs/init/init_struct_utils.c \
 				srcs/init/init_sprite_window.c \
 				srcs/parser/parse_map/check_map.c \
+				srcs/parser/mini_map/get_mini_map_utils.c \
 
 SRC_DIR = .
 
