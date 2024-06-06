@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:55:16 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 11:32:33 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:57:35 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	parse_floor_color(t_cub *cub, char *line)
 		while (tmp_line[nb])
 			nb++;
 	if (nb != 3)
-		print_and_exit(INVALIDE_FLOOR_COLOR);
+		print_and_exit(INVALIDE_FLOOR_COLOR, cub);
 	if (tmp_line[0] && tmp_line[1] && tmp_line[2])
 	{
 		cub->color->f_r = ft_atoi(tmp_line[0]);
@@ -56,7 +56,7 @@ int	parse_floor_color(t_cub *cub, char *line)
 		cub->color->f_b = ft_atoi(tmp_line[2]);
 	}
 	if (cub->color->c_r > 255 || cub->color->c_b > 255 || cub->color->c_g > 255)
-		print_and_exit(INVALIDE_CEILING_COLOR);
+		print_and_exit(INVALIDE_CEILING_COLOR, cub);
 	convert_color_hex(cub);
 	free_split(tmp_line);
 	return (1);
@@ -77,7 +77,7 @@ int	parse_ceiling_color(t_cub *cub, char *line)
 		while (tmp_line[nb])
 			nb++;
 	if (nb != 3)
-		print_and_exit(INVALIDE_CEILING_COLOR);
+		print_and_exit(INVALIDE_CEILING_COLOR, cub);
 	if (tmp_line[0] && tmp_line[1] && tmp_line[2])
 	{
 		cub->color->c_r = ft_atoi(tmp_line[0]);
@@ -85,7 +85,7 @@ int	parse_ceiling_color(t_cub *cub, char *line)
 		cub->color->c_b = ft_atoi(tmp_line[2]);
 	}
 	if (cub->color->c_r > 255 || cub->color->c_b > 255 || cub->color->c_g > 255)
-		print_and_exit(INVALIDE_CEILING_COLOR);
+		print_and_exit(INVALIDE_CEILING_COLOR, cub);
 	convert_color_hex(cub);
 	free_split(tmp_line);
 	return (1);

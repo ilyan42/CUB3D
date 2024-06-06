@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:57:05 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 11:32:21 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:56:52 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**allocate_and_fill_map(t_cub *cub, int fd)
 	i = 1;
 	cub->map->map = malloc(sizeof(char *) * (cub->map->height + 1));
 	if (!cub->map->map)
-		print_and_exit(MALLOC_FAILED);
+		print_and_exit(MALLOC_FAILED, cub);
 	cub->map->map[0] = cub->line;
 	cub->line = get_next_line_map(fd);
 	while (cub->line && i <= cub->map->height)
@@ -47,13 +47,13 @@ char	**allocate_and_fill_map(t_cub *cub, int fd)
 	return (cub->map->map);
 }
 
-void	is_cub_file(char *map)
+void	is_cub_file(char *map, t_cub *cub)
 {
 	char	*extensions_check;
 
 	extensions_check = ft_strnstr(map, ".cub", ft_strlen(map));
 	if (extensions_check == NULL || ft_strlen(extensions_check) != 4)
-		print_and_exit(INVALIDE_FILE_EXTENSION);
+		print_and_exit(INVALIDE_FILE_EXTENSION, cub);
 }
 
 void	get_map_and_tex(char *file, t_cub *cub)
@@ -61,7 +61,7 @@ void	get_map_and_tex(char *file, t_cub *cub)
 	int	fd;
 
 	cub->line = NULL;
-	is_cub_file(file);
+	is_cub_file(file, cub);
 	fd = open(file, O_RDONLY);
 	cub->texture->height = 0;
 	count_texture_height(cub, fd);

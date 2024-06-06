@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:54:24 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 11:32:31 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:57:17 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,33 @@ void	check_to_many_player(t_cub *cub)
 		y++;
 	}
 	if (player != 1)
-		print_and_exit(TO_MANY_PLAYERS_OR_NO_PLAYER);
+		print_and_exit(TO_MANY_PLAYERS_OR_NO_PLAYER, cub);
+}
+
+void	check_character_in_map(t_cub *cub)
+{
+	int	x;
+	int	y;
+	int	check;
+
+	y = 0;
+	check = 0;
+	while (cub->map->map[y])
+	{
+		x = 0;
+		while (cub->map->map[y][x])
+		{
+			if (cub->map->map[y][x] != '0' && cub->map->map[y][x] != '1'
+				&& cub->map->map[y][x] != 'N' && cub->map->map[y][x] != ' '
+				&& cub->map->map[y][x] != '\n' && cub->map->map[y][x] != 'S'
+				&& cub->map->map[y][x] != 'E' && cub->map->map[y][x] != 'W')
+				check++;
+			x++;
+		}
+		y++;
+	}
+	if (check != 0)
+		print_and_exit(WRONG_CHARACTER_IN_MAP, cub);
 }
 
 void	check_first_colone(t_cub *cub)
@@ -105,7 +131,7 @@ void	check_first_colone(t_cub *cub)
 	while (cub->map->map[y])
 	{
 		if (cub->map->map[y][0] != '1')
-			print_and_exit("hdhdhd");
+			print_and_exit("hdhdhd", cub);
 		y++;
 	}
 }
@@ -115,6 +141,7 @@ void	check_map(t_cub *cub)
 	get_size_map(cub);
 	check_first_colone(cub);
 	check_to_many_player(cub);
+	check_character_in_map(cub);
 }
 
 void	map_is_valid(t_cub *cub)
@@ -132,11 +159,11 @@ void	map_is_valid(t_cub *cub)
 			if (cub->map->map[y][x] == '0')
 			{
 				if (ft_check_around_floor(cub, x, y) == false)
-					print_and_exit("bababa");
+					print_and_exit("bababa", cub);
 			}
 			else if (cub->map->map[y][x] == '1')
 				if (ft_check_around_wall(cub, x, y) == false)
-					print_and_exit("kdkdk");
+					print_and_exit("kdkdk", cub);
 			x++;
 		}
 		x = 0;

@@ -1,12 +1,12 @@
-SO ./texture/doom1.xpm
-WE ./texture/doom1.xpm
-NO ./texture/doom1.xpm
-EA ./texture/doom1.xpm
+NO ./texture/black_wall_NO.xpm
+								SO ./texture/black_wall_SO.xpm
+WE ./texture/black_wall_WE.xpm
+	EA ./texture/black_wall_EA.xpm
 
 
 
 F 0,0,0
-C 255 , 150 , 0
+C 0,0,139
 
 
 

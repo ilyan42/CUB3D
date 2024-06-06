@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:53:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 15:05:54 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:24:54 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,28 @@ void	cam_rotate_right(t_cub *data)
 	data->player->plane_y = sin(data->player->angle + M_PI);
 }
 
+// int	key_press(int key, t_cub *data)
+// {
+// 	if (key == LEFT)
+// 		data->key->rotate_left = _true;
+// 	else if (key == RIGHT)
+// 		data->key->rotate_right = _true;
+// 	else if (key == W)
+// 		data->key->forward = _true;
+// 	else if (key == S_QW)
+// 		data->key->backward = _true;
+// 	else if (key == A)
+// 		data->key->left = _true;
+// 	else if (key == D_QW)
+// 		data->key->right = _true;
+// 	else if (key == ESCAPE_KEY)
+// 		close_game(data);
+// 	else if (key == MAP)
+// 		data->key->map = _true;
+// 	else if (key == LEFT_SHIFT)
+// 		data->key->left_shift = _true;
+// 	return (0);
+// }
 int	key_press(int key, t_cub *data)
 {
 	if (key == LEFT)
@@ -47,7 +69,10 @@ int	key_press(int key, t_cub *data)
 	else if (key == ESCAPE_KEY)
 		close_game(data);
 	else if (key == MAP)
+	{
 		data->key->map = _true;
+		data->key->map_displayed = !data->key->map_displayed; // Bascule l'état de la mini-carte
+	}
 	else if (key == LEFT_SHIFT)
 		data->key->left_shift = _true;
 	return (0);
@@ -73,6 +98,28 @@ int	key_release(int key, t_cub *data)
 		data->key->left_shift = _false;
 	return (0);
 }
+
+
+// int	key_release(int key, t_cub *data)
+// {
+// 	if (key == LEFT)
+// 		data->key->rotate_left = _false;
+// 	else if (key == RIGHT)
+// 		data->key->rotate_right = _false;
+// 	else if (key == W)
+// 		data->key->forward = _false;
+// 	else if (key == S_QW)
+// 		data->key->backward = _false;
+// 	else if (key == A)
+// 		data->key->left = _false;
+// 	else if (key == D_QW)
+// 		data->key->right = _false;
+// 	else if (key == MAP)
+// 		data->key->map = _false;
+// 	else if (key == LEFT_SHIFT)
+// 		data->key->left_shift = _false;
+// 	return (0);
+// }
 
 int	ft_handle_key_press(t_cub *cub)
 {

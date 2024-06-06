@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:49:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 11:32:37 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:57:53 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	parse_north_texture(t_cub *cub, char *line, int x)
 			cub->texture_file->north_path[path_len] = '\0';
 		}
 		else
-			print_and_exit(MALLOC_FAILED);
+			print_and_exit(MALLOC_FAILED, cub);
 	}
 	else
-		print_and_exit(INVALIDE_NORTH_TEXTURE);
+		print_and_exit(INVALIDE_NORTH_TEXTURE, cub);
 	return (1);
 }
 
@@ -55,10 +55,10 @@ int	parse_south_texture(t_cub *cub, char *line, int x)
 			cub->texture_file->south_path[path_len] = '\0';
 		}
 		else
-			print_and_exit(MALLOC_FAILED);
+			print_and_exit(MALLOC_FAILED, cub);
 	}
 	else
-		print_and_exit(INVALIDE_SOUTH_TEXTURE);
+		print_and_exit(INVALIDE_SOUTH_TEXTURE, cub);
 	return (1);
 }
 
@@ -80,10 +80,10 @@ int	parse_west_texture(t_cub *cub, char *line, int x)
 			cub->texture_file->west_path[path_len] = '\0';
 		}
 		else
-			print_and_exit(MALLOC_FAILED);
+			print_and_exit(MALLOC_FAILED, cub);
 	}
 	else
-		print_and_exit(INVALIDE_WEST_TEXTURE);
+		print_and_exit(INVALIDE_WEST_TEXTURE, cub);
 	return (1);
 }
 
@@ -105,9 +105,9 @@ int	parse_east_texture(t_cub *cub, char *line, int x)
 			cub->texture_file->east_path[path_len] = '\0';
 		}
 		else
-			print_and_exit(MALLOC_FAILED);
+			print_and_exit(MALLOC_FAILED, cub);
 	}
 	else
-		print_and_exit(INVALIDE_EAST_TEXTURE);
+		print_and_exit(INVALIDE_EAST_TEXTURE, cub);
 	return (1);
 }

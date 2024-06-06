@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 13:40:09 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:25:29 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	update(void *param)
 	raycasting(cub);
 	if (cub->map->size_y <= 60 && cub->map->size_x <= 120)
 	{
-		if (cub->key->good->good)
+		if (cub->key->map_displayed)
 			display_map_pixel_color(cub);
 	}
 	cub->key->good->good = _false;
@@ -85,7 +85,7 @@ int	main(int ac, char **av)
 	}
 	init_struct_cub(&cub);
 	if (cub.res_x != 1920 || cub.res_y != 1080)
-		print_and_exit("Error: resolution must be 1920x1080\n");
+		print_and_exit("Error: resolution must be 1920x1080\n", &cub);
 	get_map_and_tex(av[1], &cub);
 	map_is_valid(&cub);
 	init_window(cub.mlx, &cub);

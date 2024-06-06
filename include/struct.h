@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:35:52 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 11:45:14 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:24:06 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ typedef struct s_key
 	int		escape;
 	int		map;
 	int		left_shift;
+	bool	map_displayed;
 	t_good	*good;
 }			t_key;
 

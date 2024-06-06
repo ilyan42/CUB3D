@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 12:10:18 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:00:45 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 void		count_map_height(t_cub *cub, int fd);
 char		**allocate_and_fill_map(t_cub *cub, int fd);
-void		is_cub_file(char *map);
+void	is_cub_file(char *map, t_cub *cub);
 void		get_map_and_tex(char *file, t_cub *cub);
 
 /********************************************************/
@@ -66,10 +66,10 @@ int			is_in_space(char *line, int y);
 /*					PARSE_AND_OPEN_TEXTURE				*/
 /********************************************************/
 
-int			put_texture(char *line, int check, int x, t_cub *cub);
+int			put_texture(char *line, int *check, int x, t_cub *cub);
 void		parsing_texture(t_cub *cub);
 int			open_texture(t_cub *cub);
-void		check_extention_texture(char *path);
+void	check_extention_texture(char *path, t_cub *cub);
 void		texture_processing(t_cub *cub);
 
 /********************************************************/
@@ -157,7 +157,7 @@ void		init_draw_start_end(t_cub *cub);
 /*					ERROR								*/
 /********************************************************/
 
-void		print_and_exit(char *msg);
+void		print_and_exit(char *msg, t_cub *cub);
 int			close_game(t_cub *cub);
 
 /********************************************************/
