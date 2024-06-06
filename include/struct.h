@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:35:52 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 19:55:30 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:45:14 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ typedef struct s_key
 
 typedef struct s_mini_map
 {
+	char	**map;
 	int		map_block_size;
 	int		player_size;
 	int		player_color;

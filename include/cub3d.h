@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 19:22:27 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:10:18 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void		get_distance(t_cub *cub, t_raycast *raycast);
 /*					GET_MINI_MAP						*/
 /********************************************************/
 
-void		init_struct_mini_map(t_mini_map *mini_map);
+void		init_struct_mini_map(t_cub *cub);
 void		draw_mini_map_wall(t_cub *cub, t_mini_map *mini_map,
 				int x, int y);
 void		draw_mini_map_floor(t_cub *cub, t_mini_map *mini_map,

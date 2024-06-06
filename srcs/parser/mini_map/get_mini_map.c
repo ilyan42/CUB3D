@@ -6,32 +6,34 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:49:33 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 17:17:46 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:45:33 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-void	init_struct_mini_map(t_mini_map *mini_map)
+void	init_struct_mini_map(t_cub *cub)
 {
-	printf ("init_struct_mini_map\n");
-	mini_map = malloc(sizeof(t_mini_map));
-	if (!mini_map)
+	if (cub->mini_map == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		cub->mini_map = malloc(sizeof(t_mini_map));
+		if (!cub->mini_map)
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			exit(EXIT_FAILURE);
+		}
 	}
-	mini_map->start_x = 0;
-	mini_map->start_y = 0;
-	mini_map->map_block_size = 16;
-	mini_map->player_size = mini_map->map_block_size / 2;
-	mini_map->player_color = 0x00FFFF00;
-	mini_map->i = 0;
-	mini_map->j = 0;
-	mini_map->srceen_x = 0;
-	mini_map->screen_y = 0;
-	mini_map->player_center_x = 0;
-	mini_map->player_center_y = 0;
+	cub->mini_map->start_x = 0;
+	cub->mini_map->start_y = 0;
+	cub->mini_map->map_block_size = 16;
+	cub->mini_map->player_size = cub->mini_map->map_block_size / 2;
+	cub->mini_map->player_color = 0x00FFFF00;
+	cub->mini_map->i = 0;
+	cub->mini_map->j = 0;
+	cub->mini_map->srceen_x = 0;
+	cub->mini_map->screen_y = 0;
+	cub->mini_map->player_center_x = 0;
+	cub->mini_map->player_center_y = 0;
 }
 
 void	draw_mini_map_wall(t_cub *cub, t_mini_map *mini_map, int x, int y)
@@ -101,8 +103,8 @@ void	display_map_pixel_color(t_cub *cub)
 	int	y;
 
 	y = 0;
-	init_struct_mini_map(cub->mini_map);
-	while (cub->map->map[y] != NULL)
+	init_struct_mini_map(cub);
+	while (cub->map->map[y])
 	{
 		x = 0;
 		while (cub->map->map[y][x])

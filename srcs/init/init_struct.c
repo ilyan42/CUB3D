@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 11:07:01 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 15:08:19 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:45:55 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	init_struct_cub(t_cub *cub)
 	cub->res_x = 1920;
 	cub->res_y = 1080;
 	cub->line = NULL;
+	cub->mini_map = NULL;
 	init_struct_mlx(cub);
 	init_struct_map(cub);
 	init_struct_image(cub);
