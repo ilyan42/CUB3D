@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 18:21:39 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/06 19:48:06 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,5 +207,15 @@ void		check_to_many_player(t_cub *cub);
 void		check_character_in_map(t_cub *cub);
 void		check_first_colone(t_cub *cub);
 void		check_map(t_cub *cub);
+
+/********************************************************/
+/*						FREE							*/
+/********************************************************/
+
+void		free_image(t_image *image, void *mlx_ptr);
+void		free_mlx(t_minilibx *mlx);
+void		free_player(t_player *player);
+void		free_raycast(t_raycast *raycast);
+void		free_keys(t_key *keys);
 
 #endif
