@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 19:48:06 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/07 11:45:51 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ void		display_map_pixel_color(t_cub *cub);
 
 int			key_press(int key, t_cub *data);
 int			key_release(int key, t_cub *data);
-void		cam_rotate_left(t_cub *data);
-void		cam_rotate_right(t_cub *data);
 int			key_press(int key, t_cub *data);
 int			key_release(int key, t_cub *data);
 int			ft_handle_key_press(t_cub *cub);
@@ -127,6 +125,9 @@ void		move_forward(t_cub *cub);
 void		move_backward(t_cub *cub);
 void		move_left(t_cub *cub);
 void		move_right(t_cub *cub);
+void		cam_rotate_left(t_cub *cub, double angle_delta);
+void		cam_rotate_right(t_cub *cub, double angle_delta);
+int			mouse_move(int x, int y, t_cub *cub);
 
 /********************************************************/
 /*					RENDER_RAYCAST						*/

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 18:00:58 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/07 11:30:19 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(cub.mlx->mlx_ptr, update, &cub);
 	mlx_hook(cub.mlx->win, 2, 1L << 0, key_press, &cub);
 	mlx_hook(cub.mlx->win, 3, 1L << 1, key_release, &cub);
+	mlx_hook(cub.mlx->win, 6, 1L << 6, mouse_move, &cub);
 	mlx_hook(cub.mlx->win, 17, 0, close_game, &cub);
 	mlx_loop(cub.mlx->mlx_ptr);
 	return (0);

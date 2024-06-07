@@ -28,6 +28,7 @@ _SRCS = 		srcs/main.c \
 				srcs/parser/parse_map/check_map.c \
 				srcs/parser/mini_map/get_mini_map_utils.c \
 				srcs/error/free.c \
+				srcs/player_movement/mouse_move.c \
 
 SRC_DIR = .
 

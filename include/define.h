@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:37:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 18:39:29 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/07 11:33:20 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # define MOVE_BACKWARD_KEY S
 # define MOVE_LEFT_KEY A
 # define MOVE_RIGHT_KEY D
+# define MOUSE_SENSITIVITY 0.005
 
 # define MAP_IS_NOT_VALID "Error\n -> Map is not valid\n"
 # define WRONG_ARGUMENTS_IN_MAP "Error\n -> Wrong arguments in map\n"

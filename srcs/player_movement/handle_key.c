@@ -6,28 +6,28 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:53:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 17:58:09 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/07 11:45:14 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	cam_rotate_left(t_cub *data)
+void	cam_rotate_left(t_cub *cub, double angle_delta)
 {
-	data->player->angle -= ROTATE_SPEED;
-	data->player->dir_x = cos(data->player->angle);
-	data->player->dir_y = sin(data->player->angle);
-	data->player->plane_x = cos(data->player->angle + M_PI);
-	data->player->plane_x = sin(data->player->angle + M_PI);
+	cub->player->angle -= angle_delta;
+	cub->player->dir_x = cos(cub->player->angle);
+	cub->player->dir_y = sin(cub->player->angle);
+	cub->player->plane_x = cos(cub->player->angle + M_PI / 2);
+	cub->player->plane_y = sin(cub->player->angle + M_PI / 2);
 }
 
-void	cam_rotate_right(t_cub *data)
+void	cam_rotate_right(t_cub *cub, double angle_delta)
 {
-	data->player->angle += ROTATE_SPEED;
-	data->player->dir_x = cos(data->player->angle);
-	data->player->dir_y = sin(data->player->angle);
-	data->player->plane_x = cos(data->player->angle + M_PI);
-	data->player->plane_y = sin(data->player->angle + M_PI);
+	cub->player->angle += angle_delta;
+	cub->player->dir_x = cos(cub->player->angle);
+	cub->player->dir_y = sin(cub->player->angle);
+	cub->player->plane_x = cos(cub->player->angle + M_PI / 2);
+	cub->player->plane_y = sin(cub->player->angle + M_PI / 2);
 }
 
 int	key_press(int key, t_cub *data)
@@ -84,9 +84,9 @@ int	key_release(int key, t_cub *data)
 int	ft_handle_key_press(t_cub *cub)
 {
 	if (cub->key->rotate_left)
-		cam_rotate_left(cub);
+		cam_rotate_left(cub, ROTATE_SPEED);
 	if (cub->key->rotate_right)
-		cam_rotate_right(cub);
+		cam_rotate_right(cub, ROTATE_SPEED);
 	if (cub->key->forward)
 		move_forward(cub);
 	if (cub->key->left)
