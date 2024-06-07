@@ -29,6 +29,9 @@ _SRCS = 		srcs/main.c \
 				srcs/parser/mini_map/get_mini_map_utils.c \
 				srcs/error/free.c \
 				srcs/player_movement/mouse_move.c \
+				srcs/weapon/draw_weapon.c \
+				srcs/weapon/draw_weapon_utils.c \
+				srcs/utils/destroy.c \
 
 SRC_DIR = .
 
@@ -56,6 +59,8 @@ $(_OBJ_DIR):
 	mkdir -p $(_OBJ_DIR)/srcs/player_movement
 	mkdir -p $(_OBJ_DIR)/srcs/init
 	mkdir -p $(_OBJ_DIR)/srcs/parser/mini_map
+	mkdir -p $(_OBJ_DIR)/srcs/weapon
+	mkdir -p $(_OBJ_DIR)/srcs/utils
 
 all: $(_OBJ_DIR) $(NAME)
 

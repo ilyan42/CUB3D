@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 10:57:53 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/04 16:36:20 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/07 15:36:36 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	raycasting(void *param)
 		draw_wall(cub, x, cub->raycast);
 		x++;
 	}
+	draw(cub, cub->image);
 	mlx_put_image_to_window(cub->mlx->mlx_ptr,
 		cub->mlx->win, cub->image->img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:53:45 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/07 11:45:14 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:49:31 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,13 @@ int	key_press(int key, t_cub *data)
 	else if (key == ESCAPE_KEY)
 		close_game(data);
 	else if (key == MAP)
-	{
-		data->key->map = _true;
 		data->key->map_displayed = !data->key->map_displayed;
-	}
 	else if (key == LEFT_SHIFT)
 		data->key->left_shift = _true;
 	else if (key == E)
 		data->key->open_door = _true;
+	else if (key == SPACE_BAR)
+		data->shoot = _true;
 	return (0);
 }
 

@@ -6,14 +6,14 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:35:52 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 16:08:44 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/07 19:02:13 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef enum t_boolean
+typedef enum e_boolean
 {
 	_false = 0,
 	_true = 1
@@ -196,6 +196,18 @@ typedef struct s_pixel_column
 	int		color;
 }	t_pixel_column;
 
+typedef struct s_weapon
+{
+	void			*reference;
+	int				width;
+	int				height;
+	int				bits_per_pixel;
+	int				line_len;
+	int				endian;
+	int				weapon_index;
+	unsigned char	*addr;
+}	t_weapon;
+
 typedef struct s_cub
 {
 	t_minilibx		*mlx;
@@ -208,10 +220,13 @@ typedef struct s_cub
 	t_mini_map		*mini_map;
 	t_texture_file	*texture_file;
 	t_key			*key;
+	t_image			*gun_[5];
 	char			*line;
 	int				res_x;
 	int				res_y;
 	int				d;
+	bool			shoot;
+	int				gun_index;
 }			t_cub;
 
 #endif

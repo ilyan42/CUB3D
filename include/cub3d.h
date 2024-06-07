@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/07 11:45:51 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/07 19:13:54 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,5 +218,16 @@ void		free_mlx(t_minilibx *mlx);
 void		free_player(t_player *player);
 void		free_raycast(t_raycast *raycast);
 void		free_keys(t_key *keys);
+void		ft_destroy_utils(t_cub *cub);
+void		ft_destroy(t_cub *cub);
+
+/********************************************************/
+/*						WEAPON							*/
+/********************************************************/
+
+void		draw(t_cub *cub, t_image *img);
+int			mousepress(int keycode, int x, int y, t_cub *cub);
+void		init_gun(t_cub *cub);
+void		init_weapon_utils(t_cub *cub);
 
 #endif

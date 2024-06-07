@@ -6,56 +6,25 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:29:50 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/07 11:30:19 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/07 19:15:56 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	ft_destroy(t_cub *cub)
-{
-	mlx_destroy_image(cub->mlx->mlx_ptr, cub->image->img);
-	mlx_destroy_image(cub->mlx->mlx_ptr, cub->texture[0].reference);
-	mlx_destroy_image(cub->mlx->mlx_ptr, cub->texture[1].reference);
-	mlx_destroy_image(cub->mlx->mlx_ptr, cub->texture[2].reference);
-	mlx_destroy_image(cub->mlx->mlx_ptr, cub->texture[3].reference);
-	mlx_destroy_image(cub->mlx->mlx_ptr, cub->texture[4].reference);
-	mlx_clear_window(cub->mlx->mlx_ptr, cub->mlx->win);
-	mlx_destroy_window(cub->mlx->mlx_ptr, cub->mlx->win);
-	mlx_destroy_display(cub->mlx->mlx_ptr);
-	free(cub->mlx->mlx_ptr);
-	if (cub->key->good)
-		free(cub->key->good);
-	if (cub->texture_file->text)
-		free(cub->texture_file->text);
-	if (cub->mini_map)
-		free(cub->mini_map);
-	free(cub->key);
-	free(cub->player);
-	free(cub->mlx);
-	free(cub->image);
-}
-
 int	close_game(t_cub *cub)
 {
-	int	i;
-
-	i = 0;
 	ft_destroy(cub);
-	while (cub->map->map[i])
-	{
-		free(cub->map->map[i]);
-		i++;
-	}
-	free(cub->map->map);
-	free(cub->map);
-	free(cub->raycast);
-	free(cub->texture_file->north_path);
-	free(cub->texture_file->south_path);
+	ft_destroy_utils(cub);
 	free(cub->texture_file->west_path);
 	free(cub->texture_file->east_path);
 	free(cub->texture_file->door_path);
 	free(cub->texture_file);
+	free(cub->gun_[0]);
+	free(cub->gun_[1]);
+	free(cub->gun_[2]);
+	free(cub->gun_[3]);
+	free(cub->gun_[4]);
 	printf("Programme terminé.\n");
 	exit(EXIT_SUCCESS);
 	return (0);
@@ -76,6 +45,19 @@ int	update(void *param)
 	return (0);
 }
 
+void	parsing(t_cub *cub, char **av)
+{
+	init_struct_cub(cub);
+	if (cub->res_x != 1920 || cub->res_y != 1080)
+		print_and_exit("Error: resolution must be 1920x1080\n", cub);
+	get_map_and_tex(av[1], cub);
+	map_is_valid(cub);
+	init_window(cub->mlx, cub);
+	init_image(cub);
+	init_gun(cub);
+	init_weapon_utils(cub);
+}
+
 int	main(int ac, char **av)
 {
 	t_cub	cub;
@@ -85,13 +67,7 @@ int	main(int ac, char **av)
 		printf("Error: map file not found\n");
 		return (0);
 	}
-	init_struct_cub(&cub);
-	if (cub.res_x != 1920 || cub.res_y != 1080)
-		print_and_exit("Error: resolution must be 1920x1080\n", &cub);
-	get_map_and_tex(av[1], &cub);
-	map_is_valid(&cub);
-	init_window(cub.mlx, &cub);
-	init_image(&cub);
+	parsing(&cub, av);
 	texture_processing(&cub);
 	initialize_textures(&cub);
 	init_sprite(&cub);
@@ -100,6 +76,7 @@ int	main(int ac, char **av)
 	mlx_hook(cub.mlx->win, 2, 1L << 0, key_press, &cub);
 	mlx_hook(cub.mlx->win, 3, 1L << 1, key_release, &cub);
 	mlx_hook(cub.mlx->win, 6, 1L << 6, mouse_move, &cub);
+	mlx_hook(cub.mlx->win, 4, 1L << 2, mousepress, &cub);
 	mlx_hook(cub.mlx->win, 17, 0, close_game, &cub);
 	mlx_loop(cub.mlx->mlx_ptr);
 	return (0);

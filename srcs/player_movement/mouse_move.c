@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:10:44 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/07 11:44:37 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:46:23 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,14 @@ int	mouse_move(int x, int y, t_cub *cub)
 		cam_rotate_right(cub, delta_x * MOUSE_SENSITIVITY);
 	else if (delta_x < 0)
 		cam_rotate_left(cub, -delta_x * MOUSE_SENSITIVITY);
+	return (0);
+}
+
+int	mousepress(int keycode, int x, int y, t_cub *cub)
+{
+	(void)x;
+	(void)y;
+	if (keycode == LEFT_CLICK && !cub->shoot)
+		cub->shoot = true;
 	return (0);
 }
