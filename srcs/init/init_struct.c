@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 11:07:01 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/07 15:57:05 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:49:47 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,14 @@ void	init_struct_cub(t_cub *cub)
 	cub->res_y = 1080;
 	cub->line = NULL;
 	cub->mini_map = NULL;
+	cub->order_tex = NULL;
+	cub->texture_file = NULL;
+	cub->mlx = NULL;
+	cub->image = NULL;
+	cub->player = NULL;
+	cub->raycast = NULL;
+	cub->key = NULL;
+	cub->map = NULL;
 	cub->shoot = _false;
 	init_struct_mlx(cub);
 	init_struct_map(cub);

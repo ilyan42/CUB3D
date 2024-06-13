@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:39:01 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 18:07:41 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/12 17:35:22 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ void	init_window(t_minilibx *window, t_cub *cub)
 {
 	window->mlx_ptr = mlx_init();
 	if (!window->mlx_ptr)
-	{
-		printf("Error: environement not set\n");
-		return (exit(0), (void)0);
-	}
+		print_and_exit(MALLOC_FAILED, cub, 0);
 	window->win = mlx_new_window(window->mlx_ptr,
 			cub->res_x, cub->res_y, "cub3d");
 }
@@ -31,18 +28,11 @@ t_texture	new_sprite(t_cub *cub, int i)
 
 	texture = (t_texture *)malloc(sizeof(t_texture));
 	if (!texture)
-	{
-		printf("Error: malloc failed for texture\n");
-		exit(EXIT_FAILURE);
-	}
+		print_and_exit(MALLOC_FAILED, cub, 0);
 	texture->reference = mlx_xpm_file_to_image(cub->mlx->mlx_ptr,
 			cub->texture_file->text[i], &texture->width, &texture->height);
 	if (!texture->reference)
-	{
-		printf("Error: texture not found\n");
-		free(texture);
-		exit(EXIT_FAILURE);
-	}
+		print_and_exit(MALLOC_FAILED, cub, 0);
 	texture->pixels = (unsigned char *)mlx_get_data_addr(texture->reference,
 			&texture->bits_per_pixel, &texture->line_len, &texture->endian);
 	result = *texture;
@@ -66,10 +56,7 @@ void	initialize_textures(t_cub *cub)
 {
 	cub->texture_file->text = (char **)malloc(sizeof(char *) * 5);
 	if (!cub->texture_file->text)
-	{
-		printf("Error: malloc failed for texture_file->text\n");
-		exit(EXIT_FAILURE);
-	}
+		print_and_exit(MALLOC_FAILED, cub, 0);
 	cub->texture_file->text[0] = cub->texture_file->north_path;
 	cub->texture_file->text[1] = cub->texture_file->south_path;
 	cub->texture_file->text[2] = cub->texture_file->west_path;

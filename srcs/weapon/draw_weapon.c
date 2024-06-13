@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 13:25:33 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/07 19:00:33 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:36:26 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_gun(t_cub *cub)
 {
 	cub->gun_[0] = malloc(sizeof(t_image));
 	if (!cub->gun_[0])
-		print_and_exit(MALLOC_FAILED, cub);
+		print_and_exit(MALLOC_FAILED, cub, 0);
 	cub->gun_[0]->img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr,
 			"texture/1.xpm", &cub->gun_[0]->width, &cub->gun_[0]->height);
 	cub->gun_[0]->addr = mlx_get_data_addr(cub->gun_[0]->img, &cub->gun_[0]
@@ -24,7 +24,7 @@ void	init_gun(t_cub *cub)
 			&cub->gun_[0]->endian);
 	cub->gun_[1] = malloc(sizeof(t_image));
 	if (!cub->gun_[1])
-		print_and_exit(MALLOC_FAILED, cub);
+		print_and_exit(MALLOC_FAILED, cub, 0);
 	cub->gun_[1]->img = mlx_xpm_file_to_image(cub->mlx->mlx_ptr,
 			"texture/2.xpm", &cub->gun_[1]->width, &cub->gun_[1]->height);
 	cub->gun_[1]->addr = mlx_get_data_addr(cub->gun_[1]->img, &cub->gun_[1]
@@ -32,7 +32,7 @@ void	init_gun(t_cub *cub)
 			&cub->gun_[1]->endian);
 	cub->gun_[2] = malloc(sizeof(t_image));
 	if (!cub->gun_[2])
-		print_and_exit(MALLOC_FAILED, cub);
+		print_and_exit(MALLOC_FAILED, cub, 0);
 }
 
 void	draw_pixel(t_image *img, int x, int y, unsigned int color)

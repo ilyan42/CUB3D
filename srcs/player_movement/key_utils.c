@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:54:42 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 18:22:09 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:36:08 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_position_valid(t_cub *cub, double new_x, double new_y)
 {
-	const double	min_dist = 0.1;
+	const double	min_dist = 0.2;
 	int				map_x;
 	int				map_y;
 

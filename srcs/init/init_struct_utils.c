@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:22:30 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/05 12:30:39 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:29:47 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ void	init_struct_mlx(t_cub *cub)
 {
 	cub->mlx = malloc(sizeof(t_minilibx));
 	if (!cub->mlx)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+		print_and_exit(MALLOC_FAILED, cub, 0);
 	cub->mlx->mlx_ptr = NULL;
 	cub->mlx->win = NULL;
 }
@@ -28,10 +25,7 @@ void	init_struct_map(t_cub *cub)
 {
 	cub->map = malloc(sizeof(t_map));
 	if (!cub->map)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+		print_and_exit(MALLOC_FAILED, cub, 0);
 	cub->map->map = NULL;
 	cub->map->size_x = 0;
 	cub->map->size_y = 0;
@@ -43,16 +37,15 @@ void	init_struct_image(t_cub *cub)
 {
 	cub->texture_file = malloc(sizeof(t_texture_file));
 	if (!cub->texture_file)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+		print_and_exit(MALLOC_FAILED, cub, 0);
+	cub->texture_file->north_path = NULL;
+	cub->texture_file->south_path = NULL;
+	cub->texture_file->west_path = NULL;
+	cub->texture_file->east_path = NULL;
+	cub->texture_file->door_path = NULL;
 	cub->image = malloc(sizeof(t_image));
 	if (!cub->image)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+		print_and_exit(MALLOC_FAILED, cub, 0);
 	cub->image->img = NULL;
 	cub->image->addr = NULL;
 	cub->image->bits_per_pixel = 0;
@@ -67,10 +60,7 @@ void	init_struct_player(t_cub *cub)
 {
 	cub->player = malloc(sizeof(t_player));
 	if (!cub->player)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+		print_and_exit(MALLOC_FAILED, cub, 0);
 	cub->player->pos_x = 0;
 	cub->player->pos_y = 0;
 	cub->player->dir_x = 0;

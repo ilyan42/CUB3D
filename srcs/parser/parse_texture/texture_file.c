@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:23:09 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 18:19:23 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:57:01 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	**parse_texture_file(t_cub *cub, int fd)
 	cub->line = get_next_line_map(fd);
 	cub->texture->texture = malloc(sizeof(char *) * (cub->texture->height + 1));
 	if (!cub->texture->texture)
-		print_and_exit(MALLOC_FAILED, cub);
+		print_and_exit(MALLOC_FAILED, cub, 2);
 	while ((cub->line && i < cub->texture->height))
 	{
 		cub->texture->texture[i] = ft_strdup(cub->line);

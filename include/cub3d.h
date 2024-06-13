@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:30:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/07 19:13:54 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/13 18:19:31 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,20 @@ int			is_in_space(char *line, int y);
 /*					PARSE_AND_OPEN_TEXTURE				*/
 /********************************************************/
 
-int			put_texture(char *line, int *check, int x, t_cub *cub);
 void		parsing_texture(t_cub *cub);
 int			open_texture(t_cub *cub);
 void		check_extention_texture(char *path, t_cub *cub);
 void		texture_processing(t_cub *cub);
+
+/********************************************************/
+/*					PUT_TEXTURE							*/
+/********************************************************/
+
+int			put_texture_no_so(char *line, int *check, int x, t_cub *cub);
+int			put_texture_we_ea(char *line, int *check, int x, t_cub *cub);
+int			put_texture_c_f_d(char *line, int *check, int x, t_cub *cub);
+int			put_texture(char *line, int *check, int x, t_cub *cub);
+int			put_texture_door(char *line, int *check, int x, t_cub *cub);
 
 /********************************************************/
 /*					GET_TEXTURE							*/
@@ -158,7 +167,7 @@ void		init_draw_start_end(t_cub *cub);
 /*					ERROR								*/
 /********************************************************/
 
-void		print_and_exit(char *msg, t_cub *cub);
+void		print_and_exit(char *msg, t_cub *cub, int err);
 int			close_game(t_cub *cub);
 
 /********************************************************/
@@ -220,6 +229,12 @@ void		free_raycast(t_raycast *raycast);
 void		free_keys(t_key *keys);
 void		ft_destroy_utils(t_cub *cub);
 void		ft_destroy(t_cub *cub);
+void		free_map(t_map *map);
+void		free_texture_file(t_texture_file *texture_file);
+void		clear_before_exit_3(t_cub *cub);
+void		clear_before_exit_2(t_cub *cub);
+void		clear_before_exit(t_cub *cub, int err);
+void		free_split(char **tmp_line);
 
 /********************************************************/
 /*						WEAPON							*/
@@ -229,5 +244,24 @@ void		draw(t_cub *cub, t_image *img);
 int			mousepress(int keycode, int x, int y, t_cub *cub);
 void		init_gun(t_cub *cub);
 void		init_weapon_utils(t_cub *cub);
+
+/********************************************************/
+/*						UTILS							*/
+/********************************************************/
+
+bool		has_only_spaces(const char *start, const char *end);
+int			is_valid_floor_color_char(char c);
+void		validate_floor_color_values(const char *color_values, t_cub *cub);
+void		check_first_line(t_cub *cub);
+void		check_last_line(t_cub *cub);
+void		free_textures(t_cub *cub);
+void		free_gun(t_cub *cub);
+void		init_order_tex(t_cub *cub);
+int			check_cmp(char *line);
+int			check_line(char *line, int check, t_cub *cub, int texture_found);
+int			isspace(int c);
+bool		has_only_spaces_before(const char *line, int pos);
+void		validate_ceilling_color_values(const char
+				*color_values, t_cub *cub);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:57:05 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 18:00:38 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/12 18:25:28 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**allocate_and_fill_map(t_cub *cub, int fd)
 	i = 1;
 	cub->map->map = malloc(sizeof(char *) * (cub->map->height + 1));
 	if (!cub->map->map)
-		print_and_exit(MALLOC_FAILED, cub);
+		print_and_exit(MALLOC_FAILED, cub, 0);
 	cub->map->map[0] = cub->line;
 	cub->line = get_next_line_map(fd);
 	while (cub->line && i <= cub->map->height)
@@ -53,7 +53,7 @@ void	is_cub_file(char *map, t_cub *cub)
 
 	extensions_check = ft_strnstr(map, ".cub", ft_strlen(map));
 	if (extensions_check == NULL || ft_strlen(extensions_check) != 4)
-		print_and_exit(INVALIDE_FILE_EXTENSION, cub);
+		print_and_exit(INVALIDE_FILE_EXTENSION, cub, 0);
 }
 
 void	get_map_and_tex(char *file, t_cub *cub)

@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 19:12:42 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/07 19:13:08 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/12 17:04:33 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	ft_destroy_utils(t_cub *cub)
 	free(cub->raycast);
 	free(cub->texture_file->north_path);
 	free(cub->texture_file->south_path);
+	free(cub->texture_file->west_path);
+	free(cub->texture_file->east_path);
+	free(cub->texture_file->door_path);
+	free(cub->texture_file);
 }
 
 void	ft_destroy(t_cub *cub)

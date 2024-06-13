@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:35:52 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/07 19:02:13 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/13 16:43:09 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_map
 	int		height;
 	int		size_x;
 	int		size_y;
+	int		size_line;
 }			t_map;
 
 typedef struct s_image
@@ -186,6 +187,17 @@ typedef struct s_mini_map
 	int		player_center_y;
 }			t_mini_map;
 
+typedef struct s_order_tex
+{
+	bool	north;
+	bool	south;
+	bool	west;
+	bool	east;
+	bool	floor;
+	bool	ceiling;
+	bool	door;
+}	t_order_tex;
+
 typedef struct s_pixel_column
 {
 	int		tex_x;
@@ -221,6 +233,7 @@ typedef struct s_cub
 	t_texture_file	*texture_file;
 	t_key			*key;
 	t_image			*gun_[5];
+	t_order_tex		*order_tex;
 	char			*line;
 	int				res_x;
 	int				res_y;

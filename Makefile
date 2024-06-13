@@ -32,6 +32,11 @@ _SRCS = 		srcs/main.c \
 				srcs/weapon/draw_weapon.c \
 				srcs/weapon/draw_weapon_utils.c \
 				srcs/utils/destroy.c \
+				srcs/parser/parse_texture/put_texture.c \
+				srcs/utils/utils.c \
+				srcs/utils/utils1.c \
+				srcs/utils/utils2.c \
+				srcs/error/print_exit.c \
 
 SRC_DIR = .
 

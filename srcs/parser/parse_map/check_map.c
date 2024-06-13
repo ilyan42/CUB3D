@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:15:56 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/06 18:16:23 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:37:16 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	check_to_many_player(t_cub *cub)
 		y++;
 	}
 	if (player != 1)
-		print_and_exit(TO_MANY_PLAYERS_OR_NO_PLAYER, cub);
+		print_and_exit(MAP_IS_NOT_VALID, cub, 0);
 }
 
 void	check_character_in_map(t_cub *cub)
@@ -60,7 +60,7 @@ void	check_character_in_map(t_cub *cub)
 		y++;
 	}
 	if (check != 0)
-		print_and_exit(WRONG_CHARACTER_IN_MAP, cub);
+		print_and_exit(WRONG_CHARACTER_IN_MAP, cub, 0);
 }
 
 void	check_first_colone(t_cub *cub)
@@ -70,8 +70,8 @@ void	check_first_colone(t_cub *cub)
 	y = 0;
 	while (cub->map->map[y])
 	{
-		if (cub->map->map[y][0] != '1')
-			print_and_exit("hdhdhd", cub);
+		if (cub->map->map[y][0] != '1' && cub->map->map[y][0] != ' ')
+			print_and_exit(MAP_IS_NOT_CLOSED, cub, 0);
 		y++;
 	}
 }
@@ -79,7 +79,9 @@ void	check_first_colone(t_cub *cub)
 void	check_map(t_cub *cub)
 {
 	get_size_map(cub);
-	check_first_colone(cub);
 	check_to_many_player(cub);
+	check_first_colone(cub);
+	check_first_line(cub);
+	check_last_line(cub);
 	check_character_in_map(cub);
 }
