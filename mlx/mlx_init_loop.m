@@ -1,5 +1,5 @@
 //  mlx_init_loop.m
-// By Ol
+// By Olw
 
 #import <Cocoa/Cocoa.h>
 #import <OpenGL/gl3.h>
