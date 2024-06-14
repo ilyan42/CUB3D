@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:55:16 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/13 18:14:19 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/14 11:31:03 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,18 @@ int	parse_floor_color(t_cub *cub, char *line)
 		while (tmp_line[nb])
 			nb += check_nb_floor(tmp_line[nb], cub);
 	if (nb != 3)
-		print_and_exit(INVALIDE_FLOOR_COLOR, cub, 1);
+		return (free_split(tmp_line), print_and_exit(INVALIDE_F, cub, 1), 0);
 	if (tmp_line[0] && tmp_line[1] && tmp_line[2])
 	{
 		cub->color->f_r = ft_atoi(tmp_line[0]);
 		cub->color->f_g = ft_atoi(tmp_line[1]);
 		cub->color->f_b = ft_atoi(tmp_line[2]);
 	}
-	if (cub->color->f_r > 255 || cub->color->f_g > 255 || cub->color->f_b > 255)
-		print_and_exit(INVALIDE_FLOOR_COLOR, cub, 1);
 	convert_color_hex(cub);
 	cub->order_tex->floor = true;
 	free_split(tmp_line);
+	if (cub->color->f_r > 255 || cub->color->f_g > 255 || cub->color->f_b > 255)
+		print_and_exit(INVALIDE_FLOOR_COLOR, cub, 1);
 	return (1);
 }
 
@@ -97,17 +97,17 @@ int	parse_ceiling_color(t_cub *cub, char *line)
 		while (tmp_line[nb])
 			nb += check_nb_ceilling(tmp_line[nb], cub);
 	if (nb != 3)
-		print_and_exit(INVALIDE_CEILING_COLOR, cub, 1);
+		return (free_split(tmp_line), print_and_exit(INVALIDE_C, cub, 1), 0);
 	if (tmp_line[0] && tmp_line[1] && tmp_line[2])
 	{
 		cub->color->c_r = ft_atoi(tmp_line[0]);
 		cub->color->c_g = ft_atoi(tmp_line[1]);
 		cub->color->c_b = ft_atoi(tmp_line[2]);
 	}
-	if (cub->color->c_r > 255 || cub->color->c_b > 255 || cub->color->c_g > 255)
-		print_and_exit(INVALIDE_CEILING_COLOR, cub, 1);
 	convert_color_hex(cub);
 	cub->order_tex->ceiling = true;
 	free_split(tmp_line);
+	if (cub->color->c_r > 255 || cub->color->c_b > 255 || cub->color->c_g > 255)
+		print_and_exit(INVALIDE_CEILING_COLOR, cub, 1);
 	return (1);
 }

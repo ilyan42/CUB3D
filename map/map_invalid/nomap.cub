@@ -1,0 +1,14 @@
+NO ./texture/north.xpm
+SO ./texture/south.xpm
+WE ./texture/west.xpm
+EA ./texture/east.xpm
+
+
+F 0,0,0
+C 255, 150, 0
+
+DO ./texture/door.xpm
+
+
+
+

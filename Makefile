@@ -67,15 +67,18 @@ $(_OBJ_DIR):
 	mkdir -p $(_OBJ_DIR)/srcs/weapon
 	mkdir -p $(_OBJ_DIR)/srcs/utils
 
-all: $(_OBJ_DIR) $(NAME)
+all: force $(_OBJ_DIR) $(NAME)
 
-$(_OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(_HEADERS_DIR)/cub3d.h Makefile
+$(_OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(_HEADERS_DIR)/cub3d.h $(_HEADERS_DIR)/define.h $(_HEADERS_DIR)/struct.h Makefile
 	$(CC) -I$(_HEADERS_DIR) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	$(MAKE) all -C ./LIBFT 
 	$(MAKE) -C minilibx-linux
 	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME) 
+
+force:
+		make -C LIBFT
 
 clean:
 	rm -f $(OBJS)
@@ -91,4 +94,4 @@ norminette:
 
 re: fclean all
 
-.PHONY: all clean fclean re norminette
+.PHONY: all clean fclean re norminette force

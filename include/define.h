@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:37:03 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/07 18:43:18 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/14 11:31:12 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define TEX_HEIGHT 64
 # define NUM_TEXTURES 4 
 # define MOVE_SPEED 0.05
-# define ROTATE_SPEED 0.03
+# define ROTATE_SPEED 0.05
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 # define TILE_SIZE 64
@@ -83,5 +83,7 @@
 # define WRONG_CHARACTER_IN_MAP "Error\n -> Wrong character in map\n"
 # define INVALIDE_DOOR_TEXTURE "Error\n -> Invalid door texture format\n"
 # define OPEN_DOOR_TEXTURE "Error\n -> Open door texture\n"
+# define INVALIDE_F "Error\n -> Invalid floor color\n"
+# define INVALIDE_C "Error\n -> Invalid ceiling color\n"
 
 #endif

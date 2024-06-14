@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 11:07:01 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/06/13 17:49:47 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/06/14 11:09:49 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	init_struct_cub(t_cub *cub)
 	cub->player = NULL;
 	cub->raycast = NULL;
 	cub->key = NULL;
+	cub->texture->texture = NULL;
 	cub->map = NULL;
 	cub->shoot = _false;
 	init_struct_mlx(cub);
